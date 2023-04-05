@@ -31,9 +31,11 @@ const ResetPass = () => {
       password: values?.password,
     };
     const Reset = await resetPassAPI(userObj2);
+
+    console.log("Reset", Reset, userObj2);
     Toast.show({ type: "success", text1: "رمزعبور با موفقیت تغییر یافت" });
 
-    console.log("first" , values);
+    console.log("first", values);
   };
 
   return (

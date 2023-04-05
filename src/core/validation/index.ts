@@ -40,7 +40,7 @@ export const signUp1Validation = Yup.object().shape({
     .min(3, "تعدادکاراکترهای نام صحیح نمیباشد")
     .matches(/^[a-zA-Z\s\u0600-\u06FF]+$/, "لطفا نام خود را صحیح وارد کنید!!!"),
 
-    nationalId: Yup.string()
+  nationalId: Yup.string()
     .required("پر کردن فیلد الزامیست")
     .test("nationalId", "کدملی وارد شده نامعتبر است!!!", (value) =>
       isValidIranianNationalId(value)

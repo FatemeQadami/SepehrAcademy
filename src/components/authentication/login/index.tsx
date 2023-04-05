@@ -3,7 +3,6 @@ import React, { useState, FC } from "react";
 import Form from "../../common/forms";
 import { LoginValidation } from "../../../core/validation";
 import InputText from "../../common/inputText";
-import FormButton from "../../common/customButton";
 import { Link, useNavigation } from "@react-navigation/native";
 import google from "../../../assets/img/auth/login/google.png";
 import facebook from "../../../assets/img/auth/login/facebook.png";
@@ -19,6 +18,8 @@ import { loginType } from "../../../core/models";
 const LoginForm: FC = (): JSX.Element => {
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
 
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+
   const { token, studentModel } = useSelector((state: RootState) => state.user);
 
   const navigation = useNavigation<any>();
@@ -26,6 +27,7 @@ const LoginForm: FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const onSubmit = async (values: loginType) => {
+    setIsLoading(true);
     const userObj = {
       email: values?.email,
       password: values?.password,
@@ -43,6 +45,7 @@ const LoginForm: FC = (): JSX.Element => {
       console.log("fffff", token, studentModel);
     }
     console.log(values);
+    setIsLoading(false);
   };
   return (
     <>
@@ -99,6 +102,8 @@ const LoginForm: FC = (): JSX.Element => {
             <>
               <CustomButton
                 buttonTitle="ورود"
+                isLoading={isLoading}
+                color="white"
                 onPress={submitForm}
                 className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "
               />

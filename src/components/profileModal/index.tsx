@@ -1,13 +1,30 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { FC } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Pressable } from "react-native";
 
-const ProfileUpload = ({ onPress, getImageFromCamera , getImageFromGallery }: any) => {
+interface propsType {
+  onPress: Function;
+  getImageFromCamera: Function;
+  getImageFromGallery: Function;
+  removeProfile: Function;
+}
+
+const ProfileUpload: FC<propsType> = ({
+  onPress,
+  getImageFromCamera,
+  getImageFromGallery,
+  removeProfile,
+}): JSX.Element => {
   return (
     <View className="mx-7 mt-2 w-[350] mb-8 ">
-      <Pressable className="absolute top-1 right-1" onPress={onPress}>
+      <Pressable
+        className="absolute top-1 right-1"
+        onPress={() => {
+          onPress();
+        }}
+      >
         <FontAwesome name="close" size={20} color="red" />
       </Pressable>
       <Pressable
@@ -19,13 +36,21 @@ const ProfileUpload = ({ onPress, getImageFromCamera , getImageFromGallery }: an
         <FontAwesome name="camera" size={20} color="white" />
         <Text className="font-Yekan text-[15px] text-white px-5 ">دوربین</Text>
       </Pressable>
-      <Pressable         onPress={() => {
+      <Pressable
+        onPress={() => {
           getImageFromGallery();
-        }} className="flex-row-reverse justify-center p-3 bg-[#4F91FF] rounded-[20px] my-4">
+        }}
+        className="flex-row-reverse justify-center p-3 bg-[#4F91FF] rounded-[20px] my-4"
+      >
         <FontAwesome name="picture-o" size={20} color="white" />
         <Text className="font-Yekan text-[15px] text-white px-6 ">گالری</Text>
       </Pressable>
-      <Pressable className="flex-row-reverse justify-center bg-[#FFF4F4] p-3 rounded-[20px]">
+      <Pressable
+        className="flex-row-reverse justify-center bg-[#FFF4F4] p-3 rounded-[20px]"
+        onPress={() => {
+          removeProfile();
+        }}
+      >
         <Ionicons name="remove-circle-outline" size={20} color="red" />
         <Text className="font-Yekan text-[15px] text-red-500 px-6 ">حذف</Text>
       </Pressable>

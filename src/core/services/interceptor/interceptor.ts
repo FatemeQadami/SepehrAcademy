@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getItem } from "../storage/storage";
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
 
 axios.interceptors.response.use(
   (response) => {
@@ -21,21 +21,31 @@ axios.interceptors.response.use(
         // get error message from backend (see object of response later... maybe its changed)
         try {
           console.log(error.response.data.message[0].message);
-          Toast.show({type:"error" , text1:error.response.data.message[0].message});
+          Toast.show({
+            type: "error",
+            text1: error.response.data.message[0].message,
+          });
         } catch (err) {
-          Toast.show({type:"error" , text1:error.response.data.message.message[0].message});
+          Toast.show({
+            type: "error",
+            text1: error.response.data.message.message[0].message,
+          });
         }
       }
     } catch (error) {
-      Toast.show({type:"error" , text1:"مشکلی پیش آمده است.لطفا مجددا امتحان نمایید."});
+      Toast.show({
+        type: "error",
+        text1: "مشکلی پیش آمده است.لطفا مجددا امتحان نمایید.",
+      });
     }
     return Promise.reject(error);
   }
 );
 
 // will send token to headers request ( in x-auth-token body )
-axios.interceptors.request.use((config) => {
-  config.headers["x-auth-token"] = getItem("token");
+axios.interceptors.request.use(async (config) => {
+  const token = await getItem("token");
+  config.headers["x-auth-token"] = token;
   return config;
 });
 

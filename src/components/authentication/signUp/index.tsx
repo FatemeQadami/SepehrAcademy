@@ -14,17 +14,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { handelLogin } from "../../../redux/features/user";
 import { loginAPI } from "../../../core/services/api/auth/login.api";
-import { loginType, signUpType } from "../../../core/models";
+import { loginType, signUpType, studentModelType } from "../../../core/models";
 import { signUpAPI } from "../../../core/services/api/auth/signUp.api";
 
 const SignUpForm: FC = (): JSX.Element => {
   const [step, setStep] = useState<number>(0);
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const navigation = useNavigation<any>();
 
-  const { studentModel, token } = useSelector((state: RootState) => state.user);
+  const { studentModel } = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
 
@@ -34,6 +35,7 @@ const SignUpForm: FC = (): JSX.Element => {
   };
 
   const onSecondStep = async (values: signUpType) => {
+    setIsLoading(true);
     console.log(values);
 
     // ----------signUpAPI----------
@@ -78,6 +80,7 @@ const SignUpForm: FC = (): JSX.Element => {
     } else {
       navigation.navigate("Login");
     }
+    setIsLoading(false);
   };
 
   const customStyles = {
@@ -202,7 +205,10 @@ const SignUpForm: FC = (): JSX.Element => {
                 <View className="mt-[70]">
                   <CustomButton
                     buttonTitle="ثبت نام"
+                    isLoading={isLoading}
                     onPress={submitForm}
+                    color="white"
+                    loadingClassName="bg-[#0043F7]"
                     className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "
                   />
                 </View>

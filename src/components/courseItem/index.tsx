@@ -5,8 +5,12 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import Favorite from "../common/favorite";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { removeItem } from "../../redux/features/favorite";
+import { removeItemFromCart } from "../../redux/features/cart";
+import CustomModal from "../common/modal";
+import CustomButton from "../common/customButton";
 import Toast from "react-native-toast-message";
 
 interface ICourseItemProp {
@@ -15,7 +19,7 @@ interface ICourseItemProp {
   courseImage: string | undefined;
   coursePrice: string | number;
   item: any;
-  pageName:string
+  pageName?: string;
 }
 
 const CourseItem: FC<ICourseItemProp> = ({
@@ -28,7 +32,11 @@ const CourseItem: FC<ICourseItemProp> = ({
 }): JSX.Element => {
   const navigation = useNavigation<any>();
 
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
   const { studentModel }: any = useSelector((state: RootState) => state.user);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -63,11 +71,28 @@ const CourseItem: FC<ICourseItemProp> = ({
             </View>
           </View>
           <View className="items-center flex justify-between ml-3 pr-5">
-            {pageName==="fav"}
-            <Favorite color="gray" size={16} item={item} />
-            <View className="items-center">
+            {pageName === "Courses" ? (
+              <Favorite color="gray" size={16} item={item} />
+            ) : pageName === "fav" ? (
+              <Pressable onPress={() => dispatch(removeItem(item))}>
+                <AntDesign name="delete" color="red" size={15} />
+              </Pressable>
+            ) : (
+              <></>
+            )}
+
+            {pageName === "cart" ? (
+              <Pressable
+                className="bg-red-500 rounded-[16px] items-center p-2 mt-11 "
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              >
+                <AntDesign name="delete" color="white" size={16} />
+              </Pressable>
+            ) : (
               <AntDesign name="pluscircle" size={30} color="#4F91FF" />
-            </View>
+            )}
           </View>
         </Pressable>
         <View className="absolute top-4 right-10 rounded-[40px] w-[65] h-[65]">
@@ -77,6 +102,40 @@ const CourseItem: FC<ICourseItemProp> = ({
           />
         </View>
       </View>
+      <CustomModal
+        visible={modalVisible}
+        animationType="slide"
+        className2="px-12 py-6 rounded-[30px]"
+        className="py-10"
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View>
+          <Text className="font-Yekan text-[16px] text-center my-2 ">
+            آیا از حذف این درس اطمینان دارید؟
+          </Text>
+          <View className="flex-row items-center justify-center my-4 ">
+            <CustomButton
+              buttonTitle="خیر"
+              onPress={() => setModalVisible(!modalVisible)}
+              className="border-[1.5px] font-Yekan border-[#FF0000] px-11 py-2 color-[#FF0000] text-[16px] text-center rounded-[27px] mx-2 "
+            />
+            <CustomButton
+              buttonTitle="بله"
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                dispatch(removeItemFromCart(item));
+                Toast.show({
+                  type: "success",
+                  text1: " درس انتخاب شده با موفقیت حذف شد",
+                });
+              }}
+              className="bg-[#04A641] font-Yekan border-[1.5px] border-[#04A641] px-11 py-2 color-white text-[16px] text-center rounded-[27px] mx-2 "
+            />
+          </View>
+        </View>
+      </CustomModal>
     </>
   );
 };

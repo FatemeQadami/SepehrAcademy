@@ -8,7 +8,7 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     addToFavorite: (state, { payload }) => {
-      const { id } = payload;
+      const { _id: id } = payload;
 
       const find = state.find((item: { _id: string }) => item._id === id);
 
@@ -19,8 +19,16 @@ const favoriteSlice = createSlice({
         setItem("selectedCourse", JSON.stringify(state));
       }
     },
+
+    removeItem: (state, action) => {
+      const items = action.payload;
+      const local = [
+        ...state.filter((item: { _id: string }) => item._id !== items._id),
+      ];
+      return local;
+    },
   },
 });
 
-export const { addToFavorite } = favoriteSlice.actions;
+export const { addToFavorite, removeItem } = favoriteSlice.actions;
 export default favoriteSlice.reducer;

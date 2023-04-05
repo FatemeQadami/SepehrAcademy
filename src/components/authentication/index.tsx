@@ -51,8 +51,7 @@ const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
             {pageTitle}
           </Text>
           <Text
-            className="font-Yekan"
-            style={{ fontSize: 14, marginTop: 8, marginBottom: 48 }}
+            className="font-Yekan text-[14px] mt-[8] mb-[48] "
           >
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
@@ -62,16 +61,14 @@ const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
         </View>
 
         <View
-          className="flex rounded-t-[35] px-10"
+          className="flex rounded-t-[35] px-10 bg-[#3A84FF] pt-[50] "
           style={
             formBox === "forgetpass"
               ? {
-                  backgroundColor: "#3A84FF",
-                  paddingTop: 50,
                   height: 390,
                   marginTop: 254,
                 }
-              : { backgroundColor: "#3A84FF", paddingTop: 50, height: 645 }
+              : {height: 645 }
           }
         >
           {formBox === "login" ? (

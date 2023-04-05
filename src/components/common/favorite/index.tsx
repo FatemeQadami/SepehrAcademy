@@ -3,7 +3,7 @@ import React, { FC, useState } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { Toast } from "react-native-toast-message/lib/src/Toast";
+import Toast from "react-native-toast-message";
 import { addToFavorite } from "../../../redux/features/favorite";
 
 interface propType {
@@ -19,6 +19,8 @@ const Favorite: FC<propType> = ({ color, size, item }): JSX.Element => {
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
 
+  const handelClick = state?.some((s: { _id: string }) => s._id === item._id)
+
   console.log(state);
 
   return (
@@ -33,7 +35,7 @@ const Favorite: FC<propType> = ({ color, size, item }): JSX.Element => {
             });
       }}
     >
-      {state && state?.some((s: { _id: string }) => s._id === item._id) ? (
+      {handelClick ? (
         <FontAwesome name={"heart"} color="red" size={size} />
       ) : (
         <FontAwesome name={"heart-o"} color={color} size={size} />

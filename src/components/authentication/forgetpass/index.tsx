@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Form from "../../common/forms";
 import { forgetpassValidation } from "../../../core/validation";
 import InputText from "../../common/inputText";
@@ -10,7 +10,12 @@ import Toast from "react-native-toast-message";
 import { forgetPassType } from "../../../core/models";
 
 const ForgetpassForm: FC = (): JSX.Element => {
+
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+
+
   const onSubmit = async (value: forgetPassType) => {
+    setIsLoading(true);
     const userObj = {
       email: value?.email,
     };
@@ -22,6 +27,7 @@ const ForgetpassForm: FC = (): JSX.Element => {
         text1: "لینک تغییر رمزعبور به ایمیل شما ارسال شد :)",
       });
     }
+    setIsLoading(false);
   };
   return (
     <View>
@@ -47,6 +53,8 @@ const ForgetpassForm: FC = (): JSX.Element => {
             <View className="mt-[50]">
               <CustomButton
                 buttonTitle="تایید ایمیل"
+                isLoading={isLoading}
+                color="white"
                 onPress={submitForm}
                 className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "
               />

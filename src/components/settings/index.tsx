@@ -1,5 +1,6 @@
 import { View, Text, Switch, Pressable } from "react-native";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
@@ -13,7 +14,9 @@ import ResetPass from "../authentication/resetPass";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { handelSelect } from "../../redux/features/selector";
-import { useRoute } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
+import { useColorScheme } from "nativewind";
 
 const SettingPage = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -22,19 +25,32 @@ const SettingPage = () => {
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
-  const routeName = useRoute();
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+
+  const { studentModel }: any = useSelector((state: RootState) => state.user);
+
+  // ------------route---------------
 
   const { route } = useSelector((state: RootState) => state.selector);
 
-  console.log("settingRoute", routeName.name);
+  console.log("reduxState", route);
 
   const dispatch = useDispatch();
 
-  dispatch(
-    handelSelect({
-      route: routeName.name,
-    })
-  );
+  const routeName = useRoute();
+
+  console.log(routeName.name);
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    console.log("routeName.name", routeName.name);
+    if (isFocus)
+      dispatch(
+        handelSelect({
+          route: routeName.name,
+        })
+      );
+  }, [isFocus]);
 
   return (
     <>
@@ -97,7 +113,14 @@ const SettingPage = () => {
               </View>
               <Pressable
                 className="flex-row-reverse justify-between my-3"
-                onPress={() => setModalVisible(true)}
+                onPress={() => {
+                  studentModel
+                    ? setModalVisible(true)
+                    : Toast.show({
+                        type: "error",
+                        text1: " شما حسابی ندارید!!!",
+                      });
+                }}
               >
                 <View className="flex-row-reverse">
                   <MaterialIcons
@@ -196,12 +219,16 @@ const SettingPage = () => {
                 />
               </Pressable>
             </View>
-            <View className="mt-10">
-              <Text className="font-Yekan text-[18px] color-[#1048B7] my-6 pt-3">
-                تغییر رمز عبور:
-              </Text>
-              <ResetPass />
-            </View>
+            {studentModel ? (
+              <View className="mt-10">
+                <Text className="font-Yekan text-[18px] color-[#1048B7] my-6 pt-3">
+                  تغییر رمز عبور:
+                </Text>
+                <ResetPass />
+              </View>
+            ) : (
+              <View className="h-[368]"></View>
+            )}
           </>
         </View>
       </KeyboardAwareScrollView>

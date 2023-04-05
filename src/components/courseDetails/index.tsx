@@ -2,7 +2,6 @@ import {
   View,
   Text,
   Image,
-  ScrollView,
   FlatList,
   TextInput,
   Pressable,
@@ -22,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import Toast from "react-native-toast-message";
 import { commentType } from "../../core/models";
-import { addToCart } from "../../redux/features/cart";
+import { addToCart, removeItemFromCart } from "../../redux/features/cart";
 
 interface commentProp {
   userName: string;
@@ -30,6 +29,7 @@ interface commentProp {
 }
 
 const CommentItem: FC<commentProp> = ({ userName, comment }): JSX.Element => {
+  console.log("first", comment);
   return (
     <View
       className=" bg-white p-5 rounded-[20px] mx-4 my-2"
@@ -39,7 +39,9 @@ const CommentItem: FC<commentProp> = ({ userName, comment }): JSX.Element => {
         <Image className="rounded-[20px] w-[30] h-[30]" source={user} />
         <Text className="font-Yekan color-[#002D85]">{userName} </Text>
       </View>
-      <Text>{comment}</Text>
+      <Text className="font-Yekan color-[#999999] text-[13px] pt-1 pr-1">
+        {comment}
+      </Text>
     </View>
   );
 };
@@ -87,10 +89,17 @@ const CourseDetailsPage: FC = (): JSX.Element => {
     console.log(data);
   };
 
+  const handelClick = () => {
+    return state?.some((s: { _id: string }) => s._id === item._id);
+  };
+
   useEffect(() => {
     loadComments();
     console.log(data);
   }, []);
+
+
+  console.log('gbg',state)
 
   return (
     <>
@@ -186,17 +195,14 @@ const CourseDetailsPage: FC = (): JSX.Element => {
               <Text className="text-right color-[#002D85] text-[20px] font-Yekan">
                 توضیحات دوره:
               </Text>
-              <ScrollView>
-                <Text className="color-[#818181] text-[14px] font-Yekan text-right mt-3 mx-4">
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
-                  با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
-                  مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
-                  تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
-                  کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
-                  آینده، شناخت فراوان جامعه و متخصصان را می طلبد،تا با
-                  نرم‌افزارها شناخت
-                </Text>
-              </ScrollView>
+              <Text className="color-[#818181] text-[14px] font-Yekan text-right mt-3 mx-4">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+                استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+                در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+                نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+                کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
+                جامعه و متخصصان را می طلبد،تا با نرم‌افزارها شناخت
+              </Text>
             </>
             <View className="mt-10">
               <View className="flex-row-reverse justify-between mb-2 ">
@@ -230,32 +236,38 @@ const CourseDetailsPage: FC = (): JSX.Element => {
                   />
                 </Pressable>
               </View>
-              <View>
+              <View className="h-[85]">
                 <FlatList
                   data={data}
-                  renderItem={({ items }: any) => (
+                  renderItem={({ item }: any) => (
                     <CommentItem
-                      userName={items?.username}
-                      comment={items?.comment}
+                      userName={item?.username}
+                      comment={item?.comment}
                     />
                   )}
                 />
               </View>
             </View>
           </View>
-          <View>
+          <View className="top-[-35]">
             <CustomButton
-              buttonTitle="افزودن به سبد خرید"
+              buttonTitle={
+                handelClick() ? "حذف از سبد خرید" : "افزودن به سبد خرید"
+              }
               onPress={() => {
-                dispatch(addToCart(item));
+                studentModel
+                  ? handelClick()
+                    ? dispatch(removeItemFromCart(item))
+                    : dispatch(addToCart(item))
+                  : Toast.show({
+                      type: "error",
+                      text1:
+                        "برای افزودن به سبد خرید لطفا وارد حساب کاربری خود شوید !!",
+                    });
               }}
-              className="font-Yekan border-[1.5px] border-[#04A641] px-7 py-4 color-white text-[20px] text-center rounded-[30px] "
+              className="font-Yekan px-8 py-[16] color-white text-[20px] text-center rounded-[30px] "
               style={{
-                backgroundColor:
-                  state &&
-                  state?.some((s: { _id: string }) => s._id === item._id)
-                    ? "gray"
-                    : "#04A641",
+                backgroundColor: handelClick() ? "#E00000" : "#04A641",
               }}
             />
           </View>
@@ -304,6 +316,7 @@ const CourseDetailsPage: FC = (): JSX.Element => {
               buttonTitle="ثبت نظر"
               onPress={() => {
                 addComment(value);
+                setModalVisible(!modalVisible);
               }}
               className="bg-[#04A641] font-Yekan border border-[#04A641] px-10 py-2 text-center color-white text-[16px] rounded-[27px] mx-3 "
             />

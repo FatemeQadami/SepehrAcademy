@@ -31,7 +31,7 @@ const SkeletonLoading:FC = ():JSX.Element => {
           </Text>
         </View>
         <View
-          style={{ width: 60, height: 60, borderRadius: 50, marginLeft: 4 }}
+          style={{ width: 60, height: 60, borderRadius: 50, marginLeft: 4 , marginTop: 20 }}
         />
       </View>
     </SkeletonPlaceholder>

@@ -16,6 +16,8 @@ const DrowerItem = () => {
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
 
+  const { route } = useSelector((state: RootState) => state.selector);
+
   const dispatch = useDispatch();
 
   const clearPass = () => {
@@ -53,9 +55,21 @@ const DrowerItem = () => {
             : navigation.replace("Login");
         }}
       >
-        <View className="flex-row-reverse my-[10] pl-3 border-r-2">
-          <FontAwesome name="user-o" color="gray" size={15} />
-          <Text className="color-[#686868] text-[18px] font-Yekan px-5">
+        <View
+          className="flex-row-reverse my-[10] pl-3 border-r-2"
+          style={{
+            borderRightColor: route === "Profile" ? "#0136C4" : "white",
+          }}
+        >
+          <FontAwesome
+            name="user-o"
+            color={route === "Profile" ? "#0136C4" : "gray"}
+            size={15}
+          />
+          <Text
+            className="text-[18px] font-Yekan px-5"
+            style={{ color: route === "Profile" ? "#0136C4" : "#686868" }}
+          >
             {studentModel ? "پروفایل کاربری" : "ورود/ثبت نام"}
           </Text>
         </View>
@@ -65,9 +79,21 @@ const DrowerItem = () => {
           navigation.navigate("CoursesTab");
         }}
       >
-        <View className="flex-row-reverse my-[10] pl-3">
-          <Ionicons name="document-text-outline" color="gray" size={15} />
-          <Text className="color-[#686868] text-[18px] font-Yekan px-5">
+        <View
+          className="flex-row-reverse my-[10] pl-3 border-r-2"
+          style={{
+            borderRightColor: route === "CoursesTab" ? "#0136C4" : "white",
+          }}
+        >
+          <Ionicons
+            name="document-text-outline"
+            color={route === "CoursesTab" ? "#0136C4" : "gray"}
+            size={15}
+          />
+          <Text
+            className="text-[18px] font-Yekan px-5"
+            style={{ color: route === "CoursesTab" ? "#0136C4" : "#686868" }}
+          >
             دوره‌ها
           </Text>
         </View>
@@ -77,9 +103,21 @@ const DrowerItem = () => {
           navigation.navigate("Favorites");
         }}
       >
-        <View className="flex-row-reverse my-[10] pl-3">
-          <FontAwesome name="heart-o" color="gray" size={15} />
-          <Text className="color-[#686868] text-[18px] font-Yekan px-5">
+        <View
+          className="flex-row-reverse my-[10] pl-3 border-r-2"
+          style={{
+            borderRightColor: route === "Favorites" ? "#0136C4" : "white",
+          }}
+        >
+          <FontAwesome
+            name="heart-o"
+            color={route === "Favorites" ? "#0136C4" : "gray"}
+            size={15}
+          />
+          <Text
+            className="color-[#686868] text-[18px] font-Yekan px-5"
+            style={{ color: route === "Favorites" ? "#0136C4" : "#686868" }}
+          >
             علاقمندی‌ها
           </Text>
         </View>
@@ -89,9 +127,21 @@ const DrowerItem = () => {
           navigation.navigate("Cart");
         }}
       >
-        <View className="flex-row-reverse my-[10] pl-3">
-          <FontAwesome name="shopping-basket" color="gray" size={15} />
-          <Text className="color-[#686868] font-Yekan text-[18px] px-5">
+        <View
+          className="flex-row-reverse my-[10] pl-3 border-r-2"
+          style={{
+            borderRightColor: route === "Cart" ? "#0136C4" : "white",
+          }}
+        >
+          <FontAwesome
+            name="shopping-basket"
+            color={route === "Cart" ? "#0136C4" : "gray"}
+            size={15}
+          />
+          <Text
+            className="color-[#686868] font-Yekan text-[18px] px-5"
+            style={{ color: route === "Cart" ? "#0136C4" : "#686868" }}
+          >
             سبدخرید
           </Text>
         </View>
@@ -101,9 +151,21 @@ const DrowerItem = () => {
           navigation.navigate("Settings");
         }}
       >
-        <View className="flex-row-reverse my-[10] pl-3">
-          <Ionicons name="settings-outline" color="gray" size={15} />
-          <Text className="color-[#686868] font-Yekan text-[18px] px-5">
+        <View
+          className="flex-row-reverse my-[10] pl-3 border-r-2"
+          style={{
+            borderRightColor: route === "Settings" ? "#0136C4" : "white",
+          }}
+        >
+          <Ionicons
+            name="settings-outline"
+            color={route === "Settings" ? "#0136C4" : "gray"}
+            size={15}
+          />
+          <Text
+            className="color-[#686868] font-Yekan text-[18px] px-5"
+            style={{ color: route === "Settings" ? "#0136C4" : "#686868" }}
+          >
             تنظیمات
           </Text>
         </View>

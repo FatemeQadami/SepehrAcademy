@@ -4,12 +4,12 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     token: "",
-    studentModel: null,
+    studentModel: {},
   },
   reducers: {
     handelLogin: (state, action) => {
-      state.token = action.payload.token;
-      state.studentModel = action.payload.model;
+      if (action.payload.token) state.token = action.payload.token;
+      if (action.payload.model) state.studentModel = action.payload.model;
     },
   },
 });

@@ -2,14 +2,13 @@ export interface loginType {
   email: string;
   password: string;
 }
-
 export interface signUpType {
   fullName: string;
   email: string;
   password: string;
-  phoneNumber: number;
+  phoneNumber: number | string;
   birthDate: string;
-  nationalId: number;
+  nationalId: number | string | undefined;
 }
 
 export interface forgetPassType {
@@ -18,20 +17,33 @@ export interface forgetPassType {
 
 export interface editProfileType {
   fullName: string;
-  phoneNumber: number;
+  phoneNumber: number | string;
   birthDate: string;
-  nationalId: number;
-  profile?: string | undefined;
+  nationalId: number | string | undefined;
+  email: string | undefined;
+  profile?: any | undefined;
 }
 
 export interface resetPassType {
   password: string;
 }
 
-
 export interface commentType {
-  postId:string
+  postId: string;
   email: string;
   username: string;
   comment: string;
+}
+
+export interface studentModelType {
+  _id?: string;
+  fullName?: string;
+  email?: string;
+  phoneNumber?: number | string;
+  birthDate?: string;
+  role?: string;
+  isActive?: Boolean;
+  nationalId?: number | string | undefined;
+  registerDate?: string;
+  profile?: string;
 }

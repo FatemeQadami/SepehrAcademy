@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import user from "../../assets/img/profile/user.png";
 import InputText from "../common/inputText";
@@ -12,20 +12,28 @@ import CustomModal from "../common/modal";
 import ProfileUpload from "../profileModal";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import ImageCropPicker from "react-native-image-crop-picker";
-import { useRoute } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { handelSelect } from "../../redux/features/selector";
 import { editProfileAPI } from "../../core/services/api/editProfile.api";
-import { uploadImgAPI } from "../../core/services/api/uploadImg.api";
 import { handelLogin } from "../../redux/features/user";
-import { editProfileType } from "../../core/models";
+import { editProfileType, studentModelType } from "../../core/models";
 import Toast from "react-native-toast-message";
+import { useFormikContext } from "formik";
+import RNFetchBlob from "rn-fetch-blob";
+import { env } from "../../core/config/env";
+import { getItem } from "../../core/services/storage/storage";
 
 const EditProfilePage: FC = (): JSX.Element => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [modalVisible2, setModalVisible2] = useState<boolean>(false);
-  const [profile, setProfile] = useState("");
+  const [modalVisible, setModalVisible] = useState<Boolean>(false);
+  const [modalVisible2, setModalVisible2] = useState<Boolean>(false);
+  const [profile, setProfile] = useState<String>("");
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+
+  const MainUrl = env.APP_PUBLIC_PATH;
+
+  // const {setFieldValue} = useFormikContext()
 
   // ------------route---------------
 
@@ -38,55 +46,108 @@ const EditProfilePage: FC = (): JSX.Element => {
   const routeName = useRoute();
 
   console.log(routeName.name);
+  const isFocus = useIsFocused();
 
-  dispatch(
-    handelSelect({
-      route: routeName.name,
-    })
-  );
-
-  // ------------editProfileAPI---------
-
-  const { studentModel }: any = useSelector((state: RootState) => state.user);
-
-  console.log("ff", studentModel);
-
-  const onSubmit = async (values: editProfileType) => {
-    // ----------uploadImage----------
-    const formData: any = new FormData();
-    formData.append("image", profile);
-
-    const uploadResponse = await uploadImgAPI(formData);
-
-    // ---------editAPI----------
-
-    const userObj: editProfileType = {
-      fullName: values?.fullName,
-      phoneNumber: values?.phoneNumber,
-      birthDate: values?.birthDate,
-      nationalId: studentModel?.nationalId,
-      profile: uploadResponse?.result,
-    };
-
-    const user = await editProfileAPI(userObj);
-
-    if (user) {
+  useEffect(() => {
+    if (isFocus)
       dispatch(
-        handelLogin({
-          token: user.jwtToken,
-          model: user.studentModel,
+        handelSelect({
+          route: routeName.name,
         })
       );
-      Toast.show({
-        type: "success",
-        text1: "  ویرایش اطلاعات با موفقیت انجام شد 🎉",
-      });
+  }, [isFocus]);
+
+  const { studentModel }: { studentModel: studentModelType; token: string } =
+    useSelector((state: RootState) => state.user);
+
+  console.log("f", studentModel);
+
+  const onSubmit = async (values: editProfileType) => {
+    if (values.profile && typeof values.profile !== "string") {
+      const token = await getItem("token");
+
+      setIsLoading(true);
+
+      RNFetchBlob.fetch(
+        "POST",
+        `${MainUrl}upload/image`,
+        {
+          "x-auth-token": token,
+          "Content-Type": "multipart/form-data",
+        },
+        [
+          {
+            name: "image",
+            filename: values?.profile?.path?.split("/").pop(),
+            type: values?.profile?.mime,
+            data: RNFetchBlob.wrap(values?.profile?.path),
+          },
+        ]
+      )
+        .then(async (res) => {
+          const result = res.json().result;
+          console.log("uploaded", result);
+
+          const userObj: editProfileType = {
+            fullName: values?.fullName,
+            phoneNumber: values?.phoneNumber,
+            birthDate: values?.birthDate,
+            nationalId: studentModel?.nationalId,
+            email: studentModel?.email,
+            profile: result,
+          };
+
+          const user = await editProfileAPI(userObj);
+          if (user) {
+            console.log("user", user);
+            dispatch(
+              handelLogin({
+                model: user?.result,
+              })
+            );
+            Toast.show({
+              type: "success",
+              text1: "  ویرایش اطلاعات با موفقیت انجام شد 🎉",
+            });
+          }
+          setIsLoading(false);
+        })
+        .catch((er) => {
+          console.log(er);
+          setIsLoading(false);
+        });
+    } else {
+      const userObj: editProfileType = {
+        fullName: values?.fullName,
+        phoneNumber: values?.phoneNumber,
+        birthDate: values?.birthDate,
+        nationalId: studentModel?.nationalId,
+        email: studentModel?.email,
+        profile: studentModel?.profile,
+      };
+
+      setIsLoading(true);
+
+      const user = await editProfileAPI(userObj);
+
+      if (user) {
+        dispatch(
+          handelLogin({
+            model: user?.result,
+          })
+        );
+        Toast.show({
+          type: "success",
+          text1: "  ویرایش اطلاعات با موفقیت انجام شد 🎉",
+        });
+      }
+      setIsLoading(false);
     }
   };
 
   // ------------takingImage------------
 
-  const getImageFromCamera = () => {
+  const getImageFromCamera = (setField: any) => {
     ImageCropPicker.openCamera({
       cropping: true,
       cropperCircleOverlay: true,
@@ -94,11 +155,12 @@ const EditProfilePage: FC = (): JSX.Element => {
       console.log(res);
       if (res) {
         setProfile(res.path);
+        setField("profile", res);
       }
     });
   };
 
-  const getImageFromGallery = () => {
+  const getImageFromGallery = (setField: any) => {
     ImageCropPicker.openPicker({
       cropping: true,
       cropperCircleOverlay: true,
@@ -106,6 +168,7 @@ const EditProfilePage: FC = (): JSX.Element => {
       console.log(res);
       if (res) {
         setProfile(res.path);
+        setField("profile", res);
       }
     });
   };
@@ -114,7 +177,7 @@ const EditProfilePage: FC = (): JSX.Element => {
     <KeyboardAwareScrollView>
       <View className="bg-white">
         <View
-          className="mx-8 my-5 rounded-[30px] bg-white px-9 py-6"
+          className="mx-8 my-5 rounded-[30px] bg-white px-9 py-7"
           style={{ elevation: 10 }}
         >
           <>
@@ -123,8 +186,9 @@ const EditProfilePage: FC = (): JSX.Element => {
               initialValues={{
                 fullName: studentModel?.fullName,
                 phoneNumber: studentModel?.phoneNumber,
-                nationalId: studentModel?.nationalId,
+                nationalId: studentModel?.nationalId || "",
                 birthDate: studentModel?.birthDate,
+                profile: null,
               }}
               validationSchema={profileValidation}
               onSubmit={onSubmit}
@@ -207,6 +271,9 @@ const EditProfilePage: FC = (): JSX.Element => {
                         <CustomButton
                           buttonTitle="ثبت تغییرات"
                           onPress={() => submitForm()}
+                          isLoading={isLoading}
+                          color="white"
+                          loadingClassName="bg-[#04A641] px-10 py-2 border-[2px] border-[#04A641] mx-5 rounded-[27px] items-center "
                           className="bg-[#04A641] font-Yekan border-[1.5px] border-[#04A641] px-7 py-2 color-white text-[16px] text-center rounded-[27px] mx-5 "
                         />
                       </View>
@@ -239,30 +306,36 @@ const EditProfilePage: FC = (): JSX.Element => {
                       style={{ borderRadius: 20, width: 300 }}
                     />
                   </CustomModal>
+
+                  <CustomModal
+                    animationType="slide"
+                    visible={modalVisible}
+                    className="mt-[613] mx-7"
+                    onRequestClose={() => {
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    <ProfileUpload
+                      onPress={() => setModalVisible(!modalVisible)}
+                      getImageFromCamera={() => {
+                        getImageFromCamera(setFieldValue);
+                        setModalVisible(!modalVisible);
+                      }}
+                      getImageFromGallery={() => {
+                        getImageFromGallery(setFieldValue);
+                        setModalVisible(!modalVisible);
+                      }}
+                      removeProfile={() => {
+                        setModalVisible(!modalVisible);
+                      }}
+                    />
+                  </CustomModal>
                 </>
               )}
             </Form>
           </>
         </View>
       </View>
-      <CustomModal
-        animationType="slide"
-        visible={modalVisible}
-        className="mt-[613] mx-7"
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <ProfileUpload
-          onPress={() => setModalVisible(!modalVisible)}
-          getImageFromCamera={() => {
-            getImageFromCamera();
-          }}
-          getImageFromGallery={() => {
-            getImageFromGallery();
-          }}
-        />
-      </CustomModal>
     </KeyboardAwareScrollView>
   );
 };

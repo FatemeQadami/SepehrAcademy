@@ -1,17 +1,30 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import React, { FC } from "react";
 
 interface ICustomButtonProp {
   buttonTitle: string;
-  onPress?: any;
+  onPress: any;
   className: string;
-  style?:any
+  style?: any;
+  isLoading?: Boolean;
+  color?: string;
+  loadingClassName?: string;
 }
 
 const CustomButton: FC<ICustomButtonProp> = ({
   buttonTitle,
   onPress,
-  className,style
+  className,
+  isLoading,
+  style,
+  loadingClassName,
+  color,
 }): JSX.Element => {
   return (
     <TouchableOpacity
@@ -20,7 +33,15 @@ const CustomButton: FC<ICustomButtonProp> = ({
         onPress();
       }}
     >
-      <Text className={className}style = {style}>{buttonTitle} </Text>
+      {isLoading ? (
+        <View className={loadingClassName}>
+          <ActivityIndicator size="small" color={color} />
+        </View>
+      ) : (
+        <Text className={className} style={style}>
+          {buttonTitle}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

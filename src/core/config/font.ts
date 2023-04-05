@@ -1,1 +1,1 @@
-export const fonts= {Yekan:"YekanBakh" , Gab:"Gabriola"};
+export const fonts = { Yekan: "YekanBakh", Gab: "Gabriola" };

@@ -8,26 +8,27 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, { payload }) => {
-      const { id } = payload;
-      const find = state.find((item: { _id: string }) => item._id === id);
+      const { _id: id } = payload;
 
+      const find = state.find((item: { _id: string }) => item._id === id);
+      console.log("find", find);
+      console.log("add", payload);
+      
       if (find) {
-        return state.map((item: { _id: string }) =>
-          item._id === id ? { ...item } : item
-        );
+        return state.filter((item: { _id: string }) => item._id !== id);
       } else {
         state.push({ ...payload });
         setItem("selectedCourse", JSON.stringify(state));
       }
     },
 
-    removeItem: (state, action) => {
-      const itemId = action.payload;
-      return state.filter((item: { _id: string }) => item._id !== itemId);
+    removeItemFromCart: (state, action) => {
+      const items = action.payload;
+      const local = [...state.filter((item: { _id: string }) => item._id !== items._id)]
+      return local;
     },
-
   },
 });
 
-export const { addToCart, removeItem } = cartSlice.actions;
+export const { addToCart, removeItemFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
