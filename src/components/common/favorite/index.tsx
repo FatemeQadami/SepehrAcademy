@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import Toast from "react-native-toast-message";
 import { addToFavorite } from "../../../redux/features/favorite";
+import { studentModelType } from "../../../core/models";
 
 interface propType {
   color: string;

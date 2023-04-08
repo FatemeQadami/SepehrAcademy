@@ -88,7 +88,7 @@ const ResetPass = () => {
             </>
             <View className="flex-row items-center justify-center my-5">
               <Pressable onPress={() => resetForm()}>
-                <Text className="border font-Yekan border-[#FF0000] px-10 py-2 color-[#FF0000] text-[16px] text-center rounded-[27px] mx-3 ">
+                <Text className="border font-Yekan border-[#FF0000] px-10 py-2 color-[#FF0000] text-[16px] text-center rounded-[27px] mx-3 dark:color-white dark:border-white ">
                   باز نشانی
                 </Text>
               </Pressable>

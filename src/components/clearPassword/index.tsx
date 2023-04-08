@@ -7,6 +7,8 @@ import { RootState } from "../../redux/store";
 import { handelLogin } from "../../redux/features/user";
 import Toast from "react-native-toast-message";
 import CustomButton from "../common/customButton";
+import { EStorageKeys } from "../../core/enums/storage";
+import { ERouteList } from "../../core/enums/route";
 
 interface clearPassType {
   onPress: any;
@@ -20,10 +22,10 @@ const ClearPassword: FC<clearPassType> = ({ onPress }): JSX.Element => {
   const navigation = useNavigation<any>();
 
   const clearPass = () => {
-    removeItem("user");
-    removeItem("token");
+    removeItem(EStorageKeys.user);
+    removeItem(EStorageKeys.token);
     dispatch(handelLogin({ model: null, token: null }));
-    navigation.navigate("Login");
+    navigation.navigate(ERouteList.LogIn);
     Toast.show({
       type: "error",
       text1: "برای ورود به اپلیکیشن باید مجددا رمز عبور خود را وارد نمایید!!",

@@ -8,6 +8,7 @@ import CustomButton from "../../common/customButton";
 import { forgetPassAPI } from "../../../core/services/api/auth/forget.api";
 import Toast from "react-native-toast-message";
 import { forgetPassType } from "../../../core/models";
+import { ERouteList } from "../../../core/enums/route";
 
 const ForgetpassForm: FC = (): JSX.Element => {
 
@@ -61,7 +62,7 @@ const ForgetpassForm: FC = (): JSX.Element => {
             </View>
             <View className="flex flex-row-reverse justify-center mt-20">
               <Link
-                to={{ screen: "Login" }}
+                to={{ screen: ERouteList.LogIn }}
                 style={{
                   fontFamily: "YekanBakh",
                   fontSize: 18,
@@ -75,7 +76,7 @@ const ForgetpassForm: FC = (): JSX.Element => {
                 ورود
               </Link>
               <Link
-                to={{ screen: "SignUp" }}
+                to={{ screen: ERouteList.SignUp }}
                 style={{
                   fontFamily: "YekanBakh",
                   fontSize: 18,

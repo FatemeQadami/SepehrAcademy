@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getItem } from "../storage/storage";
 import Toast from "react-native-toast-message";
+import { EStorageKeys } from "../../enums/storage";
 
 axios.interceptors.response.use(
   (response) => {
@@ -44,7 +45,7 @@ axios.interceptors.response.use(
 
 // will send token to headers request ( in x-auth-token body )
 axios.interceptors.request.use(async (config) => {
-  const token = await getItem("token");
+  const token = await getItem(EStorageKeys.token);
   config.headers["x-auth-token"] = token;
   return config;
 });

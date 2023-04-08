@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { handelLogin } from "../../../redux/features/user";
 import { loginType } from "../../../core/models";
+import { ERouteList } from "../../../core/enums/route";
 
 const LoginForm: FC = (): JSX.Element => {
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
@@ -41,7 +42,7 @@ const LoginForm: FC = (): JSX.Element => {
         })
       );
       Toast.show({ type: "success", text1: "خوش آمدید :)" });
-      navigation.replace("Courses");
+      navigation.replace(ERouteList.Courses);
       console.log("fffff", token, studentModel);
     }
     console.log(values);
@@ -87,7 +88,7 @@ const LoginForm: FC = (): JSX.Element => {
             </>
             <>
               <Link
-                to={{ screen: "Forgetpass" }}
+                to={{ screen: ERouteList.ForgetPass }}
                 style={{
                   color: "white",
                   textAlign: "left",
@@ -113,7 +114,7 @@ const LoginForm: FC = (): JSX.Element => {
       </Form>
       <View className="flex flex-row justify-center my-12">
         <Link
-          to={{ screen: "SignUp" }}
+          to={{ screen: ERouteList.SignUp }}
           style={{
             color: "white",
             fontSize: 18,

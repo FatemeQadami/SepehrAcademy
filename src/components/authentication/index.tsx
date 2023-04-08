@@ -23,7 +23,7 @@ interface IAuthLayoutProp{
 const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
   return (
     <KeyboardAwareScrollView>
-      <View className="bg-white">
+      <View className="bg-white dark:bg-[#00216C] ">
         <ImageBackground
           source={background}
           style={{
@@ -47,11 +47,11 @@ const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
           resizeMode="contain"
         />
         <View className="px-10 mt-[70]">
-          <Text className="font-Yekan" style={{ fontSize: 30 }}>
+          <Text className="font-Yekan text-[30px] dark:color-white">
             {pageTitle}
           </Text>
           <Text
-            className="font-Yekan text-[14px] mt-[8] mb-[48] "
+            className="font-Yekan text-[14px] mt-[8] mb-[48] dark:color-white"
           >
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در

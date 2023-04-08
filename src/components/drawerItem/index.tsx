@@ -10,21 +10,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { handelLogin } from "../../redux/features/user";
 import Toast from "react-native-toast-message";
+import { useColorTheme } from "../../core/config/color";
+import { ERouteList } from "../../core/enums/route";
+import { EStorageKeys } from "../../core/enums/storage";
+import { useColorScheme } from "nativewind";
 
 const DrowerItem = () => {
   const navigation = useNavigation<any>();
 
+  const color = useColorTheme();
+
+  const { colorScheme } = useColorScheme();
+
   const { studentModel }: any = useSelector((state: RootState) => state.user);
 
-  const { route } = useSelector((state: RootState) => state.selector);
+  const { route }: any = useSelector((state: RootState) => state.selector);
 
   const dispatch = useDispatch();
 
   const clearPass = () => {
-    removeItem("user");
-    removeItem("token");
+    removeItem(EStorageKeys.user);
+    removeItem(EStorageKeys.token);
     dispatch(handelLogin({ model: null, token: null }));
-    navigation.navigate("Login");
+    navigation.navigate(ERouteList.LogIn);
     Toast.show({
       type: "error",
       text1: "برای ورود به اپلیکیشن باید مجددا رمز عبور خود را وارد نمایید!!",
@@ -32,7 +40,7 @@ const DrowerItem = () => {
   };
 
   return (
-    <View className="p-[30]">
+    <View className="p-[30] dark:bg-[#00216C] h-full">
       <View className="items-center mt-[90] mb-[75]">
         <Image
           source={
@@ -42,133 +50,201 @@ const DrowerItem = () => {
           }
           className="w-[153] h-[153] rounded-[80px]"
         />
-        <Text className="font-Gab text-[25px] mt-4 ">
+        <Text className="font-Gab text-[25px] mt-4 color-[#002D85] dark:color-white">
           {studentModel && studentModel.fullName
             ? studentModel.fullName
             : "کاربر مهمان"}
         </Text>
       </View>
       <Pressable
+        className="flex-row-reverse my-[10] pl-3 border-r-2"
+        style={{
+          borderRightColor:
+            route === ERouteList.EditProfile
+              ? color?.routeBorderColor
+              : "transparent",
+        }}
         onPress={() => {
           studentModel
-            ? navigation.navigate("Profile")
-            : navigation.replace("Login");
+            ? navigation.navigate(ERouteList.EditProfile)
+            : navigation.replace(ERouteList.LogIn);
         }}
       >
-        <View
-          className="flex-row-reverse my-[10] pl-3 border-r-2"
+        <FontAwesome
+          name="user-o"
+          color={
+            route === ERouteList.EditProfile
+              ? color?.iconColor
+              : colorScheme === "dark"
+              ? "white"
+              : "gray"
+          }
+          size={15}
+          style={{ marginTop: 2 }}
+        />
+        <Text
+          className="text-[18px] font-Yekan px-5"
           style={{
-            borderRightColor: route === "Profile" ? "#0136C4" : "white",
+            color:
+              route === ERouteList.EditProfile
+                ? color?.routeTextColor
+                : colorScheme === "dark"
+                ? "white"
+                : "#686868",
           }}
         >
-          <FontAwesome
-            name="user-o"
-            color={route === "Profile" ? "#0136C4" : "gray"}
-            size={15}
-          />
-          <Text
-            className="text-[18px] font-Yekan px-5"
-            style={{ color: route === "Profile" ? "#0136C4" : "#686868" }}
-          >
-            {studentModel ? "پروفایل کاربری" : "ورود/ثبت نام"}
-          </Text>
-        </View>
+          {studentModel !== null ? "پروفایل کاربری" : "ورود/ثبت نام"}
+        </Text>
       </Pressable>
       <Pressable
+        className="flex-row-reverse my-[10] pl-3 border-r-2"
+        style={{
+          borderRightColor:
+            route === ERouteList.CourseTab
+              ? color?.routeBorderColor
+              : "transparent",
+        }}
         onPress={() => {
-          navigation.navigate("CoursesTab");
+          navigation.navigate(ERouteList.CourseTab);
         }}
       >
-        <View
-          className="flex-row-reverse my-[10] pl-3 border-r-2"
+        <Ionicons
+          name="document-text-outline"
+          color={
+            route === ERouteList.CourseTab
+              ? color?.iconColor
+              : colorScheme === "dark"
+              ? "white"
+              : "gray"
+          }
+          size={15}
+          style={{ marginTop: 2 }}
+        />
+        <Text
+          className="text-[18px] font-Yekan px-5"
           style={{
-            borderRightColor: route === "CoursesTab" ? "#0136C4" : "white",
+            color:
+              route === ERouteList.CourseTab
+                ? color?.routeTextColor
+                : colorScheme === "dark"
+                ? "white"
+                : "#686868",
           }}
         >
-          <Ionicons
-            name="document-text-outline"
-            color={route === "CoursesTab" ? "#0136C4" : "gray"}
-            size={15}
-          />
-          <Text
-            className="text-[18px] font-Yekan px-5"
-            style={{ color: route === "CoursesTab" ? "#0136C4" : "#686868" }}
-          >
-            دوره‌ها
-          </Text>
-        </View>
+          دوره‌ها
+        </Text>
       </Pressable>
       <Pressable
+        className="flex-row-reverse my-[10] pl-3 border-r-2"
+        style={{
+          borderRightColor:
+            route === ERouteList.Favorites
+              ? color?.routeBorderColor
+              : "transparent",
+        }}
         onPress={() => {
-          navigation.navigate("Favorites");
+          navigation.navigate(ERouteList.Favorites);
         }}
       >
-        <View
-          className="flex-row-reverse my-[10] pl-3 border-r-2"
+        <FontAwesome
+          name="heart-o"
+          color={
+            route === ERouteList.Favorites
+              ? color?.iconColor
+              : colorScheme === "dark"
+              ? "white"
+              : "gray"
+          }
+          size={15}
+          style={{ marginTop: 2 }}
+        />
+        <Text
+          className="color-[#686868] text-[18px] font-Yekan px-5"
           style={{
-            borderRightColor: route === "Favorites" ? "#0136C4" : "white",
+            color:
+              route === ERouteList.Favorites
+                ? color?.routeTextColor
+                : colorScheme === "dark"
+                ? "white"
+                : "#686868",
           }}
         >
-          <FontAwesome
-            name="heart-o"
-            color={route === "Favorites" ? "#0136C4" : "gray"}
-            size={15}
-          />
-          <Text
-            className="color-[#686868] text-[18px] font-Yekan px-5"
-            style={{ color: route === "Favorites" ? "#0136C4" : "#686868" }}
-          >
-            علاقمندی‌ها
-          </Text>
-        </View>
+          علاقمندی‌ها
+        </Text>
       </Pressable>
       <Pressable
+        className="flex-row-reverse my-[10] pl-3 border-r-2"
+        style={{
+          borderRightColor:
+            route === ERouteList.Cart ? color?.routeBorderColor : "transparent",
+        }}
         onPress={() => {
-          navigation.navigate("Cart");
+          navigation.navigate(ERouteList.Cart);
         }}
       >
-        <View
-          className="flex-row-reverse my-[10] pl-3 border-r-2"
+        <FontAwesome
+          name="shopping-basket"
+          color={
+            route === ERouteList.Cart
+              ? color?.iconColor
+              : colorScheme === "dark"
+              ? "white"
+              : "gray"
+          }
+          size={15}
+          style={{ marginTop: 2 }}
+        />
+        <Text
+          className="color-[#686868] font-Yekan text-[18px] px-5"
           style={{
-            borderRightColor: route === "Cart" ? "#0136C4" : "white",
+            color:
+              route === ERouteList.Cart
+                ? color?.routeTextColor
+                : colorScheme === "dark"
+                ? "white"
+                : "#686868",
           }}
         >
-          <FontAwesome
-            name="shopping-basket"
-            color={route === "Cart" ? "#0136C4" : "gray"}
-            size={15}
-          />
-          <Text
-            className="color-[#686868] font-Yekan text-[18px] px-5"
-            style={{ color: route === "Cart" ? "#0136C4" : "#686868" }}
-          >
-            سبدخرید
-          </Text>
-        </View>
+          سبدخرید
+        </Text>
       </Pressable>
       <Pressable
+        className="flex-row-reverse my-[10] pl-3 border-r-2"
+        style={{
+          borderRightColor:
+            route === ERouteList.Settings
+              ? color?.routeBorderColor
+              : "transparent",
+        }}
         onPress={() => {
-          navigation.navigate("Settings");
+          navigation.navigate(ERouteList.Settings);
         }}
       >
-        <View
-          className="flex-row-reverse my-[10] pl-3 border-r-2"
+        <Ionicons
+          name="settings-outline"
+          color={
+            route === ERouteList.Settings
+              ? color?.iconColor
+              : colorScheme === "dark"
+              ? "white"
+              : "gray"
+          }
+          size={15}
+          style={{ marginTop: 2 }}
+        />
+        <Text
+          className="color-[#686868] font-Yekan text-[18px] px-5"
           style={{
-            borderRightColor: route === "Settings" ? "#0136C4" : "white",
+            color:
+              route === ERouteList.Settings
+                ? color?.routeTextColor
+                : colorScheme === "dark"
+                ? "white"
+                : "#686868",
           }}
         >
-          <Ionicons
-            name="settings-outline"
-            color={route === "Settings" ? "#0136C4" : "gray"}
-            size={15}
-          />
-          <Text
-            className="color-[#686868] font-Yekan text-[18px] px-5"
-            style={{ color: route === "Settings" ? "#0136C4" : "#686868" }}
-          >
-            تنظیمات
-          </Text>
-        </View>
+          تنظیمات
+        </Text>
       </Pressable>
       {studentModel && (
         <View className="px-2">

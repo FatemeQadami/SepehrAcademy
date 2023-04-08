@@ -1,4 +1,5 @@
 import { env } from "../../../config/env";
+import { EStorageKeys } from "../../../enums/storage";
 import { signUpType } from "../../../models";
 import Http from "../../interceptor/interceptor";
 import { setItem } from "../../storage/storage";
@@ -11,7 +12,7 @@ export const signUpAPI = async (obj: signUpType) => {
 
     const user = result.data.result;
 
-    setItem("user", JSON.stringify(user));
+    setItem(EStorageKeys.user, JSON.stringify(user));
 
     return result.data.result;
   } catch (error) {

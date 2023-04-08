@@ -16,6 +16,7 @@ import { handelLogin } from "../../../redux/features/user";
 import { loginAPI } from "../../../core/services/api/auth/login.api";
 import { loginType, signUpType, studentModelType } from "../../../core/models";
 import { signUpAPI } from "../../../core/services/api/auth/signUp.api";
+import { ERouteList } from "../../../core/enums/route";
 
 const SignUpForm: FC = (): JSX.Element => {
   const [step, setStep] = useState<number>(0);
@@ -76,9 +77,9 @@ const SignUpForm: FC = (): JSX.Element => {
         })
       );
       Toast.show({ type: "success", text1: "خوش آمدید :)" });
-      navigation.navigate("Courses");
+      navigation.navigate(ERouteList.Courses);
     } else {
-      navigation.navigate("Login");
+      navigation.navigate(ERouteList.LogIn);
     }
     setIsLoading(false);
   };
@@ -246,7 +247,7 @@ const SignUpForm: FC = (): JSX.Element => {
       </Form>
       <View className="flex flex-row justify-center my-12">
         <Link
-          to={{ screen: "Login" }}
+          to={{ screen: ERouteList.LogIn }}
           style={{
             color: "white",
             fontSize: 18,

@@ -12,6 +12,9 @@ import { removeItemFromCart } from "../../redux/features/cart";
 import CustomModal from "../common/modal";
 import CustomButton from "../common/customButton";
 import Toast from "react-native-toast-message";
+import { studentModelType } from "../../core/models";
+import { useColorTheme } from "../../core/config/color";
+import { ERouteList } from "../../core/enums/route";
 
 interface ICourseItemProp {
   courseTitle: string;
@@ -38,19 +41,21 @@ const CourseItem: FC<ICourseItemProp> = ({
 
   const dispatch = useDispatch();
 
+  const color = useColorTheme();
+
   return (
     <>
       <View className="my-[15] pr-14 pl-6 relative">
         <Pressable
           onPress={() => {
-            navigation.navigate("CourseDetails", { item });
+            navigation.navigate(ERouteList.CourseDetails, { item });
           }}
-          className="flex-row-reverse justify-between rounded-[20px] mx-5 py-3.5 bg-white "
+          className="flex-row-reverse justify-between rounded-[20px] mx-5 py-3.5 bg-white dark:bg-[#212477] "
           style={{ elevation: 5 }}
         >
           <View className="mr-10">
             <View className="flex flex-row-reverse justify-around">
-              <Text className="font-Yekan font-bold text-[18px] color-[#002D85] mb-2 ">
+              <Text className="font-Yekan font-bold text-[18px] color-[#002D85] mb-2 dark:color-white ">
                 {courseTitle}
               </Text>
             </View>
@@ -91,7 +96,7 @@ const CourseItem: FC<ICourseItemProp> = ({
                 <AntDesign name="delete" color="white" size={16} />
               </Pressable>
             ) : (
-              <AntDesign name="pluscircle" size={30} color="#4F91FF" />
+              <AntDesign name="pluscircle" size={30} color={color?.iconColor} />
             )}
           </View>
         </Pressable>

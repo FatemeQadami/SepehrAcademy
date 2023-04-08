@@ -12,6 +12,7 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { handelSelect } from "../../../redux/features/selector";
+import { ERouteList } from "../../../core/enums/route";
 
 const FavoritesList: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
@@ -53,13 +54,12 @@ const FavoritesList: FC = (): JSX.Element => {
 
   return (
     <>
-      {studentModel ? (
-        <View className="bg-white pt-[15] flex-1">
+      {studentModel !== null ? (
+        <View className="pt-[15] flex-1 dark:bg-[#00216C] ">
           <FlatList
             data={state}
             ListEmptyComponent={
-              <Text className="font-Yekan px-8 py-[18] text-[20px] text-center rounded-[30px] ">
-                {" "}
+              <Text className="font-Yekan px-8 py-[18] text-[20px] text-center rounded-[30px] dark:text-white ">
                 لیست خالی است
               </Text>
             }
@@ -78,14 +78,14 @@ const FavoritesList: FC = (): JSX.Element => {
           />
         </View>
       ) : (
-        <View className="h-[100%] bg-white items-center flex justify-center">
-          <Text className="font-Yekan px-8 py-[18] text-[20px] text-center rounded-[30px] ">
+        <View className="h-[100%] bg-white items-center flex justify-center dark:bg-[#00216C]">
+          <Text className="font-Yekan px-8 py-[18] text-[20px] text-center rounded-[30px] dark:color-white ">
             بر ای مشاهده لیست موارد دلخواه لطفا وارد حساب خود شوید!!
           </Text>
           <CustomButton
             buttonTitle="ورود به حساب کاربری"
             onPress={() => {
-              navigation.replace("Login");
+              navigation.replace(ERouteList.LogIn);
             }}
             className="border-[1.5px] border-[#3A84FF] color-[#3A84FF] font-Yekan px-7 py-[12] text-[16px] text-center rounded-[30px] "
           />

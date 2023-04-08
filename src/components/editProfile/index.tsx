@@ -20,10 +20,10 @@ import { editProfileAPI } from "../../core/services/api/editProfile.api";
 import { handelLogin } from "../../redux/features/user";
 import { editProfileType, studentModelType } from "../../core/models";
 import Toast from "react-native-toast-message";
-import { useFormikContext } from "formik";
 import RNFetchBlob from "rn-fetch-blob";
 import { env } from "../../core/config/env";
 import { getItem } from "../../core/services/storage/storage";
+import { EStorageKeys } from "../../core/enums/storage";
 
 const EditProfilePage: FC = (): JSX.Element => {
   const [modalVisible, setModalVisible] = useState<Boolean>(false);
@@ -57,14 +57,13 @@ const EditProfilePage: FC = (): JSX.Element => {
       );
   }, [isFocus]);
 
-  const { studentModel }: { studentModel: studentModelType; token: string } =
-    useSelector((state: RootState) => state.user);
+  const { studentModel }: any = useSelector((state: RootState) => state.user);
 
   console.log("f", studentModel);
 
   const onSubmit = async (values: editProfileType) => {
     if (values.profile && typeof values.profile !== "string") {
-      const token = await getItem("token");
+      const token = await getItem(EStorageKeys.token);
 
       setIsLoading(true);
 
@@ -174,10 +173,10 @@ const EditProfilePage: FC = (): JSX.Element => {
   };
 
   return (
-    <KeyboardAwareScrollView>
-      <View className="bg-white">
+    <KeyboardAwareScrollView className="dark:bg-[#00216C]">
+      <View>
         <View
-          className="mx-8 my-5 rounded-[30px] bg-white px-9 py-7"
+          className="mx-8 my-5 rounded-[30px] bg-white px-9 py-7 dark:bg-[#212477] "
           style={{ elevation: 10 }}
         >
           <>
@@ -266,7 +265,7 @@ const EditProfilePage: FC = (): JSX.Element => {
                         <CustomButton
                           buttonTitle="انصراف"
                           onPress={() => resetForm()}
-                          className="border-[1.5px] font-Yekan border-[#FF0000] px-9 py-2 color-[#FF0000] text-[16px] text-center rounded-[27px] mx-5 "
+                          className="border-[1.5px] font-Yekan border-[#FF0000] dark:border-white px-9 py-2 color-[#FF0000] dark:color-white text-[16px] text-center rounded-[27px] mx-5 "
                         />
                         <CustomButton
                           buttonTitle="ثبت تغییرات"
@@ -310,7 +309,8 @@ const EditProfilePage: FC = (): JSX.Element => {
                   <CustomModal
                     animationType="slide"
                     visible={modalVisible}
-                    className="mt-[613] mx-7"
+                    className="mt-[601]"
+                    className2="dark:bg-[#212477] px-1"
                     onRequestClose={() => {
                       setModalVisible(!modalVisible);
                     }}
@@ -326,7 +326,7 @@ const EditProfilePage: FC = (): JSX.Element => {
                         setModalVisible(!modalVisible);
                       }}
                       removeProfile={() => {
-                        setModalVisible(!modalVisible);
+                        setModalVisible(!modalVisible); setProfile("")
                       }}
                     />
                   </CustomModal>

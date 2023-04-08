@@ -49,7 +49,7 @@ const CoursesList: FC = (): JSX.Element => {
   }, [isFocus]);
 
   return (
-    <View className="bg-white pt-[15] flex-1 ">
+    <View className="dark:bg-[#00216C] pt-[15] flex-1 ">
       {data && data?.length !== 0 ? (
         <FlatList
           data={data}

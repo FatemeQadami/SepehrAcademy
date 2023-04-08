@@ -1,4 +1,5 @@
 import { env } from "../../../config/env";
+import { EStorageKeys } from "../../../enums/storage";
 import { loginType } from "../../../models";
 import Http from "../../interceptor/interceptor";
 import { setItem } from "../../storage/storage";
@@ -12,8 +13,8 @@ export const loginAPI = async (obj: loginType) => {
     const user = result.data.result.studentModel;
     const token = result.data.result.jwtToken;
 
-    setItem("user", JSON.stringify(user));
-    setItem("token", token);
+    setItem(EStorageKeys.user, JSON.stringify(user));
+    setItem(EStorageKeys.token, token);
 
     console.log(result.data.result);
     return result.data.result;

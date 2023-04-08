@@ -30,7 +30,7 @@ const CustomModal: FC<ICustomModalProp> = ({
     >
       <View className={`flex justify-center items-center ${className}`}>
         <View
-          className={`bg-white items-center ${className2}`}
+          className={`bg-white items-center dark:bg-[#212477] ${className2}`}
           style={{ elevation: 8 }}
         >
           {children}

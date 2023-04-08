@@ -1,19 +1,12 @@
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  Alert,
-  Modal,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import React, { FC, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Link, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import CustomModal from "../modal";
 import CustomButton from "../customButton";
+import { useColorTheme } from "../../../core/config/color";
+import { ERouteList } from "../../../core/enums/route";
+import Filters from "../../filter";
 
 interface INavbarProp {
   pageName?: string;
@@ -24,21 +17,26 @@ const Navbar: FC<INavbarProp> = ({ pageName }): JSX.Element => {
 
   const navigation = useNavigation<any>();
 
+  const color = useColorTheme();
+
   return (
-    <View className="bg-white">
-      <View className="flex flex-row justify-center rounded-b-[35] px-7 pt-[45] bg-[#4F91FF] ">
-        {pageName ? (
+    <View className="dark:bg-[#00216C]">
+      <View
+        className="flex flex-row justify-center rounded-b-[35] px-7 pt-[45] bg-[#4F91FF] "
+        style={{ backgroundColor: color?.navbarColor }}
+      >
+        {pageName && (
           <View className="flex flex-row-reverse mb-6">
             <Pressable
               onPress={() => {
-                navigation.navigate("Cart");
+                navigation.navigate(ERouteList.Cart);
               }}
             >
               <View
                 className="bg-white pt-2 rounded-3xl items-center mt-2 w-[37] h-[37]"
                 style={{ elevation: 10 }}
               >
-                <Icon name="shopping-cart" size={24} color="#3A84FF" />
+                <Icon name="shopping-cart" size={24} color={color?.iconColor} />
               </View>
             </Pressable>
             <View
@@ -47,11 +45,13 @@ const Navbar: FC<INavbarProp> = ({ pageName }): JSX.Element => {
             >
               <TextInput
                 placeholder="جستجو ..."
+                // value={}
+                // onChangeText={handelSearch}
                 className="bg-white w-[170] h-[38] text-right pr-[10] rounded-r-[20] "
               />
               <Icon
                 name="search"
-                color="#3A84FF"
+                color={color?.iconColor}
                 size={20}
                 style={{
                   backgroundColor: "#D5E4FF",
@@ -67,35 +67,28 @@ const Navbar: FC<INavbarProp> = ({ pageName }): JSX.Element => {
                 className="bg-white pt-2 rounded-3xl items-center mt-2 w-[37] h-[37]"
                 style={{ elevation: 10 }}
               >
-                <Icon name="filter" size={24} color="#3A84FF" />
+                <Icon name="filter" size={24} color={color?.iconColor} />
               </View>
             </Pressable>
           </View>
-        ) : (
-          <></>
         )}
         <CustomModal
           animationType="slide"
           visible={modalVisible}
-          className2="p-[30] rounded-[30px]"
-          className="my-10 mx-7"
+          className2="px-8 py-9 mt-10 mb-16 rounded-[30px]"
+          className="px-7 py-2 bg-blue-rgba "
           onRequestClose={() => {
             setModalVisible(!modalVisible);
           }}
         >
-          <Text>ماسماسکای فیلتر</Text>
-          <View className="flex-row items-center justify-center">
-            <Pressable onPress={() => setModalVisible(!modalVisible)}>
-              <Text className="border font-Yekan border-[#FF0000] px-8 py-2 color-[#FF0000] text-[16px] text-center rounded-[27px] mx-3 ">
-                بازگشت
-              </Text>
-            </Pressable>
-            <CustomButton
-              buttonTitle="فیلتر"
-              onPress=""
-              className="bg-[#04A641] font-Yekan border border-[#04A641] px-10 py-2 color-white text-[16px] text-center rounded-[27px] mx-3"
-            />
-          </View>
+          <Filters
+            onPress={() => {
+              setModalVisible(!modalVisible);
+            }}
+            onPressFilter={() => {
+              setModalVisible(!modalVisible);
+            }}
+          />
         </CustomModal>
       </View>
     </View>
