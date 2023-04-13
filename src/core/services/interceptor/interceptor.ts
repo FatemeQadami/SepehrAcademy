@@ -1,6 +1,7 @@
 import axios from "axios";
-import { getItem } from "../storage/storage";
 import Toast from "react-native-toast-message";
+
+import { getItem } from "../storage/storage";
 import { EStorageKeys } from "../../enums/storage";
 
 axios.interceptors.response.use(

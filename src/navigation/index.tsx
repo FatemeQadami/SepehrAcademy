@@ -1,30 +1,35 @@
 import React, { FC } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, Image } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useColorScheme } from "nativewind";
+
+//----------screens----------
+
 import Login from "../screens/authentication/login";
 import Courses from "../screens/courses";
 import Start from "../screens/start";
 import SplashScreen from "../screens/splashScreen";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import Cart from "../screens/cart";
 import Favorites from "../screens/favorites";
 import EditProfile from "../screens/editProfile";
 import Settings from "../screens/settings";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import DrowerItem from "../components/drawerItem";
 import SignUp from "../screens/authentication/signUp";
 import Forgetpass from "../screens/authentication/forgetPass";
 import CourseDetails from "../screens/courseDetails";
-import { useColorScheme } from "nativewind";
+
+//-----------------------------------
+
 import { useColorTheme } from "../core/config/color";
 import { ERouteList } from "../core/enums/route";
+import { DrowerItem } from "../components/drawerItem";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-const Navigation: FC = (): JSX.Element => {
+export const Navigation: FC = (): JSX.Element => {
   return (
     <Stack.Navigator
       initialRouteName={ERouteList.SplashScreen}
@@ -39,8 +44,6 @@ const Navigation: FC = (): JSX.Element => {
     </Stack.Navigator>
   );
 };
-
-export default Navigation;
 
 const MyTab: FC = ({ navigation }: any) => {
   const color = useColorTheme();

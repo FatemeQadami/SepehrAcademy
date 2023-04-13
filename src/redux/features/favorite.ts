@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { setItem } from "../../core/services/storage/storage";
 import { EStorageKeys } from "../../core/enums/storage";
 
-const initialState: any = []
+const initialState: any = [];
 
 const favoriteSlice = createSlice({
   name: "favorite",
