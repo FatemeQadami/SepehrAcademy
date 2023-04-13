@@ -3,13 +3,13 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
-  Pressable,
+  GestureResponderEvent,
 } from "react-native";
 import React, { FC, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useFormikContext } from "formik";
 
-interface IInputTextProp {
+interface InputTextProp {
   placeholder: string;
   type?: any;
   name: string;
@@ -26,7 +26,7 @@ interface IInputTextProp {
   editable?: boolean;
 }
 
-const InputText: FC<IInputTextProp> = ({
+export const InputText: FC<InputTextProp> = ({
   placeholder,
   type,
   name,
@@ -97,5 +97,3 @@ const InputText: FC<IInputTextProp> = ({
     </KeyboardAvoidingView>
   );
 };
-
-export default InputText;

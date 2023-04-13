@@ -1,14 +1,15 @@
 import { Link, useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { FC } from "react";
 import { Text, View, Image, ImageBackground, Dimensions } from "react-native";
+
 import logo from "../../assets/img/pre-start/logo.png";
 import background from "../../assets/img/pre-start/background.png";
-import CustomButton from "../common/customButton";
+import { CustomButton } from "../common/customButton";
 import { ERouteList } from "../../core/enums/route";
 
 const { width, height } = Dimensions.get("screen");
 
-const StartPage = () => {
+export const StartPage: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
 
   return (
@@ -42,9 +43,7 @@ const StartPage = () => {
             آکادمی کدنویسی بحر
           </Text>
         </View>
-        <View
-          className="flex rounded-t-[40] p-9 mt-20 bg-[#3A84FF] h-[65%]"
-        >
+        <View className="flex rounded-t-[40] p-9 mt-20 bg-[#3A84FF] h-[65%]">
           <Text className="text-white text-5xl font-Yekan pt-3">خوش آمدید</Text>
           <Text className="text-white text-base font-Yekan mt-4">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
@@ -87,5 +86,3 @@ const StartPage = () => {
     </View>
   );
 };
-
-export default StartPage;

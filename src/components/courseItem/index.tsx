@@ -1,22 +1,20 @@
 import { View, Text, Image, Pressable } from "react-native";
 import React, { FC, useState } from "react";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
-import Favorite from "../common/favorite";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
+
+import { Favorite } from "../common/favorite";
 import { removeItem } from "../../redux/features/favorite";
 import { removeItemFromCart } from "../../redux/features/cart";
-import CustomModal from "../common/modal";
-import CustomButton from "../common/customButton";
-import Toast from "react-native-toast-message";
-import { studentModelType } from "../../core/models";
+import { CustomModal } from "../common/modal";
+import { CustomButton } from "../common/customButton";
 import { useColorTheme } from "../../core/config/color";
 import { ERouteList } from "../../core/enums/route";
 
-interface ICourseItemProp {
+interface CourseItemProp {
   courseTitle: string;
   courseTeacher: string;
   courseImage: string | undefined;
@@ -25,7 +23,7 @@ interface ICourseItemProp {
   pageName?: string;
 }
 
-const CourseItem: FC<ICourseItemProp> = ({
+export const CourseItem: FC<CourseItemProp> = ({
   courseTitle,
   courseTeacher,
   courseImage,
@@ -33,11 +31,9 @@ const CourseItem: FC<ICourseItemProp> = ({
   pageName,
   item,
 }): JSX.Element => {
-  const navigation = useNavigation<any>();
-
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  const { studentModel }: any = useSelector((state: RootState) => state.user);
+  const navigation = useNavigation<any>();
 
   const dispatch = useDispatch();
 
@@ -117,24 +113,24 @@ const CourseItem: FC<ICourseItemProp> = ({
         }}
       >
         <View>
-          <Text className="font-Yekan text-[16px] text-center my-2 ">
+          <Text className="font-Yekan text-[16px] text-center my-2 dark:color-white ">
             آیا از حذف این درس اطمینان دارید؟
           </Text>
           <View className="flex-row items-center justify-center my-4 ">
             <CustomButton
               buttonTitle="خیر"
               onPress={() => setModalVisible(!modalVisible)}
-              className="border-[1.5px] font-Yekan border-[#FF0000] px-11 py-2 color-[#FF0000] text-[16px] text-center rounded-[27px] mx-2 "
+              className="border-[1.5px] font-Yekan border-[#FF0000] dark:border-white px-11 py-2 color-[#FF0000] dark:color-white text-[16px] text-center rounded-[27px] mx-2 "
             />
             <CustomButton
               buttonTitle="بله"
               onPress={() => {
-                setModalVisible(!modalVisible);
                 dispatch(removeItemFromCart(item));
                 Toast.show({
                   type: "success",
                   text1: " درس انتخاب شده با موفقیت حذف شد",
                 });
+                setModalVisible(!modalVisible);
               }}
               className="bg-[#04A641] font-Yekan border-[1.5px] border-[#04A641] px-11 py-2 color-white text-[16px] text-center rounded-[27px] mx-2 "
             />
@@ -144,5 +140,3 @@ const CourseItem: FC<ICourseItemProp> = ({
     </>
   );
 };
-
-export default CourseItem;

@@ -1,11 +1,11 @@
-import { View, Text, Pressable } from "react-native";
-import React, { FC, useState } from "react";
+import { Pressable } from "react-native";
+import React, { FC } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
 import Toast from "react-native-toast-message";
+
+import { RootState } from "../../../redux/store";
 import { addToFavorite } from "../../../redux/features/favorite";
-import { studentModelType } from "../../../core/models";
 
 interface propType {
   color: string;
@@ -13,14 +13,14 @@ interface propType {
   item: any;
 }
 
-const Favorite: FC<propType> = ({ color, size, item }): JSX.Element => {
+export const Favorite: FC<propType> = ({ color, size, item }): JSX.Element => {
   const dispatch = useDispatch<any>();
 
   const state: any = useSelector((state: RootState) => state.favorite);
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
 
-  const handelClick = state?.some((s: { _id: string }) => s._id === item._id)
+  const handelClick = state?.some((s: { _id: string }) => s._id === item._id);
 
   console.log(state);
 
@@ -44,5 +44,3 @@ const Favorite: FC<propType> = ({ color, size, item }): JSX.Element => {
     </Pressable>
   );
 };
-
-export default Favorite;

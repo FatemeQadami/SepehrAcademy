@@ -1,19 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import {View } from "react-native";
 import React, { FC, useState } from "react";
-import Form from "../../common/forms";
-import { forgetpassValidation } from "../../../core/validation";
-import InputText from "../../common/inputText";
-import { Link } from "@react-navigation/native";
-import CustomButton from "../../common/customButton";
-import { forgetPassAPI } from "../../../core/services/api/auth/forget.api";
 import Toast from "react-native-toast-message";
+import { Link } from "@react-navigation/native";
+
+import {Form} from "../../common/forms";
+import { forgetpassValidation } from "../../../core/validation";
+import {InputText} from "../../common/inputText";
+import { CustomButton } from "../../common/customButton";
+import { forgetPassAPI } from "../../../core/services/api/auth/forget.api";
 import { forgetPassType } from "../../../core/models";
 import { ERouteList } from "../../../core/enums/route";
 
-const ForgetpassForm: FC = (): JSX.Element => {
-
+export const ForgetpassForm: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
-
 
   const onSubmit = async (value: forgetPassType) => {
     setIsLoading(true);
@@ -55,6 +54,7 @@ const ForgetpassForm: FC = (): JSX.Element => {
               <CustomButton
                 buttonTitle="تایید ایمیل"
                 isLoading={isLoading}
+                loadingClassName="bg-[#0043F7] py-3.5 rounded-[30px]"
                 color="white"
                 onPress={submitForm}
                 className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "
@@ -96,5 +96,3 @@ const ForgetpassForm: FC = (): JSX.Element => {
     </View>
   );
 };
-
-export default ForgetpassForm;

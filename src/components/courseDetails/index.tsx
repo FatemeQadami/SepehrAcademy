@@ -2,59 +2,38 @@ import {
   View,
   Text,
   Image,
-  FlatList,
-  TextInput,
   Pressable,
   ScrollView,
+  TextInput,
 } from "react-native";
 import React, { FC, useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import Favorite from "../common/favorite";
-import CustomButton from "../common/customButton";
-import user from "../../assets/img/comment/user.png";
+import { useDispatch, useSelector } from "react-redux";
+import Toast from "react-native-toast-message";
+
+import { Favorite } from "../common/favorite";
+import { CustomButton } from "../common/customButton";
 import {
   commentsAPI,
   addCommentsAPI,
 } from "../../core/services/api/comment.api";
-import CustomModal from "../common/modal";
-import { useDispatch, useSelector } from "react-redux";
+import { CustomModal } from "../common/modal";
 import { RootState } from "../../redux/store";
-import Toast from "react-native-toast-message";
 import { commentType } from "../../core/models";
 import { addToCart, removeItemFromCart } from "../../redux/features/cart";
 import { useColorTheme } from "../../core/config/color";
+import user from "../../assets/img/comment/user.png";
+import { CommentItem } from "../commentItem";
 
-interface commentProp {
-  userName: string;
-  comment: string;
-}
+export const CourseDetailsPage: FC = (): JSX.Element => {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [reFetch, setReFetch] = useState<Boolean>(false);
+  const [data, setData] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [value, setValue] = useState<any>();
 
-const CommentItem: FC<commentProp> = ({ userName, comment }): JSX.Element => {
-  console.log("first", comment);
-
-  return (
-    <View
-      className=" bg-white p-5 rounded-[20px] mx-4 my-2 dark:bg-[#212477]"
-      style={{ elevation: 8 }}
-    >
-      <View className="flex-row-reverse">
-        <Image className="rounded-[20px] w-[30] h-[30]" source={user} />
-        <Text className="font-Yekan color-[#002D85] dark:color-white">
-          {userName}
-        </Text>
-      </View>
-      <Text className="font-Yekan color-[#999999] text-[13px] pt-1 pr-1 dark:color-white">
-        {comment}
-      </Text>
-    </View>
-  );
-};
-
-const CourseDetailsPage: FC = (): JSX.Element => {
   const { studentModel }: any = useSelector((state: RootState) => state.user);
-
-  console.log("test", studentModel);
 
   const state: any = useSelector((state: RootState) => state.cart);
 
@@ -66,11 +45,10 @@ const CourseDetailsPage: FC = (): JSX.Element => {
 
   const { item } = route.params;
 
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-
-  const [data, setData] = useState<any>([]);
-
-  const [value, setValue] = useState<any>();
+  const onChangeText = (text: string) => {
+    let val = text;
+    setValue(val);
+  };
 
   const loadComments = async () => {
     const comment: any = await commentsAPI();
@@ -78,9 +56,10 @@ const CourseDetailsPage: FC = (): JSX.Element => {
       (it: { postId: string }) => it?.postId === item?._id
     );
     setData(result);
-    console.log(data);
   };
   const addComment = async (value: string) => {
+    setIsLoading(true);
+
     const commentObj: commentType = {
       postId: item?._id,
       email: studentModel?.email,
@@ -89,13 +68,19 @@ const CourseDetailsPage: FC = (): JSX.Element => {
     };
     const response: any = await addCommentsAPI(commentObj);
 
-    setData([...data, response]);
+    // setData([...data, response]);
+
+    setReFetch((old) => !old);
+
     Toast.show({
       type: "success",
       text1: "نظر شما با موفقیت ثبت شد :)",
       text2: "ممنون از همکاری شما :)",
     });
-    console.log(data);
+
+    setIsLoading(false);
+
+    setModalVisible(!modalVisible);
   };
 
   const handelClick = () => {
@@ -104,10 +89,7 @@ const CourseDetailsPage: FC = (): JSX.Element => {
 
   useEffect(() => {
     loadComments();
-    console.log(data);
-  }, []);
-
-  console.log("gbg", state);
+  }, [reFetch]);
 
   return (
     <View className="dark:bg-[#00216C] ">
@@ -249,12 +231,18 @@ const CourseDetailsPage: FC = (): JSX.Element => {
                 </Pressable>
               </View>
               <View className="mt-1">
-                {data?.map((item: { username: string; comment: string }) => (
-                  <CommentItem
-                    userName={item?.username}
-                    comment={item?.comment}
-                  />
-                ))}
+                {data?.map(
+                  (
+                    item: { username: string; comment: string },
+                    index: React.Key | null | undefined
+                  ) => (
+                    <CommentItem
+                      key={index}
+                      userName={item?.username}
+                      comment={item?.comment}
+                    />
+                  )
+                )}
               </View>
             </View>
           </ScrollView>
@@ -312,6 +300,9 @@ const CourseDetailsPage: FC = (): JSX.Element => {
               placeholderTextColor="#707070"
               multiline
               numberOfLines={5}
+              onChangeText={(text) => {
+                onChangeText(text);
+              }}
               value={value}
             />
           </View>
@@ -323,6 +314,7 @@ const CourseDetailsPage: FC = (): JSX.Element => {
             />
             <CustomButton
               buttonTitle="ثبت نظر"
+              isLoading={isLoading}
               onPress={() => {
                 addComment(value);
                 setModalVisible(!modalVisible);
@@ -335,5 +327,3 @@ const CourseDetailsPage: FC = (): JSX.Element => {
     </View>
   );
 };
-
-export default CourseDetailsPage;

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import StartPage from "../../components/start";
+
+import { StartPage } from "../../components/start";
 
 const Start: FC = (): JSX.Element => {
   return <StartPage />;

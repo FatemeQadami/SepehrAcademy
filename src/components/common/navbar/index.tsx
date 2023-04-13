@@ -1,18 +1,18 @@
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, TextInput, Pressable } from "react-native";
 import React, { FC, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
-import CustomModal from "../modal";
-import CustomButton from "../customButton";
+
+import { CustomModal } from "../modal";
 import { useColorTheme } from "../../../core/config/color";
 import { ERouteList } from "../../../core/enums/route";
-import Filters from "../../filter";
+import { Filters } from "../../filter";
 
-interface INavbarProp {
+interface NavbarProp {
   pageName?: string;
 }
 
-const Navbar: FC<INavbarProp> = ({ pageName }): JSX.Element => {
+export const Navbar: FC<NavbarProp> = ({ pageName }): JSX.Element => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const navigation = useNavigation<any>();
@@ -82,7 +82,7 @@ const Navbar: FC<INavbarProp> = ({ pageName }): JSX.Element => {
           }}
         >
           <Filters
-            onPress={() => {
+            comebackOnpress={() => {
               setModalVisible(!modalVisible);
             }}
             onPressFilter={() => {
@@ -94,5 +94,3 @@ const Navbar: FC<INavbarProp> = ({ pageName }): JSX.Element => {
     </View>
   );
 };
-
-export default Navbar;

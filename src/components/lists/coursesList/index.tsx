@@ -1,14 +1,14 @@
 import { View, Text, FlatList } from "react-native";
 import React, { FC, useEffect, useState } from "react";
-import CourseItem from "../../courseItem";
-import { coursesAPI } from "../../../core/services/api/courses.api";
-import SkeletonLoading from "../../common/skeletonLoading";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import { handelSelect } from "../../../redux/features/selector";
 import { useIsFocused, useRoute } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
-const CoursesList: FC = (): JSX.Element => {
+import { CourseItem } from "../../courseItem";
+import { coursesAPI } from "../../../core/services/api/courses.api";
+import { SkeletonLoading } from "../../common/skeletonLoading";
+import { handelSelect } from "../../../redux/features/selector";
+
+export const CoursesList: FC = (): JSX.Element => {
   const [data, setData] = useState([]);
   const [refreshing, setRefreshing] = useState<any>(false);
 
@@ -16,26 +16,17 @@ const CoursesList: FC = (): JSX.Element => {
 
   // ------------route---------------
 
-  const { route } = useSelector((state: RootState) => state.selector);
-
-  console.log("reduxState", route);
-
   const dispatch = useDispatch();
 
   const routeName = useRoute();
 
-  console.log(routeName.name);
-  
   const isFocus = useIsFocused();
   // ------------API---------
 
   const loadData = async () => {
     const result = await coursesAPI();
     setData(result?.data?.result);
-    // console.log(data);
   };
-
-
 
   useEffect(() => {
     loadData();
@@ -78,5 +69,3 @@ const CoursesList: FC = (): JSX.Element => {
     </View>
   );
 };
-
-export default CoursesList;

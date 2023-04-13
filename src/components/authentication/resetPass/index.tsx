@@ -1,23 +1,22 @@
 import { Pressable, View, Text } from "react-native";
-import React, { useState } from "react";
-import Form from "../../common/forms";
-import { validationReset } from "../../../core/validation";
-import InputText from "../../common/inputText";
-import CustomButton from "../../common/customButton";
+import React, { useState, FC } from "react";
 import Toast from "react-native-toast-message";
+import { useSelector } from "react-redux";
+
+import { Form } from "../../common/forms";
+import { validationReset } from "../../../core/validation";
+import { InputText } from "../../common/inputText";
+import { CustomButton } from "../../common/customButton";
 import { forgetPassType, resetPassType } from "../../../core/models";
 import { resetPassAPI } from "../../../core/services/api/auth/resetPass.api";
 import { forgetPassAPI } from "../../../core/services/api/auth/forget.api";
 import { RootState } from "../../../redux/store";
-import { useDispatch, useSelector } from "react-redux";
 
-const ResetPass = () => {
+export const ResetPass: FC = (): JSX.Element => {
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
   const [isPasswordSecure2, setIsPasswordSecure2] = useState<Boolean>(true);
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
-
-  const dispatch = useDispatch();
 
   const onSubmit = async (values: resetPassType) => {
     try {
@@ -104,5 +103,3 @@ const ResetPass = () => {
     </View>
   );
 };
-
-export default ResetPass;

@@ -1,17 +1,16 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React, { FC } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Pressable } from "react-native";
 
-interface propsType {
+interface ProfileUploadPropsType {
   onPress: Function;
   getImageFromCamera: Function;
   getImageFromGallery: Function;
   removeProfile: Function;
 }
 
-const ProfileUpload: FC<propsType> = ({
+export const ProfileUpload: FC<ProfileUploadPropsType> = ({
   onPress,
   getImageFromCamera,
   getImageFromGallery,
@@ -57,5 +56,3 @@ const ProfileUpload: FC<propsType> = ({
     </View>
   );
 };
-
-export default ProfileUpload;

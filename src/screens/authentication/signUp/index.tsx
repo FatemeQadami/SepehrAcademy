@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Text } from "react-native";
-import AuthLayout from "../../../components/authentication";
+
+import { AuthLayout } from "../../../components/authentication";
 
 const SignUp: FC = (): JSX.Element => {
   return <AuthLayout pageTitle="ثبت نام" formBox="signUp" />;

@@ -1,26 +1,23 @@
-import {
-  Dimensions,
-  ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, ImageBackground, Text, View } from "react-native";
 import React, { FC } from "react";
-import background from "../../assets/img/auth/background.png";
-import LoginForm from "./login";
-import SignUpForm from "./signUp";
-import ForgetpassForm from "./forgetpass";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+import background from "../../assets/img/auth/background.png";
+import { LoginForm } from "./login";
+import { SignUpForm } from "./signUp";
+import { ForgetpassForm } from "./forgetpass";
 
 const { width, height } = Dimensions.get("screen");
 
-interface IAuthLayoutProp{
-  formBox:string, pageTitle:string
+interface AuthLayoutProp {
+  formBox: string;
+  pageTitle: string;
 }
 
-const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
+export const AuthLayout: FC<AuthLayoutProp> = ({
+  formBox,
+  pageTitle,
+}): JSX.Element => {
   return (
     <KeyboardAwareScrollView>
       <View className="bg-white dark:bg-[#00216C] ">
@@ -50,9 +47,7 @@ const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
           <Text className="font-Yekan text-[30px] dark:color-white">
             {pageTitle}
           </Text>
-          <Text
-            className="font-Yekan text-[14px] mt-[8] mb-[48] dark:color-white"
-          >
+          <Text className="font-Yekan text-[14px] mt-[8] mb-[48] dark:color-white">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
             ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
@@ -68,7 +63,7 @@ const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
                   height: 390,
                   marginTop: 254,
                 }
-              : {height: 645 }
+              : { height: 645 }
           }
         >
           {formBox === "login" ? (
@@ -83,5 +78,3 @@ const AuthLayout:FC<IAuthLayoutProp> = ({ formBox, pageTitle }):JSX.Element => {
     </KeyboardAwareScrollView>
   );
 };
-
-export default AuthLayout;

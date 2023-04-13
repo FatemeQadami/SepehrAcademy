@@ -1,24 +1,25 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React, { FC, useState } from "react";
-import InputText from "../../common/inputText";
-import Form from "../../common/forms";
-import { Link, useNavigation } from "@react-navigation/native";
-import CustomButton from "../../common/customButton";
-import { signUp1Validation, signUp2Validation } from "../../../core/validation";
-import StepIndicator from "react-native-step-indicator";
-import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
-import CustomModal from "../../common/modal";
-import DateInput from "../../common/dateInput";
 import Toast from "react-native-toast-message";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigation } from "@react-navigation/native";
+import StepIndicator from "react-native-step-indicator";
+import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
+
+import { InputText } from "../../common/inputText";
+import { Form } from "../../common/forms";
+import { CustomButton } from "../../common/customButton";
+import { signUp1Validation, signUp2Validation } from "../../../core/validation";
+import { CustomModal } from "../../common/modal";
+import { DateInput } from "../../common/dateInput";
 import { RootState } from "../../../redux/store";
 import { handelLogin } from "../../../redux/features/user";
 import { loginAPI } from "../../../core/services/api/auth/login.api";
-import { loginType, signUpType, studentModelType } from "../../../core/models";
+import { loginType, signUpType } from "../../../core/models";
 import { signUpAPI } from "../../../core/services/api/auth/signUp.api";
 import { ERouteList } from "../../../core/enums/route";
 
-const SignUpForm: FC = (): JSX.Element => {
+export const SignUpForm: FC = (): JSX.Element => {
   const [step, setStep] = useState<number>(0);
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -78,8 +79,6 @@ const SignUpForm: FC = (): JSX.Element => {
       );
       Toast.show({ type: "success", text1: "خوش آمدید :)" });
       navigation.navigate(ERouteList.Courses);
-    } else {
-      navigation.navigate(ERouteList.LogIn);
     }
     setIsLoading(false);
   };
@@ -207,9 +206,9 @@ const SignUpForm: FC = (): JSX.Element => {
                   <CustomButton
                     buttonTitle="ثبت نام"
                     isLoading={isLoading}
+                    loadingClassName="bg-[#0043F7] py-3.5 rounded-[30px]"
                     onPress={submitForm}
                     color="white"
-                    loadingClassName="bg-[#0043F7]"
                     className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "
                   />
                 </View>
@@ -271,5 +270,3 @@ const SignUpForm: FC = (): JSX.Element => {
     </>
   );
 };
-
-export default SignUpForm;

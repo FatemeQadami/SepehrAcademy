@@ -1,24 +1,24 @@
-import { StyleSheet, Text, View, TextInput, Image } from "react-native";
+import { Text, View, Image } from "react-native";
 import React, { useState, FC } from "react";
-import Form from "../../common/forms";
-import { LoginValidation } from "../../../core/validation";
-import InputText from "../../common/inputText";
 import { Link, useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Form } from "../../common/forms";
+import { LoginValidation } from "../../../core/validation";
+import { InputText } from "../../common/inputText";
 import google from "../../../assets/img/auth/login/google.png";
 import facebook from "../../../assets/img/auth/login/facebook.png";
 import twitter from "../../../assets/img/auth/login/twitter.png";
-import CustomButton from "../../common/customButton";
-import Toast from "react-native-toast-message";
+import { CustomButton } from "../../common/customButton";
 import { loginAPI } from "../../../core/services/api/auth/login.api";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { handelLogin } from "../../../redux/features/user";
 import { loginType } from "../../../core/models";
 import { ERouteList } from "../../../core/enums/route";
 
-const LoginForm: FC = (): JSX.Element => {
+export const LoginForm: FC = (): JSX.Element => {
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
-
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const { token, studentModel } = useSelector((state: RootState) => state.user);
@@ -104,6 +104,7 @@ const LoginForm: FC = (): JSX.Element => {
               <CustomButton
                 buttonTitle="ورود"
                 isLoading={isLoading}
+                loadingClassName="bg-[#0043F7] py-3.5 rounded-[30px]"
                 color="white"
                 onPress={submitForm}
                 className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "
@@ -150,5 +151,3 @@ const LoginForm: FC = (): JSX.Element => {
     </>
   );
 };
-
-export default LoginForm;

@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -9,7 +8,7 @@ import React, { FC } from "react";
 
 interface ICustomButtonProp {
   buttonTitle: string;
-  onPress: any;
+  onPress: Function;
   className: string;
   style?: any;
   isLoading?: Boolean;
@@ -17,7 +16,7 @@ interface ICustomButtonProp {
   loadingClassName?: string;
 }
 
-const CustomButton: FC<ICustomButtonProp> = ({
+export const CustomButton: FC<ICustomButtonProp> = ({
   buttonTitle,
   onPress,
   className,
@@ -45,5 +44,3 @@ const CustomButton: FC<ICustomButtonProp> = ({
     </TouchableOpacity>
   );
 };
-
-export default CustomButton;

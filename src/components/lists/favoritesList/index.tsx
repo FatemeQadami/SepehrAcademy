@@ -1,40 +1,31 @@
 import { View, Text, FlatList } from "react-native";
-import React, { FC, useState, useEffect, useMemo } from "react";
-import CourseItem from "../../courseItem";
-import SkeletonLoading from "../../common/skeletonLoading";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import Toast from "react-native-toast-message";
-import CustomButton from "../../common/customButton";
+import React, { FC, useEffect } from "react";
 import {
   useIsFocused,
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
+import { useDispatch, useSelector } from "react-redux";
+
+import { CourseItem } from "../../courseItem";
+import { RootState } from "../../../redux/store";
+import { CustomButton } from "../../common/customButton";
 import { handelSelect } from "../../../redux/features/selector";
 import { ERouteList } from "../../../core/enums/route";
 
-const FavoritesList: FC = (): JSX.Element => {
+export const FavoritesList: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
   const state: any = useSelector((state: RootState) => state.favorite);
 
-  // const data = useMemo(() => state, [state]);
-
-  // console.log("state", state);
-
   // ------------route---------------
-
-  const { route } = useSelector((state: RootState) => state.selector);
-
-  console.log("reduxState", route);
 
   const dispatch = useDispatch();
 
   const routeName = useRoute();
 
-  console.log(routeName.name);
   const isFocus = useIsFocused();
 
   useEffect(() => {
@@ -94,5 +85,3 @@ const FavoritesList: FC = (): JSX.Element => {
     </>
   );
 };
-
-export default FavoritesList;

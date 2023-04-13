@@ -1,8 +1,7 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Modal } from "react-native";
 import React, { FC } from "react";
-import { Modal } from "react-native";
 
-interface ICustomModalProp {
+interface CustomModalProp {
   animationType: "none" | "slide" | "fade";
   onRequestClose: Function;
   visible: any;
@@ -11,7 +10,7 @@ interface ICustomModalProp {
   className2?: string;
 }
 
-const CustomModal: FC<ICustomModalProp> = ({
+export const CustomModal: FC<CustomModalProp> = ({
   animationType,
   onRequestClose,
   visible,
@@ -39,5 +38,3 @@ const CustomModal: FC<ICustomModalProp> = ({
     </Modal>
   );
 };
-
-export default CustomModal;

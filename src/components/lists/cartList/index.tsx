@@ -1,24 +1,23 @@
-import { View, Text, Pressable, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React, { useEffect, FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-
 import Toast from "react-native-toast-message";
 import {
   useIsFocused,
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
+
+import { RootState } from "../../../redux/store";
 import { handelSelect } from "../../../redux/features/selector";
-import CourseItem from "../../courseItem";
-import SkeletonLoading from "../../common/skeletonLoading";
-import CustomButton from "../../common/customButton";
-import CustomModal from "../../common/modal";
+import { CourseItem } from "../../courseItem";
+import { CustomButton } from "../../common/customButton";
 import { ERouteList } from "../../../core/enums/route";
 
-const CartList: FC = (): JSX.Element => {
-  const navigation = useNavigation<any>();
+export const CartList: FC = (): JSX.Element => {
   const [price, setPrice] = useState<number>();
+
+  const navigation = useNavigation<any>();
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
   const state: any = useSelector((state: RootState) => state.cart);
@@ -30,8 +29,6 @@ const CartList: FC = (): JSX.Element => {
   };
 
   // ------------route---------------
-
-  const { route } = useSelector((state: RootState) => state.selector);
 
   const dispatch = useDispatch();
 
@@ -150,5 +147,3 @@ const CartList: FC = (): JSX.Element => {
     </>
   );
 };
-
-export default CartList;

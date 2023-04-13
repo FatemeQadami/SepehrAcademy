@@ -1,31 +1,32 @@
 import { View, Text, Image, Pressable } from "react-native";
 import React, { FC, useState, useEffect } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import user from "../../assets/img/profile/user.png";
-import InputText from "../common/inputText";
-import Form from "../common/forms";
-import { profileValidation } from "../../core/validation";
-import CustomButton from "../common/customButton";
-import DateInput from "../common/dateInput";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import CustomModal from "../common/modal";
-import ProfileUpload from "../profileModal";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import ImageCropPicker from "react-native-image-crop-picker";
 import { useIsFocused, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
+import Toast from "react-native-toast-message";
+import RNFetchBlob from "rn-fetch-blob";
+
+import user from "../../assets/img/profile/user.png";
+import { InputText } from "../common/inputText";
+import { Form } from "../common/forms";
+import { profileValidation } from "../../core/validation";
+import { CustomButton } from "../common/customButton";
+import { DateInput } from "../common/dateInput";
+import { CustomModal } from "../common/modal";
+import {ProfileUpload} from "../profileModal";
 import { RootState } from "../../redux/store";
 import { handelSelect } from "../../redux/features/selector";
 import { editProfileAPI } from "../../core/services/api/editProfile.api";
 import { handelLogin } from "../../redux/features/user";
-import { editProfileType, studentModelType } from "../../core/models";
-import Toast from "react-native-toast-message";
-import RNFetchBlob from "rn-fetch-blob";
+import { editProfileType } from "../../core/models";
 import { env } from "../../core/config/env";
 import { getItem } from "../../core/services/storage/storage";
 import { EStorageKeys } from "../../core/enums/storage";
 
-const EditProfilePage: FC = (): JSX.Element => {
+export const EditProfilePage: FC = (): JSX.Element => {
   const [modalVisible, setModalVisible] = useState<Boolean>(false);
   const [modalVisible2, setModalVisible2] = useState<Boolean>(false);
   const [profile, setProfile] = useState<String>("");
@@ -33,19 +34,10 @@ const EditProfilePage: FC = (): JSX.Element => {
 
   const MainUrl = env.APP_PUBLIC_PATH;
 
-  // const {setFieldValue} = useFormikContext()
-
-  // ------------route---------------
-
-  const { route } = useSelector((state: RootState) => state.selector);
-
-  console.log("reduxState", route);
-
   const dispatch = useDispatch();
 
   const routeName = useRoute();
 
-  console.log(routeName.name);
   const isFocus = useIsFocused();
 
   useEffect(() => {
@@ -326,7 +318,8 @@ const EditProfilePage: FC = (): JSX.Element => {
                         setModalVisible(!modalVisible);
                       }}
                       removeProfile={() => {
-                        setModalVisible(!modalVisible); setProfile("")
+                        setModalVisible(!modalVisible);
+                        setProfile("");
                       }}
                     />
                   </CustomModal>
@@ -339,5 +332,3 @@ const EditProfilePage: FC = (): JSX.Element => {
     </KeyboardAwareScrollView>
   );
 };
-
-export default EditProfilePage;

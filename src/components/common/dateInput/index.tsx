@@ -11,7 +11,7 @@ interface IDateInputProp {
   onPress: Function;
 }
 
-const DateInput: FC<IDateInputProp> = ({
+export const DateInput: FC<IDateInputProp> = ({
   className,
   inputWidth,
   name,
@@ -64,5 +64,3 @@ const DateInput: FC<IDateInputProp> = ({
     </>
   );
 };
-
-export default DateInput;

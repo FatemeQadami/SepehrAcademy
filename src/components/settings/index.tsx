@@ -1,29 +1,31 @@
 import { View, Text, Switch, Pressable } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import CustomModal from "../common/modal";
-import AboutUs from "../aboutUs";
-import ClearPassword from "../clearPassword";
-import ContactUs from "../contactUs";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import ResetPass from "../authentication/resetPass";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { handelSelect } from "../../redux/features/selector";
 import { useIsFocused, useRoute } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { useColorScheme } from "nativewind";
+
+import { CustomModal } from "../common/modal";
+import { AboutUs } from "../aboutUs";
+import { ClearPassword } from "../clearPassword";
+import { ContactUs } from "../contactUs";
+import { ResetPass } from "../authentication/resetPass";
+import { RootState } from "../../redux/store";
+import { handelSelect } from "../../redux/features/selector";
 import { handelTheme } from "../../redux/features/theme";
 import { setItem } from "../../core/services/storage/storage";
 import { EStorageKeys } from "../../core/enums/storage";
 
-const SettingPage = () => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [modalVisible2, setModalVisible2] = useState<boolean>(false);
-  const [modalVisible3, setModalVisible3] = useState<boolean>(false);
+export const SettingPage: FC = (): JSX.Element => {
+  const [clearModalVisible, setClearModalVisible] = useState<boolean>(false);
+  const [aboutModalVisible, setAboutModalVisible] = useState<boolean>(false);
+  const [contactModalVisible, setContactModalVisible] =
+    useState<boolean>(false);
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
 
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -39,8 +41,6 @@ const SettingPage = () => {
   const { theme }: any = useSelector((state: RootState) => state.theme);
 
   // ------------route---------------
-
-  const {} = useSelector((state: RootState) => state.selector);
 
   const dispatch = useDispatch();
 
@@ -171,7 +171,7 @@ const SettingPage = () => {
                   className="flex-row-reverse justify-between my-3"
                   onPress={() => {
                     studentModel
-                      ? setModalVisible(true)
+                      ? setClearModalVisible(true)
                       : Toast.show({
                           type: "error",
                           text1: " شما حسابی ندارید!!!",
@@ -209,7 +209,7 @@ const SettingPage = () => {
                 </Pressable>
                 <Pressable
                   className="flex-row-reverse justify-between my-3"
-                  onPress={() => setModalVisible2(true)}
+                  onPress={() => setAboutModalVisible(true)}
                 >
                   <View className="flex-row-reverse">
                     <Feather
@@ -242,7 +242,7 @@ const SettingPage = () => {
                 </Pressable>
                 <Pressable
                   className="flex-row-reverse justify-between my-3"
-                  onPress={() => setModalVisible3(true)}
+                  onPress={() => setContactModalVisible(true)}
                 >
                   <View className="flex-row-reverse">
                     <Ionicons
@@ -292,41 +292,43 @@ const SettingPage = () => {
         </View>
       </KeyboardAwareScrollView>
       <CustomModal
-        visible={modalVisible}
+        visible={clearModalVisible}
         animationType="slide"
         className2="p-[30] rounded-[30px]"
         className="my-10 mx-7"
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setClearModalVisible(!clearModalVisible);
         }}
       >
-        <ClearPassword onPress={() => setModalVisible(!modalVisible)} />
+        <ClearPassword
+          onPress={() => setClearModalVisible(!clearModalVisible)}
+        />
       </CustomModal>
 
       <CustomModal
         animationType="fade"
-        visible={modalVisible2}
+        visible={aboutModalVisible}
         className="my-10 mx-7"
         className2="p-[30] rounded-[30px]"
         onRequestClose={() => {
-          setModalVisible2(!modalVisible2);
+          setAboutModalVisible(!aboutModalVisible);
         }}
       >
-        <AboutUs onPress={() => setModalVisible2(!modalVisible2)} />
+        <AboutUs onPress={() => setAboutModalVisible(!aboutModalVisible)} />
       </CustomModal>
       <CustomModal
         animationType="fade"
         className="my-10 mx-7"
         className2="p-[30] rounded-[30px]"
-        visible={modalVisible3}
+        visible={contactModalVisible}
         onRequestClose={() => {
-          setModalVisible3(!modalVisible3);
+          setContactModalVisible(!contactModalVisible);
         }}
       >
-        <ContactUs onPress={() => setModalVisible3(!modalVisible3)} />
+        <ContactUs
+          onPress={() => setContactModalVisible(!contactModalVisible)}
+        />
       </CustomModal>
     </>
   );
 };
-
-export default SettingPage;

@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, {FC } from "react";
+import { View } from "react-native";
+import React, { FC } from "react";
 import { Formik } from "formik";
 import { FormikProps } from "formik/dist/types";
 
@@ -11,7 +11,7 @@ interface IFormProp {
   children: (form: FormikProps<any>) => JSX.Element;
 }
 
-const Form: FC<IFormProp> = ({
+export const Form: FC<IFormProp> = ({
   initialValues,
   onSubmit,
   enableReinitialize,
@@ -31,5 +31,3 @@ const Form: FC<IFormProp> = ({
     </View>
   );
 };
-
-export default Form;

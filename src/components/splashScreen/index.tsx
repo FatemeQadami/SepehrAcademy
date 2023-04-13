@@ -1,23 +1,24 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, FC } from "react";
 import { Text, View, Image, ImageBackground, Dimensions } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { useColorScheme } from "nativewind";
+
 import logo from "../../assets/img/startingPage/logo.png";
 import bgBottom from "../../assets/img/startingPage/bgBot.png";
 import bgTop from "../../assets/img/startingPage/bgTop.png";
 import { getItem } from "../../core/services/storage/storage";
 import { EStorageKeys } from "../../core/enums/storage";
 import { ERouteList } from "../../core/enums/route";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { handelLogin } from "../../redux/features/user";
 import { handelTheme } from "../../redux/features/theme";
-import { useColorScheme } from "nativewind";
 import { addToCart } from "../../redux/features/cart";
 import { addToFavorite } from "../../redux/features/favorite";
 
 const { width, height } = Dimensions.get("screen");
 
-const SplashScreenPage: FC = (): JSX.Element => {
+export const SplashScreenPage: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
 
   const { setColorScheme } = useColorScheme();
@@ -105,5 +106,3 @@ const SplashScreenPage: FC = (): JSX.Element => {
     </View>
   );
 };
-
-export default SplashScreenPage;

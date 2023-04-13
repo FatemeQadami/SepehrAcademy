@@ -1,13 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import { Image, Pressable, Text, View } from "react-native";
 import logo from "../../assets/img/aboutUs/logo.png";
 
-const AboutUs = ({ onPress }: any) => {
+interface AboutUsProps {
+  onPress: Function;
+}
+
+export const AboutUs: FC<AboutUsProps> = ({ onPress }): JSX.Element => {
   return (
     <View>
       <View className="flex justify-center justify-between">
         <Image className="border mx-auto mt-8 mb-1" source={logo} />
-        <Text className="text-[23px] font-Yekan font-light text-center pt-5 color-[#00469A]">
+        <Text className="text-[23px] font-Yekan font-light text-center pt-5 color-[#00469A] dark:color-white">
           آکادمی کدنویسی بحر
         </Text>
         <Text className="font-Yekan text-[14px] color-[#818181] mt-10 mb-8">
@@ -38,12 +42,10 @@ const AboutUs = ({ onPress }: any) => {
           onPress();
         }}
       >
-        <Text className="border border-[#FF0000] px-8 py-2 color-[#FF0000] text-[16px] text-center rounded-[27px] mx-3 ">
+        <Text className="border border-[#FF0000] dark:border-white px-8 py-2 color-[#FF0000] dark:color-white text-[16px] text-center rounded-[27px] mx-3 ">
           بازگشت
         </Text>
       </Pressable>
     </View>
   );
 };
-
-export default AboutUs;

@@ -1,8 +1,8 @@
-import { View, Text, Image } from "react-native";
-import React , {FC} from "react";
+import { View, Text } from "react-native";
+import React, { FC } from "react";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
-const SkeletonLoading:FC = ():JSX.Element => {
+export const SkeletonLoading: FC = (): JSX.Element => {
   return (
     <SkeletonPlaceholder borderRadius={4}>
       <View
@@ -31,11 +31,15 @@ const SkeletonLoading:FC = ():JSX.Element => {
           </Text>
         </View>
         <View
-          style={{ width: 60, height: 60, borderRadius: 50, marginLeft: 4 , marginTop: 20 }}
+          style={{
+            width: 60,
+            height: 60,
+            borderRadius: 50,
+            marginLeft: 4,
+            marginTop: 20,
+          }}
         />
       </View>
     </SkeletonPlaceholder>
   );
 };
-
-export default SkeletonLoading;

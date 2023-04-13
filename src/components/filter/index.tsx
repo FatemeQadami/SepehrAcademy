@@ -1,19 +1,19 @@
-import { View, Text, Platform } from "react-native";
+import { View, Text, Platform, Pressable } from "react-native";
 import React, { FC, useState } from "react";
-import { Pressable } from "react-native";
-import CustomButton from "../common/customButton";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
+
 import { useColorTheme } from "../../core/config/color";
+import { CustomButton } from "../common/customButton";
 
 interface filterPropsTypes {
-  onPress: Function;
+  comebackOnpress: Function;
   onPressFilter: Function;
 }
 
-const Filters: FC<filterPropsTypes> = ({
-  onPress,
+export const Filters: FC<filterPropsTypes> = ({
+  comebackOnpress,
   onPressFilter,
 }): JSX.Element => {
   const data = ["مهدی اصغری", "بحر"];
@@ -21,7 +21,6 @@ const Filters: FC<filterPropsTypes> = ({
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
 
   const color = useColorTheme();
-
 
   const multiSliderValuesChange = (values: React.SetStateAction<number[]>) =>
     setMultiSliderValue(values);
@@ -289,7 +288,7 @@ const Filters: FC<filterPropsTypes> = ({
         />
       </View>
       <View className="flex-row items-center justify-center mt-16 mb-5">
-        <Pressable onPress={() => onPress()}>
+        <Pressable onPress={() => comebackOnpress()}>
           <Text className="border font-Yekan border-[#FF0000] dark:border-white px-8 py-2 color-[#FF0000] dark:color-white text-[16px] text-center rounded-[27px] mx-3 ">
             بازگشت
           </Text>
@@ -303,5 +302,3 @@ const Filters: FC<filterPropsTypes> = ({
     </View>
   );
 };
-
-export default Filters;

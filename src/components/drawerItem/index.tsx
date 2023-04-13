@@ -1,21 +1,22 @@
-import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
-import React from "react";
+import { View, Text, Image, Pressable } from "react-native";
+import React, { FC } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import user from "../../assets/img/profile/user.png";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
-import { removeItem } from "../../core/services/storage/storage";
 import { useDispatch, useSelector } from "react-redux";
+import Toast from "react-native-toast-message";
+import { useColorScheme } from "nativewind";
+
+import user from "../../assets/img/profile/user.png";
+import { removeItem } from "../../core/services/storage/storage";
 import { RootState } from "../../redux/store";
 import { handelLogin } from "../../redux/features/user";
-import Toast from "react-native-toast-message";
 import { useColorTheme } from "../../core/config/color";
 import { ERouteList } from "../../core/enums/route";
 import { EStorageKeys } from "../../core/enums/storage";
-import { useColorScheme } from "nativewind";
 
-const DrowerItem = () => {
+export const DrowerItem: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
 
   const color = useColorTheme();
@@ -267,5 +268,3 @@ const DrowerItem = () => {
     </View>
   );
 };
-
-export default DrowerItem;
