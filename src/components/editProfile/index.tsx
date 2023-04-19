@@ -55,7 +55,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
 
   const onSubmit = async (values: editProfileType) => {
     if (values.profile && typeof values.profile !== "string") {
-      const token = await getItem(EStorageKeys.token);
+      const token = await getItem(EStorageKeys.Token);
 
       setIsLoading(true);
 

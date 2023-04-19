@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 
-import { Navbar } from "../../components/common/navbar";
+import { Header } from "../../components/common/header";
 import { SettingPage } from "../../components/settings";
 
 const Settings: FC = (): JSX.Element => {
   return (
     <>
-      <Navbar />
+      <Header />
       <SettingPage />
     </>
   );

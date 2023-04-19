@@ -11,7 +11,7 @@ const themeSlice = createSlice({
   reducers: {
     handelTheme: (state, action) => {
       state.theme = action.payload.theme;
-      setItem(EStorageKeys.theme, state.theme);
+      setItem(EStorageKeys.Theme, state.theme);
     },
   },
 });

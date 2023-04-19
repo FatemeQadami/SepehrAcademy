@@ -8,11 +8,11 @@ import { useColorTheme } from "../../../core/config/color";
 import { ERouteList } from "../../../core/enums/route";
 import { Filters } from "../../filter";
 
-interface NavbarProp {
+interface HeaderProp {
   pageName?: string;
 }
 
-export const Navbar: FC<NavbarProp> = ({ pageName }): JSX.Element => {
+export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const navigation = useNavigation<any>();
@@ -23,7 +23,7 @@ export const Navbar: FC<NavbarProp> = ({ pageName }): JSX.Element => {
     <View className="dark:bg-[#00216C]">
       <View
         className="flex flex-row justify-center rounded-b-[35] px-7 pt-[45] bg-[#4F91FF] "
-        style={{ backgroundColor: color?.navbarColor }}
+        style={{ backgroundColor: color?.HeaderColor }}
       >
         {pageName && (
           <View className="flex flex-row-reverse mb-6">
@@ -36,7 +36,7 @@ export const Navbar: FC<NavbarProp> = ({ pageName }): JSX.Element => {
                 className="bg-white pt-2 rounded-3xl items-center mt-2 w-[37] h-[37]"
                 style={{ elevation: 10 }}
               >
-                <Icon name="shopping-cart" size={24} color={color?.iconColor} />
+                <Icon name="shopping-cart" size={24} color={color?.IconColor} />
               </View>
             </Pressable>
             <View
@@ -46,12 +46,12 @@ export const Navbar: FC<NavbarProp> = ({ pageName }): JSX.Element => {
               <TextInput
                 placeholder="جستجو ..."
                 // value={}
-                // onChangeText={handelSearch}
+                // onChangeText={handelSearch}                
                 className="bg-white w-[170] h-[38] text-right pr-[10] rounded-r-[20] "
               />
               <Icon
                 name="search"
-                color={color?.iconColor}
+                color={color?.IconColor}
                 size={20}
                 style={{
                   backgroundColor: "#D5E4FF",
@@ -67,7 +67,7 @@ export const Navbar: FC<NavbarProp> = ({ pageName }): JSX.Element => {
                 className="bg-white pt-2 rounded-3xl items-center mt-2 w-[37] h-[37]"
                 style={{ elevation: 10 }}
               >
-                <Icon name="filter" size={24} color={color?.iconColor} />
+                <Icon name="filter" size={24} color={color?.IconColor} />
               </View>
             </Pressable>
           </View>

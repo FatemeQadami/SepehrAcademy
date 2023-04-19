@@ -7,6 +7,7 @@ import { CourseItem } from "../../courseItem";
 import { coursesAPI } from "../../../core/services/api/courses.api";
 import { SkeletonLoading } from "../../common/skeletonLoading";
 import { handelSelect } from "../../../redux/features/selector";
+import { Header } from "../../common/header";
 
 export const CoursesList: FC = (): JSX.Element => {
   const [data, setData] = useState([]);
@@ -40,32 +41,35 @@ export const CoursesList: FC = (): JSX.Element => {
   }, [isFocus]);
 
   return (
-    <View className="dark:bg-[#00216C] pt-[15] flex-1 ">
-      {data && data?.length !== 0 ? (
-        <FlatList
-          data={data}
-          renderItem={({ item }: any) => (
-            <CourseItem
-              courseTitle={item?.title}
-              courseTeacher={item?.teacher?.fullName}
-              courseImage={item?.lesson?.image}
-              coursePrice={item?.cost}
-              item={item}
-              pageName="Courses"
-            />
-          )}
-          keyExtractor={(item: { _id: string }) => item?._id}
-          maxToRenderPerBatch={5}
-          onRefresh={() => {}}
-          refreshing={refreshing}
-        />
-      ) : (
-        <>
-          {mapCounter.map((_, index) => (
-            <SkeletonLoading key={index} />
-          ))}
-        </>
-      )}
-    </View>
+    <>
+      <Header pageName="Courses" />
+      <View className="dark:bg-[#00216C] pt-[15] flex-1 ">
+        {data && data?.length !== 0 ? (
+          <FlatList
+            data={data}
+            renderItem={({ item }: any) => (
+              <CourseItem
+                courseTitle={item?.title}
+                courseTeacher={item?.teacher?.fullName}
+                courseImage={item?.lesson?.image}
+                coursePrice={item?.cost}
+                item={item}
+                pageName="Courses"
+              />
+            )}
+            keyExtractor={(item: { _id: string }) => item?._id}
+            maxToRenderPerBatch={5}
+            onRefresh={() => {}}
+            refreshing={refreshing}
+          />
+        ) : (
+          <>
+            {mapCounter.map((_, index) => (
+              <SkeletonLoading key={index} />
+            ))}
+          </>
+        )}
+      </View>
+    </>
   );
 };

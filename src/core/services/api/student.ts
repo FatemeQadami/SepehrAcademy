@@ -7,7 +7,7 @@ const MainUrl = env.APP_PUBLIC_PATH;
 
 export const studentByIdAPI = async () => {
   try {
-    const user = await getItem(EStorageKeys.user);
+    const user = await getItem(EStorageKeys.User);
     const userObj = user ? JSON.parse(user) : null;
     if (!userObj) return null;
     const result = await Http.get(`${MainUrl}student/${userObj._id}`);

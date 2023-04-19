@@ -28,6 +28,7 @@ export const CartList: FC = (): JSX.Element => {
     setPrice(total);
   };
 
+  console.log('state',state)
   // ------------route---------------
 
   const dispatch = useDispatch();

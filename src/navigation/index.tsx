@@ -7,17 +7,17 @@ import { useColorScheme } from "nativewind";
 
 //----------screens----------
 
-import Login from "../screens/authentication/login";
-import Courses from "../screens/courses";
-import Start from "../screens/start";
-import SplashScreen from "../screens/splashScreen";
-import Cart from "../screens/cart";
-import Favorites from "../screens/favorites";
-import EditProfile from "../screens/editProfile";
-import Settings from "../screens/settings";
-import SignUp from "../screens/authentication/signUp";
-import Forgetpass from "../screens/authentication/forgetPass";
-import CourseDetails from "../screens/courseDetails";
+import Login from "../screens/Authentication/Login";
+import Courses from "../screens/Courses";
+import Start from "../screens/Start";
+import SplashScreen from "../screens/SplashScreen";
+import Cart from "../screens/Cart";
+import Favorites from "../screens/Favorites";
+import EditProfile from "../screens/EditProfile";
+import Settings from "../screens/Settings";
+import SignUp from "../screens/Authentication/SignUp";
+import Forgetpass from "../screens/Authentication/ForgetPass";
+import CourseDetails from "../screens/CourseDetails";
 
 //-----------------------------------
 
@@ -58,7 +58,7 @@ const MyTab: FC = ({ navigation }: any) => {
         tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "rgba(255,255,255,0.5)",
         tabBarStyle: {
-          backgroundColor: color?.tabColor,
+          backgroundColor: color?.TabColor,
           borderTopRightRadius: 35,
           borderTopLeftRadius: 35,
           height: 60,

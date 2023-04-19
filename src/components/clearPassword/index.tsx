@@ -23,8 +23,8 @@ export const ClearPassword: FC<clearPassType> = ({ onPress }): JSX.Element => {
   const navigation = useNavigation<any>();
 
   const clearPass = () => {
-    removeItem(EStorageKeys.user);
-    removeItem(EStorageKeys.token);
+    removeItem(EStorageKeys.User);
+    removeItem(EStorageKeys.Token);
     dispatch(handelLogin({ model: null, token: null }));
     navigation.navigate(ERouteList.LogIn);
     Toast.show({

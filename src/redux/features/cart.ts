@@ -19,11 +19,15 @@ const cartSlice = createSlice({
       if (find) {
         return state?.filter((item: { _id: string }) => item._id !== id);
       } else {
+        const localData = [...state, payload];
+        console.log("localData", localData);
         state?.push({ ...payload });
-        setItem(EStorageKeys.selectedCourse, JSON.stringify(state));
+        setItem(EStorageKeys.SelectedCourse, localData);
       }
     },
-
+    loadCartData: (state, { payload }) => {
+      return payload;
+    },
     removeItemFromCart: (state, action) => {
       const items = action.payload;
       const local = [
@@ -34,5 +38,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeItemFromCart } = cartSlice.actions;
+export const { loadCartData, addToCart, removeItemFromCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;

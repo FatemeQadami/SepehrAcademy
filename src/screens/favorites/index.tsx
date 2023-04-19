@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 
-import { Navbar } from "../../components/common/navbar";
+import { Header } from "../../components/common/header";
 import { FavoritesList } from "../../components/lists/favoritesList";
 
 const Favorites: FC = (): JSX.Element => {
   return (
     <>
-      <Navbar />
+      <Header />
       <FavoritesList />
     </>
   );

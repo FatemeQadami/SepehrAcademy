@@ -46,7 +46,7 @@ axios.interceptors.response.use(
 
 // will send token to headers request ( in x-auth-token body )
 axios.interceptors.request.use(async (config) => {
-  const token = await getItem(EStorageKeys.token);
+  const token = await getItem(EStorageKeys.Token);
   config.headers["x-auth-token"] = token;
   return config;
 });

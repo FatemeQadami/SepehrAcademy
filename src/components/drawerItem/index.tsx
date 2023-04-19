@@ -30,8 +30,8 @@ export const DrowerItem: FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const clearPass = () => {
-    removeItem(EStorageKeys.user);
-    removeItem(EStorageKeys.token);
+    removeItem(EStorageKeys.User);
+    removeItem(EStorageKeys.Token);
     dispatch(handelLogin({ model: null, token: null }));
     navigation.navigate(ERouteList.LogIn);
     Toast.show({
@@ -62,7 +62,7 @@ export const DrowerItem: FC = (): JSX.Element => {
         style={{
           borderRightColor:
             route === ERouteList.EditProfile
-              ? color?.routeBorderColor
+              ? color?.RouteBorderColor
               : "transparent",
         }}
         onPress={() => {
@@ -75,7 +75,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           name="user-o"
           color={
             route === ERouteList.EditProfile
-              ? color?.iconColor
+              ? color?.IconColor
               : colorScheme === "dark"
               ? "white"
               : "gray"
@@ -88,7 +88,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{
             color:
               route === ERouteList.EditProfile
-                ? color?.routeTextColor
+                ? color?.RouteTextColor
                 : colorScheme === "dark"
                 ? "white"
                 : "#686868",
@@ -102,7 +102,7 @@ export const DrowerItem: FC = (): JSX.Element => {
         style={{
           borderRightColor:
             route === ERouteList.CourseTab
-              ? color?.routeBorderColor
+              ? color?.RouteBorderColor
               : "transparent",
         }}
         onPress={() => {
@@ -113,7 +113,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           name="document-text-outline"
           color={
             route === ERouteList.CourseTab
-              ? color?.iconColor
+              ? color?.IconColor
               : colorScheme === "dark"
               ? "white"
               : "gray"
@@ -126,7 +126,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{
             color:
               route === ERouteList.CourseTab
-                ? color?.routeTextColor
+                ? color?.RouteTextColor
                 : colorScheme === "dark"
                 ? "white"
                 : "#686868",
@@ -140,7 +140,7 @@ export const DrowerItem: FC = (): JSX.Element => {
         style={{
           borderRightColor:
             route === ERouteList.Favorites
-              ? color?.routeBorderColor
+              ? color?.RouteBorderColor
               : "transparent",
         }}
         onPress={() => {
@@ -151,7 +151,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           name="heart-o"
           color={
             route === ERouteList.Favorites
-              ? color?.iconColor
+              ? color?.IconColor
               : colorScheme === "dark"
               ? "white"
               : "gray"
@@ -164,7 +164,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{
             color:
               route === ERouteList.Favorites
-                ? color?.routeTextColor
+                ? color?.RouteTextColor
                 : colorScheme === "dark"
                 ? "white"
                 : "#686868",
@@ -177,7 +177,7 @@ export const DrowerItem: FC = (): JSX.Element => {
         className="flex-row-reverse my-[10] pl-3 border-r-2"
         style={{
           borderRightColor:
-            route === ERouteList.Cart ? color?.routeBorderColor : "transparent",
+            route === ERouteList.Cart ? color?.RouteBorderColor : "transparent",
         }}
         onPress={() => {
           navigation.navigate(ERouteList.Cart);
@@ -187,7 +187,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           name="shopping-basket"
           color={
             route === ERouteList.Cart
-              ? color?.iconColor
+              ? color?.IconColor
               : colorScheme === "dark"
               ? "white"
               : "gray"
@@ -200,7 +200,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{
             color:
               route === ERouteList.Cart
-                ? color?.routeTextColor
+                ? color?.RouteTextColor
                 : colorScheme === "dark"
                 ? "white"
                 : "#686868",
@@ -214,7 +214,7 @@ export const DrowerItem: FC = (): JSX.Element => {
         style={{
           borderRightColor:
             route === ERouteList.Settings
-              ? color?.routeBorderColor
+              ? color?.RouteBorderColor
               : "transparent",
         }}
         onPress={() => {
@@ -225,7 +225,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           name="settings-outline"
           color={
             route === ERouteList.Settings
-              ? color?.iconColor
+              ? color?.IconColor
               : colorScheme === "dark"
               ? "white"
               : "gray"
@@ -238,7 +238,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{
             color:
               route === ERouteList.Settings
-                ? color?.routeTextColor
+                ? color?.RouteTextColor
                 : colorScheme === "dark"
                 ? "white"
                 : "#686868",

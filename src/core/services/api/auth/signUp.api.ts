@@ -12,7 +12,7 @@ export const signUpAPI = async (obj: signUpType) => {
 
     const user = result.data.result;
 
-    setItem(EStorageKeys.user, JSON.stringify(user));
+    setItem(EStorageKeys.User, user);
 
     return result.data.result;
   } catch (error) {

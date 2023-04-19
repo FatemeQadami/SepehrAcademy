@@ -92,7 +92,7 @@ export const CourseItem: FC<CourseItemProp> = ({
                 <AntDesign name="delete" color="white" size={16} />
               </Pressable>
             ) : (
-              <AntDesign name="pluscircle" size={30} color={color?.iconColor} />
+              <AntDesign name="pluscircle" size={30} color={color?.IconColor} />
             )}
           </View>
         </Pressable>

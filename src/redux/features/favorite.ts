@@ -18,10 +18,12 @@ const favoriteSlice = createSlice({
         return state?.filter((item: { _id: string }) => item._id !== id);
       } else {
         state?.push({ ...payload });
-        setItem(EStorageKeys.selectedFav, JSON.stringify(state));
+        setItem(EStorageKeys.SelectedFav, state);
       }
     },
-
+    loadFavData: (state, { payload }) => {
+      return payload;
+    },
     removeItem: (state, action) => {
       const items = action.payload;
       const local = [
@@ -32,5 +34,5 @@ const favoriteSlice = createSlice({
   },
 });
 
-export const { addToFavorite, removeItem } = favoriteSlice.actions;
+export const { loadFavData, addToFavorite, removeItem } = favoriteSlice.actions;
 export default favoriteSlice.reducer;

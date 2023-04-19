@@ -13,8 +13,8 @@ export const loginAPI = async (obj: loginType) => {
     const user = result.data.result.studentModel;
     const token = result.data.result.jwtToken;
 
-    setItem(EStorageKeys.user, JSON.stringify(user));
-    setItem(EStorageKeys.token, token);
+    setItem(EStorageKeys.User, user);
+    setItem(EStorageKeys.Token, token);
 
     console.log(result.data.result);
     return result.data.result;

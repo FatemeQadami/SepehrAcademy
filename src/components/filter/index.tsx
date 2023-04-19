@@ -16,7 +16,23 @@ export const Filters: FC<filterPropsTypes> = ({
   comebackOnpress,
   onPressFilter,
 }): JSX.Element => {
-  const data = ["مهدی اصغری", "بحر"];
+  const data1 = [
+    "براساس گران‌ترین",
+    "براساس ارزان‌ترین",
+    "براساس بیشترین لایک",
+    "براساس ",
+  ];
+  const data2 = ["نزولی", "صعودی"];
+  const data3 = [
+    "مهدی اصغری",
+    "محمدحسین بحرالعلوم",
+    "حامد نظری",
+    "کاوه رئیسی",
+    "سالار نیلی",
+    "عدنان رضایی",
+    "امین نامی",
+  ];
+  const data4 = ["مهدی اصغری", "بحر"];
 
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
 
@@ -29,7 +45,7 @@ export const Filters: FC<filterPropsTypes> = ({
     <View>
       <View className="">
         <SelectDropdown
-          data={data}
+          data={data1}
           defaultButtonText="مرتب سازی"
           buttonTextStyle={{
             fontFamily: "YekanBakh",
@@ -66,7 +82,7 @@ export const Filters: FC<filterPropsTypes> = ({
           }}
         />
         <SelectDropdown
-          data={data}
+          data={data2}
           defaultButtonText="روند نمایش"
           buttonTextStyle={{
             fontFamily: "YekanBakh",
@@ -124,7 +140,7 @@ export const Filters: FC<filterPropsTypes> = ({
                 height: 20,
                 width: 20,
                 borderRadius: 30,
-                backgroundColor: color?.filterColor,
+                backgroundColor: color?.FilterColor,
               },
             }),
           }}
@@ -134,12 +150,12 @@ export const Filters: FC<filterPropsTypes> = ({
                 height: 22,
                 width: 22,
                 borderRadius: 20,
-                backgroundColor: color?.filterColor,
+                backgroundColor: color?.FilterColor,
               },
             }),
           }}
           selectedStyle={{
-            backgroundColor: color?.filterColor,
+            backgroundColor: color?.FilterColor,
           }}
           trackStyle={{
             backgroundColor: "#CECECE",
@@ -178,7 +194,7 @@ export const Filters: FC<filterPropsTypes> = ({
                 height: 20,
                 width: 20,
                 borderRadius: 30,
-                backgroundColor: color?.filterColor,
+                backgroundColor: color?.FilterColor,
               },
             }),
           }}
@@ -188,12 +204,12 @@ export const Filters: FC<filterPropsTypes> = ({
                 height: 22,
                 width: 22,
                 borderRadius: 20,
-                backgroundColor: color?.filterColor,
+                backgroundColor: color?.FilterColor,
               },
             }),
           }}
           selectedStyle={{
-            backgroundColor: color?.filterColor,
+            backgroundColor: color?.FilterColor,
           }}
           trackStyle={{
             backgroundColor: "#CECECE",
@@ -213,7 +229,7 @@ export const Filters: FC<filterPropsTypes> = ({
         />
         <View className="my-5 bg-[#D3D6D8] px-32 h-[1]" />
         <SelectDropdown
-          data={data}
+          data={data3}
           defaultButtonText="مدرس دوره"
           buttonTextStyle={{
             fontFamily: "YekanBakh",
@@ -250,7 +266,7 @@ export const Filters: FC<filterPropsTypes> = ({
           }}
         />
         <SelectDropdown
-          data={data}
+          data={data4}
           defaultButtonText="دسته بندی"
           buttonTextStyle={{
             fontFamily: "YekanBakh",

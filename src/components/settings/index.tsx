@@ -33,7 +33,7 @@ export const SettingPage: FC = (): JSX.Element => {
   const toggleSwitch = () => {
     toggleColorScheme();
     setIsEnabled((previousState) => !previousState);
-    setItem(EStorageKeys.mode, colorScheme === "light" ? "dark" : "light");
+    setItem(EStorageKeys.Mode, colorScheme === "light" ? "dark" : "light");
   };
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);

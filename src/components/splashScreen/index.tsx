@@ -13,8 +13,8 @@ import { ERouteList } from "../../core/enums/route";
 import { RootState } from "../../redux/store";
 import { handelLogin } from "../../redux/features/user";
 import { handelTheme } from "../../redux/features/theme";
-import { addToCart } from "../../redux/features/cart";
-import { addToFavorite } from "../../redux/features/favorite";
+import { loadCartData } from "../../redux/features/cart";
+import { loadFavData } from "../../redux/features/favorite";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -28,12 +28,12 @@ export const SplashScreenPage: FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const handelGetItems = async () => {
-    const token = await getItem(EStorageKeys.token);
-    const user = await getItem(EStorageKeys.user);
-    const theme = await getItem(EStorageKeys.theme);
-    const selectedFav = await getItem(EStorageKeys.selectedFav);
-    const selectedCourse = await getItem(EStorageKeys.selectedCourse);
-    const mode = await getItem(EStorageKeys.mode);
+    const token = await getItem(EStorageKeys.Token);
+    const user = await getItem(EStorageKeys.User);
+    const theme = await getItem(EStorageKeys.Theme);
+    const selectedFav = await getItem(EStorageKeys.SelectedFav);
+    const selectedCourse = await getItem(EStorageKeys.SelectedCourse);
+    const mode = await getItem(EStorageKeys.Mode);
 
     setColorScheme(mode);
 
@@ -43,21 +43,14 @@ export const SplashScreenPage: FC = (): JSX.Element => {
         model: user,
       })
     );
-    dispatch(
-      handelTheme({
-        theme: theme,
-      })
-    );
-    dispatch(
-      addToCart({
-        state: selectedCourse,
-      })
-    );
-    dispatch(
-      addToFavorite({
-        state: selectedFav,
-      })
-    );
+    theme &&
+      dispatch(
+        handelTheme({
+          theme: theme,
+        })
+      );
+    dispatch(loadCartData(selectedCourse));
+    dispatch(loadFavData(selectedFav));
   };
 
   useEffect(() => {

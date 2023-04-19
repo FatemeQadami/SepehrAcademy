@@ -9,7 +9,7 @@ const MainUrl =env.APP_PUBLIC_PATH
 
 export const editProfileAPI = async (obj:editProfileType) => {
   try {
-    const user = await getItem(EStorageKeys.user);
+    const user = await getItem(EStorageKeys.User);
     const userObj = JSON.parse(user);
     const result = await Http.put(`${MainUrl}student/${userObj._id}`,obj);
     return result.data;

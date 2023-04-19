@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import React, { FC, useState, useEffect } from "react";
-import { useRoute } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
@@ -34,7 +34,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
   const [value, setValue] = useState<any>();
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
-
+  const isFocused = useIsFocused();
   const state: any = useSelector((state: RootState) => state.cart);
 
   const color = useColorTheme();
@@ -88,14 +88,14 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    loadComments();
-  }, [reFetch]);
+    if (isFocused) loadComments();
+  }, [reFetch, isFocused]);
 
   return (
     <View className="dark:bg-[#00216C] ">
       <View
         className="bg-[#4F91FF] w-[100%] h-[260] rounded-b-[40px] z-0 "
-        style={{ backgroundColor: color?.navbarColor }}
+        style={{ backgroundColor: color?.HeaderColor }}
       ></View>
       {item && (
         <View className="top-[-190] z-10 px-10">
