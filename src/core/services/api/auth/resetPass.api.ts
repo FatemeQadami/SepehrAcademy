@@ -1,5 +1,5 @@
 import { env } from "../../../config/env";
-import { studentByIdAPI } from "../student";
+import { studentByIdAPI } from "../student.api";
 import Http from "../../interceptor/interceptor";
 import { resetPassType } from "../../../models";
 

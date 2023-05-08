@@ -3,18 +3,16 @@ import React, { FC } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, CommonActions } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
 import { useColorScheme } from "nativewind";
 
 import user from "../../assets/img/profile/user.png";
-import { removeItem } from "../../core/services/storage/storage";
 import { RootState } from "../../redux/store";
-import { handelLogin } from "../../redux/features/user";
+import { handelLogOut } from "../../redux/features/user";
 import { useColorTheme } from "../../core/config/color";
 import { ERouteList } from "../../core/enums/route";
-import { EStorageKeys } from "../../core/enums/storage";
 
 export const DrowerItem: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
@@ -30,10 +28,13 @@ export const DrowerItem: FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const clearPass = () => {
-    removeItem(EStorageKeys.User);
-    removeItem(EStorageKeys.Token);
-    dispatch(handelLogin({ model: null, token: null }));
-    navigation.navigate(ERouteList.LogIn);
+    dispatch(handelLogOut());
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{ name: ERouteList.LogIn }],
+      })
+    );
     Toast.show({
       type: "error",
       text1: "برای ورود به اپلیکیشن باید مجددا رمز عبور خود را وارد نمایید!!",

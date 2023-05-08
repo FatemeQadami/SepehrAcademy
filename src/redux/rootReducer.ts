@@ -3,7 +3,7 @@ import selector from "./features/selector";
 import favorite from "./features/favorite";
 import cart from "./features/cart";
 import theme from "./features/theme";
-import filterWord from "./features/filterWord";
+import search_filter from "./features/search_filter";
 
 const rootReducer = {
   user,
@@ -11,7 +11,7 @@ const rootReducer = {
   favorite,
   cart,
   theme,
-  filterWord
+  search_filter,
 };
 
 export default rootReducer;

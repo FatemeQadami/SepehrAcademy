@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 
 import { Favorite } from "../common/favorite";
-import { removeItem } from "../../redux/features/favorite";
+import { removeItemFromFav } from "../../redux/features/favorite";
 import { removeItemFromCart } from "../../redux/features/cart";
 import { CustomModal } from "../common/modal";
 import { CustomButton } from "../common/customButton";
@@ -73,9 +73,14 @@ export const CourseItem: FC<CourseItemProp> = ({
           </View>
           <View className="items-center flex justify-between ml-3 pr-5">
             {pageName === "Courses" ? (
-              <Favorite color="gray" size={16} item={item} />
+              <View className="px-2 pb-2">
+                <Favorite color="gray" size={16} item={item} />
+              </View>
             ) : pageName === "fav" ? (
-              <Pressable onPress={() => dispatch(removeItem(item))}>
+              <Pressable
+                className="px-2 pb-2"
+                onPress={() => dispatch(removeItemFromFav(item))}
+              >
                 <AntDesign name="delete" color="red" size={15} />
               </Pressable>
             ) : (

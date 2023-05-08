@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { setItem } from "../../core/services/storage/storage";
+import { removeItem, setItem } from "../../core/services/storage/storage";
 import { EStorageKeys } from "../../core/enums/storage";
 
 const initialState: any = [];
@@ -20,7 +20,7 @@ const cartSlice = createSlice({
         return state?.filter((item: { _id: string }) => item._id !== id);
       } else {
         const localData = [...state, payload];
-        console.log("localData", localData);
+
         state?.push({ ...payload });
         setItem(EStorageKeys.SelectedCourse, localData);
       }
@@ -33,6 +33,8 @@ const cartSlice = createSlice({
       const local = [
         ...state.filter((item: { _id: string }) => item._id !== items._id),
       ];
+      console.log("local", local);
+      setItem(EStorageKeys.SelectedCourse, local);
       return local;
     },
   },

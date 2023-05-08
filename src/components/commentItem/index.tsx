@@ -12,7 +12,6 @@ export const CommentItem: FC<commentItemProp> = ({
   userName,
   comment,
 }): JSX.Element => {
-  console.log("first", comment);
 
   return (
     <View

@@ -1,6 +1,6 @@
 import { Text, View, Image } from "react-native";
 import React, { useState, FC } from "react";
-import { Link, useNavigation } from "@react-navigation/native";
+import { Link, useNavigation, CommonActions } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -42,7 +42,12 @@ export const LoginForm: FC = (): JSX.Element => {
         })
       );
       Toast.show({ type: "success", text1: "خوش آمدید :)" });
-      navigation.replace(ERouteList.Courses);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{ name: ERouteList.Courses }],
+        })
+      );
       console.log("fffff", token, studentModel);
     }
     console.log(values);

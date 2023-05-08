@@ -3,6 +3,12 @@ import React, { useEffect, FC } from "react";
 import { Text, View, Image, ImageBackground, Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useColorScheme } from "nativewind";
+import Animated, {
+  useAnimatedStyle,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
 
 import logo from "../../assets/img/startingPage/logo.png";
 import bgBottom from "../../assets/img/startingPage/bgBot.png";
@@ -23,6 +29,21 @@ export const SplashScreenPage: FC = (): JSX.Element => {
 
   const { setColorScheme } = useColorScheme();
 
+  const glowAnimation = useAnimatedStyle(() => ({
+    transform: [
+      {
+        scale: withRepeat(
+          withSequence(
+            withTiming(1.2, { duration: 1500 }),
+            withTiming(0.8, { duration: 1500 })
+          ),
+          -1,
+          true
+        ),
+      },
+    ],
+  }));
+
   const { studentModel } = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
@@ -36,7 +57,7 @@ export const SplashScreenPage: FC = (): JSX.Element => {
     const mode = await getItem(EStorageKeys.Mode);
 
     setColorScheme(mode);
-
+    console.log("user", user);
     dispatch(
       handelLogin({
         token: token,
@@ -51,17 +72,17 @@ export const SplashScreenPage: FC = (): JSX.Element => {
       );
     dispatch(loadCartData(selectedCourse));
     dispatch(loadFavData(selectedFav));
-  };
-
-  useEffect(() => {
-    handelGetItems();
     setTimeout(() => {
-      if (studentModel) {
+      if (user) {
         navigation.replace(ERouteList.Courses);
       } else {
         navigation.replace(ERouteList.Start);
       }
     }, 4000);
+  };
+
+  useEffect(() => {
+    handelGetItems();
   }, []);
 
   return (
@@ -90,7 +111,12 @@ export const SplashScreenPage: FC = (): JSX.Element => {
       />
       <View style={{ height: 880, marginTop: 250 }}>
         <View className="flex justify-center justify-between">
-          <Image className="border mx-auto mt-14 mb-1" source={logo} />
+          <Animated.View
+            className="justify-center items-center"
+            style={[glowAnimation]}
+          >
+            <Image className="border mx-auto mt-14 mb-1" source={logo} />
+          </Animated.View>
           <Text className="text-3xl font-Yekan font-light text-center pt-5 color-[#00469A] dark:color-white">
             آکادمی کدنویسی بحر
           </Text>

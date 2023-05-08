@@ -2,13 +2,10 @@ import { View, Text } from "react-native";
 import React, { FC } from "react";
 import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { removeItem } from "../../core/services/storage/storage";
-import { RootState } from "../../redux/store";
-import { handelLogin } from "../../redux/features/user";
+import { handelLogOut } from "../../redux/features/user";
 import { CustomButton } from "../common/customButton";
-import { EStorageKeys } from "../../core/enums/storage";
 import { ERouteList } from "../../core/enums/route";
 
 interface clearPassType {
@@ -16,16 +13,14 @@ interface clearPassType {
 }
 
 export const ClearPassword: FC<clearPassType> = ({ onPress }): JSX.Element => {
-  const {} = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
 
   const navigation = useNavigation<any>();
 
   const clearPass = () => {
-    removeItem(EStorageKeys.User);
-    removeItem(EStorageKeys.Token);
-    dispatch(handelLogin({ model: null, token: null }));
+    dispatch(handelLogOut());
+
     navigation.navigate(ERouteList.LogIn);
     Toast.show({
       type: "error",

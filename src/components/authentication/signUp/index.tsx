@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { FC, useState } from "react";
 import Toast from "react-native-toast-message";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigation } from "@react-navigation/native";
+import { Link, useNavigation, CommonActions } from "@react-navigation/native";
 import StepIndicator from "react-native-step-indicator";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 
@@ -78,7 +78,12 @@ export const SignUpForm: FC = (): JSX.Element => {
         })
       );
       Toast.show({ type: "success", text1: "خوش آمدید :)" });
-      navigation.navigate(ERouteList.Courses);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{ name: ERouteList.Courses }],
+        })
+      );
     }
     setIsLoading(false);
   };

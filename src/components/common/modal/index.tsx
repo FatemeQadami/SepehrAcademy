@@ -8,6 +8,7 @@ interface CustomModalProp {
   children: any;
   className: string;
   className2?: string;
+  statusBarTranslucent?: boolean;
 }
 
 export const CustomModal: FC<CustomModalProp> = ({
@@ -16,12 +17,14 @@ export const CustomModal: FC<CustomModalProp> = ({
   visible,
   children,
   className,
+  statusBarTranslucent,
   className2,
 }): JSX.Element => {
   return (
     <Modal
       animationType={animationType}
       transparent={true}
+      statusBarTranslucent={statusBarTranslucent}
       visible={visible}
       onRequestClose={() => {
         onRequestClose();

@@ -23,7 +23,7 @@ import CourseDetails from "../screens/CourseDetails";
 
 import { useColorTheme } from "../core/config/color";
 import { ERouteList } from "../core/enums/route";
-import { DrowerItem } from "../components/drawerItem";
+import { DrowerItem } from "../components/drawerItems";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

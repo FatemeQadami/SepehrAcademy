@@ -27,8 +27,6 @@ export const CartList: FC = (): JSX.Element => {
     state?.map((item: { cost: number }) => (total += item.cost));
     setPrice(total);
   };
-
-  console.log('state',state)
   // ------------route---------------
 
   const dispatch = useDispatch();

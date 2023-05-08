@@ -16,7 +16,7 @@ import { profileValidation } from "../../core/validation";
 import { CustomButton } from "../common/customButton";
 import { DateInput } from "../common/dateInput";
 import { CustomModal } from "../common/modal";
-import {ProfileUpload} from "../profileModal";
+import { ProfileUpload } from "../profileModal";
 import { RootState } from "../../redux/store";
 import { handelSelect } from "../../redux/features/selector";
 import { editProfileAPI } from "../../core/services/api/editProfile.api";
@@ -29,7 +29,7 @@ import { EStorageKeys } from "../../core/enums/storage";
 export const EditProfilePage: FC = (): JSX.Element => {
   const [modalVisible, setModalVisible] = useState<Boolean>(false);
   const [modalVisible2, setModalVisible2] = useState<Boolean>(false);
-  const [profile, setProfile] = useState<String>("");
+  const [profile, setProfile] = useState<String | null>("");
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const MainUrl = env.APP_PUBLIC_PATH;
@@ -134,11 +134,12 @@ export const EditProfilePage: FC = (): JSX.Element => {
       }
       setIsLoading(false);
     }
+    console.log("test", studentModel);
   };
 
   // ------------takingImage------------
 
-  const getImageFromCamera = (setField: any) => {
+  const getImageFromCamera = (setFieldValue: any) => {
     ImageCropPicker.openCamera({
       cropping: true,
       cropperCircleOverlay: true,
@@ -146,12 +147,12 @@ export const EditProfilePage: FC = (): JSX.Element => {
       console.log(res);
       if (res) {
         setProfile(res.path);
-        setField("profile", res);
+        setFieldValue("profile", res);
       }
     });
   };
 
-  const getImageFromGallery = (setField: any) => {
+  const getImageFromGallery = (setFieldValue: any) => {
     ImageCropPicker.openPicker({
       cropping: true,
       cropperCircleOverlay: true,
@@ -159,7 +160,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
       console.log(res);
       if (res) {
         setProfile(res.path);
-        setField("profile", res);
+        setFieldValue("profile", res);
       }
     });
   };
@@ -250,7 +251,6 @@ export const EditProfilePage: FC = (): JSX.Element => {
                         className="border-2 border-[#E3E6E8]"
                         onPress={() => {
                           setModalVisible2(true);
-                          console.log("555555555");
                         }}
                       />
                       <View className="flex-row items-center justify-center my-4 pt-8">
@@ -318,8 +318,9 @@ export const EditProfilePage: FC = (): JSX.Element => {
                         setModalVisible(!modalVisible);
                       }}
                       removeProfile={() => {
+                        setProfile(null);
+                        setFieldValue("profile", null);
                         setModalVisible(!modalVisible);
-                        setProfile("");
                       }}
                     />
                   </CustomModal>

@@ -68,8 +68,6 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
     };
     const response: any = await addCommentsAPI(commentObj);
 
-    // setData([...data, response]);
-
     setReFetch((old) => !old);
 
     Toast.show({
@@ -148,7 +146,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
                     دانشجو:
                   </Text>
                   <Text className="text-right color-[#3D5FA2] text-[16px] font-Yekan my-1">
-                    23 نفر
+                    {item?.students?.length} نفر
                   </Text>
                 </View>
                 <View className="py-[3] bg-[#F6F9FF] border border-[#B6C7E7] rounded-[18px] flex-row-reverse justify-between w-[49%] px-2">
@@ -156,7 +154,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
                     ظرفیت:
                   </Text>
                   <Text className="text-right color-[#3D5FA2] text-[16px] font-Yekan my-1">
-                    95نفر
+                    {item?.capacity} نفر
                   </Text>
                 </View>
               </View>

@@ -2,11 +2,16 @@ import { View, TextInput, Pressable } from "react-native";
 import React, { FC, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import { CustomModal } from "../modal";
 import { useColorTheme } from "../../../core/config/color";
 import { ERouteList } from "../../../core/enums/route";
 import { Filters } from "../../filter";
+import {
+  handeSearchWord,
+  handleClearFilter,
+} from "../../../redux/features/search_filter";
 
 interface HeaderProp {
   pageName?: string;
@@ -14,10 +19,18 @@ interface HeaderProp {
 
 export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const navigation = useNavigation<any>();
 
+  const dispatch = useDispatch();
+
   const color = useColorTheme();
+
+  const handelOnChange = (query: string) => {
+    let val = query;
+    setSearchQuery(val);
+  };
 
   return (
     <View className="dark:bg-[#00216C]">
@@ -45,22 +58,39 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
             >
               <TextInput
                 placeholder="جستجو ..."
-                // value={}
-                // onChangeText={handelSearch}                
+                value={searchQuery}
+                onBlur={() =>
+                  dispatch(
+                    handeSearchWord({
+                      searchWord: searchQuery,
+                    })
+                  )
+                }
+                onChangeText={(query) => handelOnChange(query)}
                 className="bg-white w-[170] h-[38] text-right pr-[10] rounded-r-[20] "
               />
-              <Icon
-                name="search"
-                color={color?.IconColor}
-                size={20}
-                style={{
-                  backgroundColor: "#D5E4FF",
-                  paddingHorizontal: 12,
-                  paddingVertical: 7,
-                  borderTopLeftRadius: 20,
-                  borderBottomLeftRadius: 20,
-                }}
-              />
+              <Pressable
+                onPress={() =>
+                  dispatch(
+                    handeSearchWord({
+                      searchWord: searchQuery,
+                    })
+                  )
+                }
+              >
+                <Icon
+                  name="search"
+                  color={color?.IconColor}
+                  size={20}
+                  style={{
+                    backgroundColor: "#D5E4FF",
+                    paddingHorizontal: 12,
+                    paddingVertical: 9,
+                    borderTopLeftRadius: 20,
+                    borderBottomLeftRadius: 20,
+                  }}
+                />
+              </Pressable>
             </View>
             <Pressable onPress={() => setModalVisible(true)}>
               <View
@@ -75,8 +105,9 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
         <CustomModal
           animationType="slide"
           visible={modalVisible}
-          className2="px-8 py-9 mt-10 mb-16 rounded-[30px]"
-          className="px-7 py-2 bg-blue-rgba "
+          statusBarTranslucent
+          className2="px-8 py-9 mt-12 mb-16 rounded-[30px]"
+          className="px-7 py-2 bg-blue-rgba h-full ] "
           onRequestClose={() => {
             setModalVisible(!modalVisible);
           }}
@@ -86,6 +117,10 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
               setModalVisible(!modalVisible);
             }}
             onPressFilter={() => {
+              setModalVisible(!modalVisible);
+            }}
+            resetOnPress={() => {
+              dispatch(handleClearFilter());
               setModalVisible(!modalVisible);
             }}
           />
