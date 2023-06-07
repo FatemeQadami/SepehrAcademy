@@ -4,7 +4,7 @@ export enum ERouteList {
   SignUp = "SignUp",
   LogIn = "LogIn",
   ForgetPass = "ForgetPass",
-  Courses = "Courses",
+  MyDrawer = "MyDrawer",
   CourseTab = "CourseTab",
   CourseDetails = "CourseDetails",
   Cart = "Cart",

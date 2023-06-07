@@ -13,22 +13,22 @@ import { RootState } from "../../redux/store";
 import { handelLogOut } from "../../redux/features/user";
 import { useColorTheme } from "../../core/config/color";
 import { ERouteList } from "../../core/enums/route";
+import { clearCart } from "../../redux/features/cart";
+import { clearFavorite } from "../../redux/features/favorite";
 
 export const DrowerItem: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
-
   const color = useColorTheme();
-
   const { colorScheme } = useColorScheme();
-
-  const { studentModel }: any = useSelector((state: RootState) => state.user);
-
-  const { route }: any = useSelector((state: RootState) => state.selector);
-
   const dispatch = useDispatch();
 
-  const clearPass = () => {
+  const { studentModel }: any = useSelector((state: RootState) => state.user);
+  const { route }: any = useSelector((state: RootState) => state.selector);
+
+  const logOut = () => {
     dispatch(handelLogOut());
+    dispatch(clearCart());
+    dispatch(clearFavorite());
     navigation.dispatch(
       CommonActions.reset({
         index: 1,
@@ -185,7 +185,7 @@ export const DrowerItem: FC = (): JSX.Element => {
         }}
       >
         <FontAwesome
-          name="shopping-basket"
+          name="bookmark-o"
           color={
             route === ERouteList.Cart
               ? color?.IconColor
@@ -207,7 +207,7 @@ export const DrowerItem: FC = (): JSX.Element => {
                 : "#686868",
           }}
         >
-          سبدخرید
+          رزرو شده‌ها
         </Text>
       </Pressable>
       <Pressable
@@ -251,7 +251,7 @@ export const DrowerItem: FC = (): JSX.Element => {
       {studentModel && (
         <View className="px-2">
           <Pressable
-            onPress={() => clearPass()}
+            onPress={() => logOut()}
             className="bg-[#FFF4F4] flex-row px-2 py-2 mt-[170] rounded-[20px]"
           >
             <Text className="color-[#FF2B2B] font-Yekan text-[15px] px-2">

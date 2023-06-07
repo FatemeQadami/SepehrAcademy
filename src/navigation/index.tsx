@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { useColorScheme } from "nativewind";
 
 //----------screens----------
@@ -40,7 +41,7 @@ export const Navigation: FC = (): JSX.Element => {
       <Stack.Screen name={ERouteList.LogIn} component={Login} />
       <Stack.Screen name={ERouteList.SignUp} component={SignUp} />
       <Stack.Screen name={ERouteList.ForgetPass} component={Forgetpass} />
-      <Stack.Screen name={ERouteList.Courses} component={MyDrawer} />
+      <Stack.Screen name={ERouteList.MyDrawer} component={MyDrawer} />
     </Stack.Navigator>
   );
 };
@@ -79,7 +80,7 @@ const MyTab: FC = ({ navigation }: any) => {
         component={Cart}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="shopping-basket" size={20} color={color} />
+            <FontAwesome name="bookmark-o" size={22} color={color} />
           ),
         }}
       />
@@ -88,7 +89,8 @@ const MyTab: FC = ({ navigation }: any) => {
         component={Courses}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="book" size={25} color={color} />
+            <Ionicons
+            name="document-text-outline" size={24} color={color} />
           ),
         }}
       />

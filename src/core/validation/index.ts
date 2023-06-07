@@ -14,7 +14,7 @@ function isValidIranianNationalId(input: any) {
   return (sum < 2 && check === sum) || (sum >= 2 && check + sum === 11);
 }
 
-export const LoginValidation = Yup.object().shape({
+export const loginValidation = Yup.object().shape({
   email: Yup.string()
     .email("ایمیل به درستی وارد نشده‌است!!!")
     .required("پر کردن فیلد الزامیست"),
@@ -70,7 +70,7 @@ export const signUp2Validation = Yup.object().shape({
     ),
 });
 
-export const validationReset = Yup.object().shape({
+export const resetPassValidation = Yup.object().shape({
   password: Yup.string()
     .required("پر کردن فیلد الزامیست")
     .min(8, "تعداد کراکتر پسورد کافی نیست")
@@ -96,13 +96,6 @@ export const profileValidation = Yup.object().shape({
     .min(3, "تعدادکاراکترهای نام صحیح نمیباشد")
     .matches(/^[a-zA-Z\s\u0600-\u06FF]+$/, "لطفا نام خود را صحیح وارد کنید!!!"),
 
-  // NationalCode: Yup.string()
-  //   .required("پر کردن فیلد الزامیست")
-  //   .test("NationalCode", "کدملی وارد شده نامعتبر است!!!", (value) =>
-  //   isValidIranianNationalCode(value)
-  //   )
-  //   .typeError("لطفا کدملی را صحیح وارد کنید"),
-
   birthDate: Yup.string().required("پر کردن فیلد الزامیست"),
 
   phoneNumber: Yup.string()
@@ -113,4 +106,12 @@ export const profileValidation = Yup.object().shape({
     ),
 
   upload: Yup.mixed().nullable().optional(),
+});
+
+export const commentValidation = Yup.object().shape({
+  comment: Yup.string()
+    .required("پر کردن فیلد الزامیست!!!")
+    .test("comment", "پر کردن فیلد الزامیست", (value) => {
+      return value?.trim() ? true : false;
+    }),
 });

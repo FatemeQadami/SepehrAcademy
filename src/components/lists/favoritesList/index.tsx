@@ -16,20 +16,16 @@ import { ERouteList } from "../../../core/enums/route";
 
 export const FavoritesList: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
+  const dispatch = useDispatch();
+  const routeName = useRoute();
+  const isFocus = useIsFocused();
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
-  const state: any = useSelector((state: RootState) => state.favorite);
+  const favorite: any = useSelector((state: RootState) => state.favorite);
 
   // ------------route---------------
 
-  const dispatch = useDispatch();
-
-  const routeName = useRoute();
-
-  const isFocus = useIsFocused();
-
   useEffect(() => {
-    console.log("routeName.name", routeName.name);
     if (isFocus)
       dispatch(
         handelSelect({
@@ -48,7 +44,7 @@ export const FavoritesList: FC = (): JSX.Element => {
       {studentModel !== null ? (
         <View className="pt-[15] flex-1 dark:bg-[#00216C] ">
           <FlatList
-            data={state}
+            data={favorite}
             ListEmptyComponent={
               <Text className="font-Yekan px-8 py-[18] text-[20px] text-center rounded-[30px] dark:text-white ">
                 لیست خالی است

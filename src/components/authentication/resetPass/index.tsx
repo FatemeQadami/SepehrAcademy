@@ -4,7 +4,7 @@ import Toast from "react-native-toast-message";
 import { useSelector } from "react-redux";
 
 import { Form } from "../../common/forms";
-import { validationReset } from "../../../core/validation";
+import { resetPassValidation } from "../../../core/validation";
 import { InputText } from "../../common/inputText";
 import { CustomButton } from "../../common/customButton";
 import { forgetPassType, resetPassType } from "../../../core/models";
@@ -42,7 +42,7 @@ export const ResetPass: FC = (): JSX.Element => {
       <Form
         enableReinitialize
         initialValues={{ password: "", passwordConfirm: "" }}
-        validationSchema={validationReset}
+        validationSchema={resetPassValidation}
         onSubmit={onSubmit}
       >
         {({ submitForm, resetForm }) => (

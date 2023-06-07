@@ -18,22 +18,22 @@ export const CartList: FC = (): JSX.Element => {
   const [price, setPrice] = useState<number>();
 
   const navigation = useNavigation<any>();
+  const dispatch = useDispatch();
+  const routeName = useRoute();
+  const isFocus = useIsFocused();
 
   const { studentModel }: any = useSelector((state: RootState) => state.user);
-  const state: any = useSelector((state: RootState) => state.cart);
+  const cart: any = useSelector((state: RootState) => state.cart);
+
+
+  console.log("cart" , cart)
 
   const handelPrice = () => {
     let total = 0;
-    state?.map((item: { cost: number }) => (total += item.cost));
+    cart?.map((item: { cost: number }) => (total += item?.cost));
     setPrice(total);
   };
   // ------------route---------------
-
-  const dispatch = useDispatch();
-
-  const routeName = useRoute();
-
-  const isFocus = useIsFocused();
 
   useEffect(() => {
     handelPrice();
@@ -48,16 +48,16 @@ export const CartList: FC = (): JSX.Element => {
         type: "error",
         text1: " لطفا وارد حساب کاربری خود شوید !!",
       });
-  }, [studentModel, isFocus, state]);
+  }, [studentModel, isFocus, cart]);
 
   return (
     <>
       {studentModel !== null ? (
         <View className="pt-[15] flex-1 dark:bg-[#00216C]">
-          <View className="h-[73%] ">
-            {state && (
+          <View className="h-[83%]">
+            {cart && (
               <FlatList
-                data={state}
+                data={cart}
                 ListEmptyComponent={
                   <View className="items-center h-full">
                     <Text className="font-Yekan px-8 py-[18] text-[20px] items-center text-center rounded-[30px] dark:text-white ">
@@ -75,7 +75,6 @@ export const CartList: FC = (): JSX.Element => {
                     pageName="cart"
                   />
                 )}
-                // keyExtractor={item => item?._id}
                 maxToRenderPerBatch={5}
               />
             )}
@@ -92,7 +91,7 @@ export const CartList: FC = (): JSX.Element => {
               </Text>
               <View className="flex-row-reverse">
                 <Text className="font-Yekan font-bold text-[14px] text-center color-[#7C7C7C] dark:color-white ">
-                  {state?.length}
+                  {cart?.length}
                 </Text>
                 <Text className="font-Yekan text-[15px] text-center color-[#878787] dark:color-white ">
                   عدد
@@ -120,19 +119,12 @@ export const CartList: FC = (): JSX.Element => {
                 </Text>
               </View>
             </View>
-            <CustomButton
-              buttonTitle="پرداخت"
-              onPress={() => {
-                state?.length !== 0 && console.log("پرداخت شد");
-              }}
-              className="bg-[#03B9FF] color-white mt-5 mb-2 text-[15px] text-center font-Yekan py-3 rounded-[22px] font-bold "
-            />
           </View>
         </View>
       ) : (
         <View className="h-[100%] bg-white items-center flex justify-center dark:bg-[#00216C]">
           <Text className="font-Yekan px-8 py-[18] text-[20px] text-center  dark:color-white">
-            بر ای مشاهده سبد خرید لطفا وارد حساب خود شوید!!
+            بر ای مشاهده درس‌های رزرو شده لطفا وارد حساب خود شوید!!
           </Text>
           <CustomButton
             buttonTitle="ورود به حساب کاربری"

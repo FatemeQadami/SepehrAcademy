@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { removeItem } from "../../core/services/storage/storage";
+import { removeItem, setItem } from "../../core/services/storage/storage";
 import { EStorageKeys } from "../../core/enums/storage";
 
 const userSlice = createSlice({
@@ -10,17 +10,20 @@ const userSlice = createSlice({
   },
   reducers: {
     handelLogin: (state, action) => {
-      if (action.payload.token) state.token = action.payload.token;
-      if (action.payload.model) state.studentModel = action.payload.model;
+      state.token = action.payload.token;
+      state.studentModel = action.payload.model;
+
+      setItem(EStorageKeys.User, state.studentModel);
     },
 
-    handelLogOut:(state)=>{
+    handelLogOut: (state) => {
       state.token = "";
       state.studentModel = null;
       removeItem(EStorageKeys.User);
+      removeItem(EStorageKeys.ShowModal);
       removeItem(EStorageKeys.Token);
-    }
+    },
   },
 });
-export const { handelLogin , handelLogOut } = userSlice.actions;
+export const { handelLogin, handelLogOut } = userSlice.actions;
 export default userSlice.reducer;

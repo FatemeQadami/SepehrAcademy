@@ -43,9 +43,7 @@ export const SettingPage: FC = (): JSX.Element => {
   // ------------route---------------
 
   const dispatch = useDispatch();
-
   const routeName = useRoute();
-
   const isFocus = useIsFocused();
 
   useEffect(() => {
@@ -116,7 +114,7 @@ export const SettingPage: FC = (): JSX.Element => {
                       پالت رنگی
                     </Text>
                   </View>
-                  <View className="flex-row pt-2 justify-around">
+                  <View className="flex-row justify-around">
                     <Pressable
                       onPress={() =>
                         dispatch(
@@ -125,14 +123,17 @@ export const SettingPage: FC = (): JSX.Element => {
                           })
                         )
                       }
-                      style={{
-                        borderWidth: 2,
-                        borderColor: theme === "blue" ? "#2E5D9B" : "#3A84FF",
-                        width: theme === "blue" ? 20 : 17,
-                        height: theme === "blue" ? 20 : 17,
-                      }}
-                      className=" mx-1 rounded-[10px] bg-[#3A84FF]"
-                    ></Pressable>
+                      className="py-2 px-1.5"
+                    >
+                      <View
+                        style={{
+                          borderWidth: 2,
+                          borderColor:
+                            theme === "blue" ? "#2E5D9B" : "transparent",
+                        }}
+                        className="rounded-full w-5 h-5 bg-[#3A84FF]"
+                      />
+                    </Pressable>
                     <Pressable
                       onPress={() =>
                         dispatch(
@@ -141,14 +142,17 @@ export const SettingPage: FC = (): JSX.Element => {
                           })
                         )
                       }
-                      style={{
-                        borderWidth: 2,
-                        borderColor: theme === "green" ? "#2E5D9B" : "#00C06D",
-                        width: theme === "green" ? 20 : 17,
-                        height: theme === "green" ? 20 : 17,
-                      }}
-                      className="mx-1 rounded-[10px] bg-[#00C06D] "
-                    ></Pressable>
+                      className="py-2 px-1.5"
+                    >
+                      <View
+                        style={{
+                          borderWidth: 2,
+                          borderColor:
+                            theme === "green" ? "#2E5D9B" : "transparent",
+                        }}
+                        className="rounded-full w-5 h-5 bg-[#00C06D] "
+                      />
+                    </Pressable>
                     <Pressable
                       onPress={() =>
                         dispatch(
@@ -157,14 +161,17 @@ export const SettingPage: FC = (): JSX.Element => {
                           })
                         )
                       }
-                      style={{
-                        borderWidth: 2,
-                        borderColor: theme === "red" ? "#2E5D9B" : "#FF0000",
-                        width: theme === "red" ? 20 : 17,
-                        height: theme === "red" ? 20 : 17,
-                      }}
-                      className="mx-1 rounded-[10px] bg-[#FF0000] "
-                    ></Pressable>
+                      className="py-2 px-1.5"
+                    >
+                      <View
+                        style={{
+                          borderWidth: 2,
+                          borderColor:
+                            theme === "red" ? "#2E5D9B" : "transparent",
+                        }}
+                        className="w-5 h-5 rounded-full bg-[#FF0000] "
+                      />
+                    </Pressable>
                   </View>
                 </View>
                 <Pressable
@@ -294,8 +301,9 @@ export const SettingPage: FC = (): JSX.Element => {
       <CustomModal
         visible={clearModalVisible}
         animationType="slide"
+        statusBarTranslucent
         className2="p-[30] rounded-[30px]"
-        className="my-10 mx-7"
+        className="py-10 px-7 bg-blue-rgba h-full"
         onRequestClose={() => {
           setClearModalVisible(!clearModalVisible);
         }}
@@ -316,6 +324,7 @@ export const SettingPage: FC = (): JSX.Element => {
       >
         <AboutUs onPress={() => setAboutModalVisible(!aboutModalVisible)} />
       </CustomModal>
+
       <CustomModal
         animationType="fade"
         className="my-10 mx-7"

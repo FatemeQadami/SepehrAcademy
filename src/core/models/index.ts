@@ -21,7 +21,7 @@ export interface editProfileType {
   birthDate: string;
   nationalId: number | string | undefined;
   email: string | undefined;
-  profile?: any | undefined;
+  profile?: any | null | undefined;
 }
 
 export interface resetPassType {
@@ -35,15 +35,7 @@ export interface commentType {
   comment: string;
 }
 
-export interface studentModelType {
-  _id?: string;
-  fullName?: string;
-  email?: string;
-  phoneNumber?: number | string;
-  birthDate?: string;
-  role?: string;
-  isActive?: Boolean;
-  nationalId?: number | string | undefined;
-  registerDate?: string;
-  profile?: string;
+export interface idType {
+  courseId: number;
+  userId: number;
 }

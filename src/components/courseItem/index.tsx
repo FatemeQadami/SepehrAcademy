@@ -1,18 +1,21 @@
-import { View, Text, Image, Pressable } from "react-native";
-import React, { FC, useState } from "react";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import React, { FC, useState } from "react";
+import { Image, Pressable, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Favorite } from "../common/favorite";
-import { removeItemFromFav } from "../../redux/features/favorite";
-import { removeItemFromCart } from "../../redux/features/cart";
-import { CustomModal } from "../common/modal";
-import { CustomButton } from "../common/customButton";
-import { useColorTheme } from "../../core/config/color";
 import { ERouteList } from "../../core/enums/route";
+import { EStorageKeys } from "../../core/enums/storage";
+import { getItem, setItem } from "../../core/services/storage/storage";
+import { removeItemFromCart } from "../../redux/features/cart";
+import { removeItemFromFav } from "../../redux/features/favorite";
+import { RootState } from "../../redux/store";
+import { BookMark } from "../common/bookMark";
+import { CustomButton } from "../common/customButton";
+import { Favorite } from "../common/favorite";
+import { CustomModal } from "../common/modal";
 
 interface CourseItemProp {
   courseTitle: string;
@@ -34,17 +37,60 @@ export const CourseItem: FC<CourseItemProp> = ({
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const navigation = useNavigation<any>();
-
   const dispatch = useDispatch();
 
-  const color = useColorTheme();
+  const { studentModel }: any = useSelector((state: RootState) => state.user);
+  const cart: any = useSelector((state: RootState) => state.cart);
+  const favorite: any = useSelector((state: RootState) => state.favorite);
+
+  //---------- remove from cart ----------
+
+  const removeFromCart = async () => {
+    dispatch(removeItemFromCart(item));
+    const filtered = cart.filter(
+      (item: { _id: string }) => item._id !== item._id
+    );
+    const userData = {
+      [studentModel?._id]: {
+        cart: filtered,
+        favorite: favorite,
+      },
+    };
+    const get = await getItem(EStorageKeys.UserData);
+    setItem(EStorageKeys.UserData, { ...get, ...userData });
+    Toast.show({
+      type: "success",
+      text1: " درس انتخاب شده با موفقیت حذف شد",
+    });
+    setModalVisible(!modalVisible);
+  };
+
+  //---------- remove from favorite ----------
+
+  const removeFromFavorite = async () => {
+    dispatch(removeItemFromFav(item));
+    const filtered = favorite.filter(
+      (item: { _id: string }) => item._id !== item._id
+    );
+    const userData = {
+      [studentModel?._id]: {
+        cart: cart,
+        favorite: filtered,
+      },
+    };
+    const get = await getItem(EStorageKeys.UserData);
+    setItem(EStorageKeys.UserData, { ...get, ...userData });
+  };
 
   return (
     <>
       <View className="my-[15] pr-14 pl-6 relative">
         <Pressable
           onPress={() => {
-            navigation.navigate(ERouteList.CourseDetails, { item });
+            navigation.navigate({
+              name: ERouteList.CourseDetails,
+              params: { item },
+            });
           }}
           className="flex-row-reverse justify-between rounded-[20px] mx-5 py-3.5 bg-white dark:bg-[#212477] "
           style={{ elevation: 5 }}
@@ -74,14 +120,14 @@ export const CourseItem: FC<CourseItemProp> = ({
           <View className="items-center flex justify-between ml-3 pr-5">
             {pageName === "Courses" ? (
               <View className="px-2 pb-2">
-                <Favorite color="gray" size={16} item={item} />
+                <Favorite color="gray" size={20} item={item} />
               </View>
             ) : pageName === "fav" ? (
               <Pressable
                 className="px-2 pb-2"
-                onPress={() => dispatch(removeItemFromFav(item))}
+                onPress={() => removeFromFavorite()}
               >
-                <AntDesign name="delete" color="red" size={15} />
+                <AntDesign name="delete" color="red" size={18} />
               </Pressable>
             ) : (
               <></>
@@ -96,8 +142,10 @@ export const CourseItem: FC<CourseItemProp> = ({
               >
                 <AntDesign name="delete" color="white" size={16} />
               </Pressable>
+            ) : pageName === "fav" ? (
+              <></>
             ) : (
-              <AntDesign name="pluscircle" size={30} color={color?.IconColor} />
+              <BookMark item={item} />
             )}
           </View>
         </Pressable>
@@ -111,8 +159,9 @@ export const CourseItem: FC<CourseItemProp> = ({
       <CustomModal
         visible={modalVisible}
         animationType="slide"
-        className2="px-12 py-6 rounded-[30px]"
-        className="py-10"
+        statusBarTranslucent
+        className2="px-12 py-6 rounded-[30px] "
+        className="py-10 bg-blue-rgba h-full"
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}
@@ -130,12 +179,7 @@ export const CourseItem: FC<CourseItemProp> = ({
             <CustomButton
               buttonTitle="بله"
               onPress={() => {
-                dispatch(removeItemFromCart(item));
-                Toast.show({
-                  type: "success",
-                  text1: " درس انتخاب شده با موفقیت حذف شد",
-                });
-                setModalVisible(!modalVisible);
+                removeFromCart();
               }}
               className="bg-[#04A641] font-Yekan border-[1.5px] border-[#04A641] px-11 py-2 color-white text-[16px] text-center rounded-[27px] mx-2 "
             />

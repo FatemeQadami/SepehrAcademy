@@ -5,7 +5,7 @@ import Toast from "react-native-toast-message";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Form } from "../../common/forms";
-import { LoginValidation } from "../../../core/validation";
+import { loginValidation } from "../../../core/validation";
 import { InputText } from "../../common/inputText";
 import google from "../../../assets/img/auth/login/google.png";
 import facebook from "../../../assets/img/auth/login/facebook.png";
@@ -16,12 +16,18 @@ import { RootState } from "../../../redux/store";
 import { handelLogin } from "../../../redux/features/user";
 import { loginType } from "../../../core/models";
 import { ERouteList } from "../../../core/enums/route";
+import { getItem } from "../../../core/services/storage/storage";
+import { EStorageKeys } from "../../../core/enums/storage";
+import { loadCartData } from "../../../redux/features/cart";
+import { loadFavData } from "../../../redux/features/favorite";
 
 export const LoginForm: FC = (): JSX.Element => {
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
-  const { token, studentModel } = useSelector((state: RootState) => state.user);
+  const { token, studentModel }: any = useSelector(
+    (state: RootState) => state.user
+  );
 
   const navigation = useNavigation<any>();
 
@@ -41,14 +47,23 @@ export const LoginForm: FC = (): JSX.Element => {
           model: user.studentModel,
         })
       );
-      Toast.show({ type: "success", text1: "خوش آمدید :)" });
+
+      const UserData = await getItem(EStorageKeys.UserData);
+      if (UserData) {
+        dispatch(loadCartData(UserData[user?.studentModel?._id]?.cart));
+        dispatch(loadFavData(UserData[user?.studentModel?._id]?.favorite));
+      }
+
+      Toast.show({
+        type: "success",
+        text1: `کاربر  ${user?.studentModel?.fullName}  عزیز خوش آمدید :)`,
+      });
       navigation.dispatch(
         CommonActions.reset({
-          index: 1,
-          routes: [{ name: ERouteList.Courses }],
+          index: 0,
+          routes: [{ name: ERouteList.MyDrawer }],
         })
       );
-      console.log("fffff", token, studentModel);
     }
     console.log(values);
     setIsLoading(false);
@@ -58,7 +73,7 @@ export const LoginForm: FC = (): JSX.Element => {
       <Form
         enableReinitialize
         initialValues={{ email: "", password: "" }}
-        validationSchema={LoginValidation}
+        validationSchema={loginValidation}
         onSubmit={onSubmit}
       >
         {({ submitForm }) => (
@@ -149,9 +164,9 @@ export const LoginForm: FC = (): JSX.Element => {
         <View className="bg-white mt-[10] h-[1] w-[30%] " />
       </View>
       <View className="flex flex-row justify-center">
-        <Image source={google} style={{ marginHorizontal: 12 }} />
-        <Image source={twitter} style={{ marginHorizontal: 12 }} />
-        <Image source={facebook} style={{ marginHorizontal: 12 }} />
+        <Image className="mx-3" source={google} />
+        <Image className="mx-3" source={twitter} />
+        <Image className="mx-3" source={facebook} />
       </View>
     </>
   );

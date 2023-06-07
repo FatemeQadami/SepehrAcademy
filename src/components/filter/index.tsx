@@ -84,23 +84,12 @@ export const Filters: FC<filterPropsTypes> = ({
     );
     dispatch(handleTeacherFilter(selectedTeacher));
     dispatch(handelSort(selectedSorting));
-    console.log("selected", selectedSorting);
     dispatch(
       handelCostRange({
         costRange: multiSliderPrice,
       })
     );
   };
-  // useEffect(() => {
-  //   if (
-  //     teacher &&
-  //     teachers.length > 0 &&
-  //     teachers.some((it: { fullName: string }) => it.fullName === teacher)
-  //   ) {
-  //     setTeachers(teacher);
-  //     console.log(teacher);
-  //   }
-  // }, [teachers]);
 
   useEffect(() => {
     allTeachers();
@@ -310,39 +299,74 @@ export const Filters: FC<filterPropsTypes> = ({
           }}
         />
         <View className="my-5 bg-[#D3D6D8] px-32 h-[1]" />
-        <SelectDropdown
-          data={teachers?.map((o: any) => o?.fullName)}
-          defaultButtonText="مدرس دوره"
-          buttonTextStyle={Styles.buttonTextStyle}
-          buttonStyle={Styles.buttonStyle}
-          dropdownStyle={Styles.dropdownStyle}
-          rowTextStyle={Styles.rowTextStyle}
-          selectedRowTextStyle={Styles.selectedRowTextStyle}
-          search
-          searchInputTxtStyle={Styles.searchInputTxtStyle}
-          searchPlaceHolder="جستجو نام مدرس"
-          renderDropdownIcon={(isOpened) => {
-            return (
-              <FontAwesome
-                name={isOpened ? "chevron-up" : "chevron-down"}
-                color="#C6C6C6"
-                size={15}
-              />
-            );
-          }}
-          dropdownIconPosition="left"
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
-            setSelectedTeacher(selectedItem);
-          }}
-          defaultValue={teacher}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
-        />
+        {teachers.length > 0 && teacher ? (
+          <SelectDropdown
+            data={teachers?.map((o: any) => o?.fullName)}
+            defaultButtonText="مدرس دوره"
+            buttonTextStyle={Styles.buttonTextStyle}
+            buttonStyle={Styles.buttonStyle}
+            dropdownStyle={Styles.dropdownStyle}
+            rowTextStyle={Styles.rowTextStyle}
+            selectedRowTextStyle={Styles.selectedRowTextStyle}
+            search
+            searchInputTxtStyle={Styles.searchInputTxtStyle}
+            searchPlaceHolder="جستجو نام مدرس"
+            renderDropdownIcon={(isOpened) => {
+              return (
+                <FontAwesome
+                  name={isOpened ? "chevron-up" : "chevron-down"}
+                  color="#C6C6C6"
+                  size={15}
+                />
+              );
+            }}
+            dropdownIconPosition="left"
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+              setSelectedTeacher(selectedItem);
+            }}
+            defaultValue={teacher}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+          />
+        ) : (
+          <SelectDropdown
+            data={teachers?.map((o: any) => o?.fullName)}
+            defaultButtonText="مدرس دوره"
+            buttonTextStyle={Styles.buttonTextStyle}
+            buttonStyle={Styles.buttonStyle}
+            dropdownStyle={Styles.dropdownStyle}
+            rowTextStyle={Styles.rowTextStyle}
+            selectedRowTextStyle={Styles.selectedRowTextStyle}
+            search
+            searchInputTxtStyle={Styles.searchInputTxtStyle}
+            searchPlaceHolder="جستجو نام مدرس"
+            renderDropdownIcon={(isOpened) => {
+              return (
+                <FontAwesome
+                  name={isOpened ? "chevron-up" : "chevron-down"}
+                  color="#C6C6C6"
+                  size={15}
+                />
+              );
+            }}
+            dropdownIconPosition="left"
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+              setSelectedTeacher(selectedItem);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+          />
+        )}
         <SelectDropdown
           data={category?.map((o: any) => o?.name)}
           defaultButtonText="دسته بندی"

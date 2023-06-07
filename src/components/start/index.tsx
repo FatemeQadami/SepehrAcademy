@@ -1,6 +1,13 @@
 import { Link, useNavigation } from "@react-navigation/native";
 import React, { FC } from "react";
-import { Text, View, Image, ImageBackground, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  ImageBackground,
+  Dimensions,
+  Pressable,
+} from "react-native";
 
 import logo from "../../assets/img/pre-start/logo.png";
 import background from "../../assets/img/pre-start/background.png";
@@ -37,7 +44,7 @@ export const StartPage: FC = (): JSX.Element => {
         resizeMode="contain"
       />
       <View className="mt-44">
-        <View className="flex justify-center justify-between">
+        <View className="flex justify-center">
           <Image className="border mx-auto mb-1" source={logo} />
           <Text className="text-3xl font-Yekan font-light text-center pt-5 color-[#00469A]  dark:color-white">
             آکادمی کدنویسی بحر
@@ -51,11 +58,11 @@ export const StartPage: FC = (): JSX.Element => {
             ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
             و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
           </Text>
-          <View className="flex-row justify-center justify-between mt-16">
+          <View className="flex-row justify-between mt-16">
             <CustomButton
               buttonTitle="ثبت‌ نام"
               onPress={() => {
-                navigation.navigate(ERouteList.SignUp);
+                navigation?.navigate(ERouteList?.SignUp);
               }}
               className="font-Yekan color-white text-[16px] text-center border-2 border-white py-[10] w-[148] rounded-[27px] "
             />
@@ -67,20 +74,18 @@ export const StartPage: FC = (): JSX.Element => {
               className="font-Yekan color-white text-[16px] text-center bg-[#0043F7] py-[12] w-[150] rounded-[27px] "
             />
           </View>
-          <Link
-            to={{ screen: ERouteList.Courses }}
-            style={{
-              marginTop: 55,
-              marginBottom: 25,
-              textAlign: "center",
-              color: "white",
-              fontSize: 20,
-              fontFamily: "YekanBakh",
-              textDecorationLine: "underline",
-            }}
+          <Pressable
+            onPress={() =>
+              navigation.navigate(ERouteList.MyDrawer, {
+                screen: ERouteList.DrawerTab,
+                params: { screen: ERouteList.CourseTab },
+              })
+            }
           >
-            ورود به صفحه اصلی
-          </Link>
+            <Text className="font-Yekan color-white text-[20px] text-center mt-[55] mb[25] underline">
+              ورود به صفحه اصلی
+            </Text>
+          </Pressable>
         </View>
       </View>
     </View>

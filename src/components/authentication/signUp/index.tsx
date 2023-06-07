@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC, useState } from "react";
+import { Text, View, Pressable } from "react-native";
+import React, { FC, useState, useEffect } from "react";
 import Toast from "react-native-toast-message";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigation, CommonActions } from "@react-navigation/native";
+import { Link, useNavigation, CommonActions, useIsFocused } from "@react-navigation/native";
 import StepIndicator from "react-native-step-indicator";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 
@@ -18,23 +18,30 @@ import { loginAPI } from "../../../core/services/api/auth/login.api";
 import { loginType, signUpType } from "../../../core/models";
 import { signUpAPI } from "../../../core/services/api/auth/signUp.api";
 import { ERouteList } from "../../../core/enums/route";
+import { PrivacyPolicy } from "../../PrivacyPolicy";
 
 export const SignUpForm: FC = (): JSX.Element => {
   const [step, setStep] = useState<number>(0);
   const [isPasswordSecure, setIsPasswordSecure] = useState<Boolean>(true);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [privacyModalVisible, setPrivacyModalVisible] =
+    useState<boolean>(false);
 
   const navigation = useNavigation<any>();
-
-  const { studentModel } = useSelector((state: RootState) => state.user);
-
   const dispatch = useDispatch();
+  const isFocus = useIsFocused();
+
+  const { studentModel }: any = useSelector((state: RootState) => state.user);
+
+  //---------- first Step---------
 
   const onFirstStep = ({ setTouched }: any) => {
     setStep(1);
     setTouched({});
   };
+
+  //---------- second Step---------
 
   const onSecondStep = async (values: signUpType) => {
     setIsLoading(true);
@@ -77,16 +84,21 @@ export const SignUpForm: FC = (): JSX.Element => {
           model: response.studentModel,
         })
       );
-      Toast.show({ type: "success", text1: "خوش آمدید :)" });
+      Toast.show({
+        type: "success",
+        text1: `کاربر ${response?.studentModel?.fullName} عزیز خوش آمدید :)`,
+      });
       navigation.dispatch(
         CommonActions.reset({
           index: 1,
-          routes: [{ name: ERouteList.Courses }],
+          routes: [{ name: ERouteList.MyDrawer }],
         })
       );
     }
     setIsLoading(false);
   };
+
+  //-------- StepIndicator Style ---------
 
   const customStyles = {
     stepIndicatorSize: 70,
@@ -103,6 +115,11 @@ export const SignUpForm: FC = (): JSX.Element => {
     stepIndicatorUnFinishedColor: "#3A84FF",
     stepIndicatorCurrentColor: "#3A84FF",
   };
+
+  useEffect(() => {
+    if(isFocus)
+    setPrivacyModalVisible(true);
+  }, [isFocus]);
 
   return (
     <>
@@ -177,7 +194,6 @@ export const SignUpForm: FC = (): JSX.Element => {
                     name="birthDate"
                     onPress={() => {
                       setModalVisible(true);
-                      console.log("555555555");
                     }}
                   />
                   <InputText
@@ -220,8 +236,8 @@ export const SignUpForm: FC = (): JSX.Element => {
                 <CustomModal
                   animationType="fade"
                   visible={modalVisible}
-                  className="pt-7 px-7"
-                  className2="p-1 rounded-[30px]"
+                  className="pt-5 px-7"
+                  className2="p-1 pb-5 rounded-[30px]"
                   onRequestClose={() => {
                     setModalVisible(!modalVisible);
                   }}
@@ -233,16 +249,18 @@ export const SignUpForm: FC = (): JSX.Element => {
                       defaultFont: "Shabnam-Light",
                       headerFont: "Shabnam-Medium",
                     }}
-                    selected={getFormatedDate(
-                      new Date(values["birthDate"]),
-                      "jYYYY/jMM/jDD"
-                    )}
+                    selected={getFormatedDate(new Date(), "jYYYY/jMM/jDD")}
                     onDateChange={(date) => {
                       setFieldValue("birthDate", date);
                       setModalVisible((old) => !old);
                     }}
                     style={{ borderRadius: 20, width: 300 }}
                   />
+                  <Pressable onPress={() => setModalVisible(!modalVisible)}>
+                    <Text className="border-[1.5px] font-Yekan border-[#FF0000] dark:border-white px-10 py-2 color-[#FF0000] dark:color-white text-[16px] text-center rounded-[27px]">
+                      انصراف
+                    </Text>
+                  </Pressable>
                 </CustomModal>
               </>
             )}
@@ -272,6 +290,20 @@ export const SignUpForm: FC = (): JSX.Element => {
           در حال حاضر اکانت فعالی دارید؟
         </Text>
       </View>
+      <CustomModal
+        animationType="fade"
+        visible={privacyModalVisible}
+        statusBarTranslucent
+        className="pt-5 px-7 bg-blue-rgba h-full"
+        className2="p-5 pb-10 rounded-[30px]"
+        onRequestClose={() => {
+          setPrivacyModalVisible(!privacyModalVisible);
+        }}
+      >
+        <PrivacyPolicy
+          closeOnpress={() => setPrivacyModalVisible(!privacyModalVisible)}
+        />
+      </CustomModal>
     </>
   );
 };

@@ -26,7 +26,7 @@ const { width, height } = Dimensions.get("screen");
 
 export const SplashScreenPage: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
-
+  const dispatch = useDispatch();
   const { setColorScheme } = useColorScheme();
 
   const glowAnimation = useAnimatedStyle(() => ({
@@ -34,7 +34,7 @@ export const SplashScreenPage: FC = (): JSX.Element => {
       {
         scale: withRepeat(
           withSequence(
-            withTiming(1.2, { duration: 1500 }),
+            withTiming(1.1, { duration: 1500 }),
             withTiming(0.8, { duration: 1500 })
           ),
           -1,
@@ -44,20 +44,16 @@ export const SplashScreenPage: FC = (): JSX.Element => {
     ],
   }));
 
-  const { studentModel } = useSelector((state: RootState) => state.user);
-
-  const dispatch = useDispatch();
-
   const handelGetItems = async () => {
     const token = await getItem(EStorageKeys.Token);
     const user = await getItem(EStorageKeys.User);
+    const UserData = await getItem(EStorageKeys.UserData);
     const theme = await getItem(EStorageKeys.Theme);
-    const selectedFav = await getItem(EStorageKeys.SelectedFav);
-    const selectedCourse = await getItem(EStorageKeys.SelectedCourse);
     const mode = await getItem(EStorageKeys.Mode);
 
     setColorScheme(mode);
     console.log("user", user);
+
     dispatch(
       handelLogin({
         token: token,
@@ -70,13 +66,18 @@ export const SplashScreenPage: FC = (): JSX.Element => {
           theme: theme,
         })
       );
-    dispatch(loadCartData(selectedCourse));
-    dispatch(loadFavData(selectedFav));
+    if (UserData) {
+      dispatch(loadCartData(UserData[user?._id]?.cart));
+      dispatch(loadFavData(UserData[user?._id]?.favorite));
+    }
     setTimeout(() => {
       if (user) {
-        navigation.replace(ERouteList.Courses);
+        navigation?.replace(ERouteList?.MyDrawer, {
+          screen: ERouteList?.DrawerTab,
+          params: { screen: ERouteList?.CourseTab },
+        });
       } else {
-        navigation.replace(ERouteList.Start);
+        navigation?.replace(ERouteList?.Start);
       }
     }, 4000);
   };
@@ -110,7 +111,7 @@ export const SplashScreenPage: FC = (): JSX.Element => {
         resizeMode="contain"
       />
       <View style={{ height: 880, marginTop: 250 }}>
-        <View className="flex justify-center justify-between">
+        <View className="flex justify-center ">
           <Animated.View
             className="justify-center items-center"
             style={[glowAnimation]}

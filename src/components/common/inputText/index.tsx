@@ -15,15 +15,17 @@ interface InputTextProp {
   name: string;
   leftIconSize?: number;
   leftIconName?: any;
-  rightIconName: string;
-  rightIconSize: number;
+  rightIconName?: string;
+  rightIconSize?: number;
   leftIconStyle?: any;
-  rightIconStyle: any;
+  rightIconStyle?: any;
   className: string;
   classView?: string;
   secureTextEntry?: any;
   onPress?: any;
   editable?: boolean;
+  multiline?: boolean;
+  numberOfLines?: number;
 }
 
 export const InputText: FC<InputTextProp> = ({
@@ -41,6 +43,8 @@ export const InputText: FC<InputTextProp> = ({
   secureTextEntry,
   onPress,
   editable,
+  numberOfLines,
+  multiline,
 }): JSX.Element => {
   const { values, errors, touched, setFieldValue }: any =
     useFormikContext<any>();
@@ -62,12 +66,14 @@ export const InputText: FC<InputTextProp> = ({
         <View
           className={`flex flex-row-reverse rounded-3xl bg-white mt-3 ${classView}`}
         >
-          <Icon
-            name={rightIconName}
-            size={rightIconSize}
-            color="gray"
-            style={rightIconStyle}
-          />
+          {rightIconName && (
+            <Icon
+              name={rightIconName}
+              size={rightIconSize}
+              color="gray"
+              style={rightIconStyle}
+            />
+          )}
           <TextInput
             editable={editable}
             className={className}
@@ -75,16 +81,20 @@ export const InputText: FC<InputTextProp> = ({
             placeholder={placeholder}
             placeholderTextColor="gray"
             keyboardType={type}
+            multiline={multiline}
+            numberOfLines={numberOfLines}
             onChangeText={(text) => onChenged(text)}
             value={name ? values[name] : value}
           />
-          <Icon
-            name={leftIconName}
-            size={leftIconSize}
-            color="gray"
-            style={leftIconStyle}
-            onPress={() => onPress()}
-          />
+          {leftIconName && (
+            <Icon
+              name={leftIconName}
+              size={leftIconSize}
+              color="gray"
+              style={leftIconStyle}
+              onPress={() => onPress()}
+            />
+          )}
         </View>
         <View className="mt-[5] h-[20]">
           {name && errors[name] && touched[name] && (

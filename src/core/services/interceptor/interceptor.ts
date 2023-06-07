@@ -22,7 +22,7 @@ axios.interceptors.response.use(
         // tweak it later
         // get error message from backend (see object of response later... maybe its changed)
         try {
-          console.log(error.response.data.message[0].message);
+          console.log("error", error.response.data.message[0].message);
           Toast.show({
             type: "error",
             text1: error.response.data.message[0].message,

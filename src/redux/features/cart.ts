@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { removeItem, setItem } from "../../core/services/storage/storage";
-import { EStorageKeys } from "../../core/enums/storage";
-
 const initialState: any = [];
 
 const cartSlice = createSlice({
@@ -10,19 +7,24 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, { payload }) => {
-      const { _id: id } = payload;
-
-      const find = state?.find((item: { _id: string }) => item._id === id);
+      const find = state?.find((item: { _id: string }) => {
+        return item?._id === payload?._id;
+      });
       console.log("find", find);
       console.log("add", payload);
 
       if (find) {
-        return state?.filter((item: { _id: string }) => item._id !== id);
+        const o = state?.filter(
+          (item: { _id: string }) => item?._id !== payload?._id
+        );
+        return o;
       } else {
-        const localData = [...state, payload];
-
-        state?.push({ ...payload });
-        setItem(EStorageKeys.SelectedCourse, localData);
+        try {
+          const localData = state ? [...state, payload] : [payload];
+          return localData;
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
     loadCartData: (state, { payload }) => {
@@ -31,15 +33,17 @@ const cartSlice = createSlice({
     removeItemFromCart: (state, action) => {
       const items = action.payload;
       const local = [
-        ...state.filter((item: { _id: string }) => item._id !== items._id),
+        ...state.filter((item: { _id: string }) => item?._id !== items?._id),
       ];
       console.log("local", local);
-      setItem(EStorageKeys.SelectedCourse, local);
       return local;
+    },
+    clearCart: (state) => {
+      state = [];
     },
   },
 });
 
-export const { loadCartData, addToCart, removeItemFromCart } =
+export const { loadCartData, addToCart, removeItemFromCart, clearCart } =
   cartSlice.actions;
 export default cartSlice.reducer;

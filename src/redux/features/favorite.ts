@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { removeItem, setItem } from "../../core/services/storage/storage";
-import { EStorageKeys } from "../../core/enums/storage";
-
 const initialState: any = [];
 
 const favoriteSlice = createSlice({
@@ -10,16 +7,26 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     addToFavorite: (state, { payload }) => {
-      const { _id: id } = payload;
+      const find = state?.find((item: { _id: string }) => {
+        console.log(item._id, payload?._id);
+        return item._id === payload?._id;
+      });
 
-      const find = state?.find((item: { _id: string }) => item._id === id);
+      console.log("findf", find);
+      console.log("addf", payload);
 
       if (find) {
-        return state?.filter((item: { _id: string }) => item._id !== id);
-        setItem(EStorageKeys.SelectedFav, state);
+        const o = state?.filter(
+          (item: { _id: string }) => item._id !== payload?._id
+        );
+        return o;
       } else {
-        state?.push({ ...payload });
-        setItem(EStorageKeys.SelectedFav, state);
+        try {
+          const localData = state ? [...state, payload] : [payload];
+          return localData;
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
     loadFavData: (state, { payload }) => {
@@ -28,14 +35,16 @@ const favoriteSlice = createSlice({
     removeItemFromFav: (state, action) => {
       const items = action.payload;
       const local = [
-        ...state.filter((item: { _id: string }) => item._id !== items._id),
+        ...state.filter((item: { _id: string }) => item._id !== items?._id),
       ];
-      setItem(EStorageKeys.SelectedFav, local);
       return local;
+    },
+    clearFavorite: (state) => {
+      state = [];
     },
   },
 });
 
-export const { loadFavData, addToFavorite, removeItemFromFav } =
+export const { loadFavData, addToFavorite, removeItemFromFav, clearFavorite } =
   favoriteSlice.actions;
 export default favoriteSlice.reducer;

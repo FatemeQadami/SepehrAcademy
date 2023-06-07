@@ -22,9 +22,7 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const navigation = useNavigation<any>();
-
   const dispatch = useDispatch();
-
   const color = useColorTheme();
 
   const handelOnChange = (query: string) => {
@@ -107,7 +105,7 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
           visible={modalVisible}
           statusBarTranslucent
           className2="px-8 py-9 mt-12 mb-16 rounded-[30px]"
-          className="px-7 py-2 bg-blue-rgba h-full ] "
+          className="px-7 py-2 bg-blue-rgba h-full "
           onRequestClose={() => {
             setModalVisible(!modalVisible);
           }}

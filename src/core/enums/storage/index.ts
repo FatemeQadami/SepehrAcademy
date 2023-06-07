@@ -1,8 +1,8 @@
 export enum EStorageKeys {
   Token = "Token",
   User = "User",
-  SelectedCourse = "SelectedCourseInCart",
-  SelectedFav = "SelectedCourseInFavorite",
+  UserData = "UserData",
+  ShowModal = "ShowModal",
   Theme = "Theme",
   Mode = "Mode",
 }

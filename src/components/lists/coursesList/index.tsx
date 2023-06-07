@@ -12,7 +12,6 @@ import { RootState } from "../../../redux/store";
 
 export const CoursesList: FC = (): JSX.Element => {
   const [data, setData] = useState([]);
-  const [refreshing, setRefreshing] = useState<any>(false);
 
   const mapCounter = [1, 2, 3, 4, 5];
 
@@ -30,6 +29,8 @@ export const CoursesList: FC = (): JSX.Element => {
     const result = await coursesAPI();
     setData(result?.data?.result);
   };
+
+  console.log("data", data);
 
   //----------search & filter---------
   const { teacher, sortId, costRange, searchWord, capacityRange }: any =
@@ -114,8 +115,6 @@ export const CoursesList: FC = (): JSX.Element => {
             )}
             keyExtractor={(item: { _id: string }) => item?._id}
             maxToRenderPerBatch={5}
-            onRefresh={() => {}}
-            refreshing={refreshing}
           />
         ) : (
           <>

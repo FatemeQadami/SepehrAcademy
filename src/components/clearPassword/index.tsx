@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React, { FC } from "react";
 import Toast from "react-native-toast-message";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, CommonActions } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 
 import { handelLogOut } from "../../redux/features/user";
@@ -13,7 +13,6 @@ interface clearPassType {
 }
 
 export const ClearPassword: FC<clearPassType> = ({ onPress }): JSX.Element => {
-
   const dispatch = useDispatch();
 
   const navigation = useNavigation<any>();
@@ -21,7 +20,12 @@ export const ClearPassword: FC<clearPassType> = ({ onPress }): JSX.Element => {
   const clearPass = () => {
     dispatch(handelLogOut());
 
-    navigation.navigate(ERouteList.LogIn);
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{ name: ERouteList.LogIn }],
+      })
+    );
     Toast.show({
       type: "error",
       text1: "برای ورود به اپلیکیشن باید مجددا رمز عبور خود را وارد نمایید!!",

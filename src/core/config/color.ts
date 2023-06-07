@@ -9,6 +9,7 @@ const blueTheme = {
   RouteTextColor: "#4F91FF",
   FilterColor: "#4F91FF",
   IconColor: "#4F91FF",
+  ActivityIndicatorColor: "#4F91FF",
 };
 
 const greenTheme = {
@@ -18,6 +19,7 @@ const greenTheme = {
   RouteTextColor: "#00C06D",
   FilterColor: "#00C06D",
   IconColor: "#00C06D",
+  ActivityIndicatorColor: "#00C06D",
 };
 
 const redTheme = {
@@ -27,6 +29,7 @@ const redTheme = {
   RouteTextColor: "#FF3E3E",
   FilterColor: "#FF3E3E",
   IconColor: "#FF3E3E",
+  ActivityIndicatorColor: "#FF3E3E",
 };
 
 export const useColorTheme = () => {

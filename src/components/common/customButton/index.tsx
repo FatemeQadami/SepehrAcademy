@@ -3,7 +3,9 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  Image,
 } from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import React, { FC } from "react";
 
 interface ICustomButtonProp {
@@ -14,6 +16,8 @@ interface ICustomButtonProp {
   isLoading?: Boolean;
   color?: string;
   loadingClassName?: string;
+  iconName?: string;
+  TextClassName?: string;
 }
 
 export const CustomButton: FC<ICustomButtonProp> = ({
@@ -24,6 +28,8 @@ export const CustomButton: FC<ICustomButtonProp> = ({
   style,
   loadingClassName,
   color,
+  iconName,
+  TextClassName,
 }): JSX.Element => {
   return (
     <TouchableOpacity
@@ -35,6 +41,11 @@ export const CustomButton: FC<ICustomButtonProp> = ({
       {isLoading ? (
         <View className={loadingClassName}>
           <ActivityIndicator size="small" color={color} />
+        </View>
+      ) : iconName ? (
+        <View className={`flex flex-row justify-center ${className}`} style={style}>
+          <FontAwesome name={iconName} size={20} color="white" />
+          <Text className={TextClassName}>{buttonTitle}</Text>
         </View>
       ) : (
         <Text className={className} style={style}>
