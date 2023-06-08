@@ -1,6 +1,6 @@
 import { View, TextInput, Pressable } from "react-native";
 import React, { FC, useState } from "react";
-import Icon from "react-native-vector-icons/FontAwesome";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 
@@ -47,7 +47,11 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
                 className="bg-white pt-2 rounded-3xl items-center mt-2 w-[37] h-[37]"
                 style={{ elevation: 10 }}
               >
-                <Icon name="shopping-cart" size={24} color={color?.IconColor} />
+                <FontAwesome
+                  name="bookmark"
+                  size={21}
+                  color={color?.IconColor}
+                />
               </View>
             </Pressable>
             <View
@@ -57,6 +61,7 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
               <TextInput
                 placeholder="جستجو ..."
                 value={searchQuery}
+                returnKeyType="search"
                 onBlur={() =>
                   dispatch(
                     handeSearchWord({
@@ -65,7 +70,7 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
                   )
                 }
                 onChangeText={(query) => handelOnChange(query)}
-                className="bg-white w-[170] h-[38] text-right pr-[10] rounded-r-[20] "
+                className="bg-white font-Yekan w-[170] h-[38] text-right pr-[10] rounded-r-[20] "
               />
               <Pressable
                 onPress={() =>
@@ -76,7 +81,7 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
                   )
                 }
               >
-                <Icon
+                <FontAwesome
                   name="search"
                   color={color?.IconColor}
                   size={20}
@@ -95,7 +100,7 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
                 className="bg-white pt-2 rounded-3xl items-center mt-2 w-[37] h-[37]"
                 style={{ elevation: 10 }}
               >
-                <Icon name="filter" size={24} color={color?.IconColor} />
+                <FontAwesome name="filter" size={24} color={color?.IconColor} />
               </View>
             </Pressable>
           </View>

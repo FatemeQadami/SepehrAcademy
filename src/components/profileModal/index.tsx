@@ -19,7 +19,7 @@ export const ProfileUpload: FC<ProfileUploadPropsType> = ({
   return (
     <View className="mx-7 mt-2 w-[350] mb-8 ">
       <Pressable
-        className="absolute top-1 right-1"
+        className="absolute top-1 left-1"
         onPress={() => {
           onPress();
         }}

@@ -2,7 +2,12 @@ import { Text, View, Pressable } from "react-native";
 import React, { FC, useState, useEffect } from "react";
 import Toast from "react-native-toast-message";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigation, CommonActions, useIsFocused } from "@react-navigation/native";
+import {
+  Link,
+  useNavigation,
+  CommonActions,
+  useIsFocused,
+} from "@react-navigation/native";
 import StepIndicator from "react-native-step-indicator";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 
@@ -117,8 +122,7 @@ export const SignUpForm: FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if(isFocus)
-    setPrivacyModalVisible(true);
+    if (isFocus) setPrivacyModalVisible(true);
   }, [isFocus]);
 
   return (
@@ -158,6 +162,7 @@ export const SignUpForm: FC = (): JSX.Element => {
                     rightIconSize={20}
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
                     className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    returnKeyType="next"
                   />
                   <InputText
                     name="phoneNumber"
@@ -167,6 +172,7 @@ export const SignUpForm: FC = (): JSX.Element => {
                     type="number-pad"
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
                     className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    returnKeyType="next"
                   />
                   <InputText
                     name="nationalId"
@@ -176,6 +182,7 @@ export const SignUpForm: FC = (): JSX.Element => {
                     type="number-pad"
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
                     className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    returnKeyType="done"
                   />
                 </View>
                 <View style={{ marginTop: 70 }}>
@@ -204,6 +211,7 @@ export const SignUpForm: FC = (): JSX.Element => {
                     rightIconSize={20}
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
                     className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    returnKeyType="next"
                   />
                   <InputText
                     className="bg-white text-right fontSize-[18px] h-[45] w-[245] pr-[20]"
@@ -221,6 +229,7 @@ export const SignUpForm: FC = (): JSX.Element => {
                     }}
                     leftIconSize={22}
                     leftIconStyle={{ padding: 10, marginLeft: 10 }}
+                    returnKeyType="done"
                   />
                 </View>
                 <View className="mt-[70]">

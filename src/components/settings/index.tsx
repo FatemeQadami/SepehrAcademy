@@ -75,11 +75,11 @@ export const SettingPage: FC = (): JSX.Element => {
                     <Octicons
                       name="moon"
                       color="white"
-                      size={15}
+                      size={20}
                       style={{
                         backgroundColor: "#474747",
-                        paddingHorizontal: 11,
-                        paddingVertical: 10,
+                        paddingHorizontal: 9,
+                        paddingVertical: 8,
                         borderRadius: 10,
                         alignItems: "center",
                       }}
@@ -101,11 +101,11 @@ export const SettingPage: FC = (): JSX.Element => {
                     <MaterialIcons
                       name="center-focus-weak"
                       color="white"
-                      size={15}
+                      size={20}
                       style={{
                         backgroundColor: "#F0A330",
-                        paddingHorizontal: 10,
-                        paddingVertical: 10,
+                        paddingHorizontal: 8,
+                        paddingVertical: 8,
                         borderRadius: 10,
                         alignItems: "center",
                       }}
@@ -189,11 +189,11 @@ export const SettingPage: FC = (): JSX.Element => {
                     <MaterialIcons
                       name="lock-outline"
                       color="white"
-                      size={15}
+                      size={20}
                       style={{
                         backgroundColor: "#2A8CFE",
-                        paddingHorizontal: 10,
-                        paddingVertical: 10,
+                        paddingHorizontal: 8,
+                        paddingVertical: 8,
                         borderRadius: 10,
                         alignItems: "center",
                       }}
@@ -222,11 +222,11 @@ export const SettingPage: FC = (): JSX.Element => {
                     <Feather
                       name="users"
                       color="white"
-                      size={15}
+                      size={20}
                       style={{
                         backgroundColor: "#2FCBA5",
-                        paddingHorizontal: 10,
-                        paddingVertical: 10,
+                        paddingHorizontal: 8,
+                        paddingVertical:8,
                         borderRadius: 10,
                         alignItems: "center",
                       }}
@@ -255,11 +255,11 @@ export const SettingPage: FC = (): JSX.Element => {
                     <Ionicons
                       name="chatbubble-ellipses-outline"
                       color="white"
-                      size={15}
+                      size={20}
                       style={{
                         backgroundColor: "#F6606C",
-                        paddingHorizontal: 10,
-                        paddingVertical: 10,
+                        paddingHorizontal: 8,
+                        paddingVertical: 8,
                         borderRadius: 10,
                         alignItems: "center",
                       }}

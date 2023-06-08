@@ -87,6 +87,7 @@ export const LoginForm: FC = (): JSX.Element => {
                 rightIconName="envelope-o"
                 rightIconSize={20}
                 rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
+                returnKeyType="next"
               />
               <InputText
                 className="bg-white text-right fontSize-[18px] h-[45] w-[245] pr-[20]"
@@ -104,6 +105,7 @@ export const LoginForm: FC = (): JSX.Element => {
                 }}
                 leftIconSize={22}
                 leftIconStyle={{ padding: 10, marginLeft: 10 }}
+                returnKeyType="done"
               />
             </>
             <>

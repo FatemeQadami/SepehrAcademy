@@ -26,6 +26,18 @@ interface InputTextProp {
   editable?: boolean;
   multiline?: boolean;
   numberOfLines?: number;
+  returnKeyType?:
+    | "default"
+    | "go"
+    | "google"
+    | "join"
+    | "next"
+    | "route"
+    | "search"
+    | "send"
+    | "yahoo"
+    | "done"
+    | "emergency-call";
 }
 
 export const InputText: FC<InputTextProp> = ({
@@ -44,6 +56,7 @@ export const InputText: FC<InputTextProp> = ({
   onPress,
   editable,
   numberOfLines,
+  returnKeyType,
   multiline,
 }): JSX.Element => {
   const { values, errors, touched, setFieldValue }: any =
@@ -85,6 +98,7 @@ export const InputText: FC<InputTextProp> = ({
             numberOfLines={numberOfLines}
             onChangeText={(text) => onChenged(text)}
             value={name ? values[name] : value}
+            returnKeyType={returnKeyType}
           />
           {leftIconName && (
             <Icon

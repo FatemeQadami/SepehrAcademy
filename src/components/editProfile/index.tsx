@@ -197,6 +197,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
                           rightIconStyle={{ marginTop: 12, marginRight: 20 }}
                           className="text-right fontSize-[18px] h-[45] w-[230] pr-[20]"
                           classView="border-2 border-[#E3E6E8]"
+                          returnKeyType="next"
                         />
                         <InputText
                           name="phoneNumber"
@@ -207,6 +208,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
                           rightIconStyle={{ marginTop: 12, marginRight: 20 }}
                           className="text-right fontSize-[18px] h-[45] w-[230] pr-[20]"
                           classView="border-2 border-[#E3E6E8]"
+                          returnKeyType="next"
                         />
                         <InputText
                           name="nationalId"

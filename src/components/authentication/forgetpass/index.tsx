@@ -47,6 +47,7 @@ export const ForgetpassForm: FC = (): JSX.Element => {
                 rightIconName="envelope-o"
                 rightIconSize={20}
                 rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
+                returnKeyType="done"
                 className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
               />
             </>

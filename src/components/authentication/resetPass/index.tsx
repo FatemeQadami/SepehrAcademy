@@ -65,6 +65,7 @@ export const ResetPass: FC = (): JSX.Element => {
                 leftIconStyle={{ padding: 10, marginLeft: 8 }}
                 className="text-right fontSize-[18px] h-[42] w-[190] pr-[20]"
                 classView="border-2 border-[#E3E6E8]"
+                returnKeyType="next"
               />
               <InputText
                 name="passwordConfirm"
@@ -83,6 +84,7 @@ export const ResetPass: FC = (): JSX.Element => {
                 leftIconStyle={{ padding: 10, marginLeft: 8 }}
                 className="text-right fontSize-[18px] h-[42] w-[190] pr-[20]"
                 classView="border-2 border-[#E3E6E8]"
+                returnKeyType="next"
               />
             </>
             <View className="flex-row items-center justify-center my-5">

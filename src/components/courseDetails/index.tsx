@@ -20,7 +20,7 @@ import { useColorTheme } from "../../core/config/color";
 import { EStorageKeys } from "../../core/enums/storage";
 import { idType } from "../../core/models";
 import { commentsAPI } from "../../core/services/api/comment.api";
-import { countLikeDislikeAPI, likeAPI } from "../../core/services/api/like.api";
+import { countLikeDislikeAPI, disLikeAPI, likeAPI } from "../../core/services/api/like.api";
 import { getItem, setItem } from "../../core/services/storage/storage";
 import { addToCart, removeItemFromCart } from "../../redux/features/cart";
 import { RootState } from "../../redux/store";
@@ -138,7 +138,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
       courseId: item?._id,
       userId: studentModel?._id,
     };
-    const response = await likeAPI(disLikeObj);
+    const response = await disLikeAPI(disLikeObj);
     setIsDisLike((old) => !old);
     setIsLike(false);
     setRefresh((old) => !old);
