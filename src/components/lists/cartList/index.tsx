@@ -54,7 +54,7 @@ export const CartList: FC = (): JSX.Element => {
     <>
       {studentModel !== null ? (
         <View className="pt-[15] flex-1 dark:bg-[#00216C]">
-          <View className="h-[83%]">
+          <View className="h-[81.5%]">
             {cart && (
               <FlatList
                 data={cart}

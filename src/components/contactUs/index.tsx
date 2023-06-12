@@ -13,7 +13,7 @@ interface ContactUsProps {
 export const ContactUs: FC<ContactUsProps> = ({ onPress }): JSX.Element => {
   return (
     <View>
-      <View className="flex justify-center justify-between">
+      <View className="flex justify-center">
         <Image className="border mx-auto mt-8 mb-1" source={logo} />
         <Text className="text-[23px] font-Yekan font-light text-center py-5 color-[#00469A] dark:color-white ">
           آکادمی کدنویسی بحر
@@ -26,7 +26,7 @@ export const ContactUs: FC<ContactUsProps> = ({ onPress }): JSX.Element => {
           در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می
           طلبد،
         </Text>
-        <View className="flex-row-reverse justify-between my-4">
+        <View className="flex-row-reverse justify-between my-3">
           <View className="flex-row-reverse items-center">
             <Entypo
               name="email"
@@ -47,7 +47,7 @@ export const ContactUs: FC<ContactUsProps> = ({ onPress }): JSX.Element => {
             Sepehr_academy@gmail.com
           </Text>
         </View>
-        <View className="flex-row-reverse justify-between my-4">
+        <View className="flex-row-reverse justify-between my-3">
           <View className="flex-row-reverse items-center">
             <Feather
               name="phone-call"
@@ -68,7 +68,7 @@ export const ContactUs: FC<ContactUsProps> = ({ onPress }): JSX.Element => {
             0911 123 1234
           </Text>
         </View>
-        <View className="flex-row-reverse mt-4 mb-[90]">
+        <View className="flex-row-reverse mt-4 mb-[50]">
           <View className="flex-row-reverse items-center">
             <Ionicons
               name="location-outline"

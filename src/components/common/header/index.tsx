@@ -55,23 +55,9 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
               </View>
             </Pressable>
             <View
-              className="flex flex-row-reverse mt-2 mx-5"
+              className="flex flex-row mt-2 mx-5"
               style={{ elevation: 8, height: 38 }}
             >
-              <TextInput
-                placeholder="جستجو ..."
-                value={searchQuery}
-                returnKeyType="search"
-                onBlur={() =>
-                  dispatch(
-                    handeSearchWord({
-                      searchWord: searchQuery,
-                    })
-                  )
-                }
-                onChangeText={(query) => handelOnChange(query)}
-                className="bg-white font-Yekan w-[170] h-[38] text-right pr-[10] rounded-r-[20] "
-              />
               <Pressable
                 onPress={() =>
                   dispatch(
@@ -94,6 +80,20 @@ export const Header: FC<HeaderProp> = ({ pageName }): JSX.Element => {
                   }}
                 />
               </Pressable>
+              <TextInput
+                placeholder="جستجو ..."
+                value={searchQuery}
+                returnKeyType="search"
+                onBlur={() =>
+                  dispatch(
+                    handeSearchWord({
+                      searchWord: searchQuery,
+                    })
+                  )
+                }
+                onChangeText={(query) => handelOnChange(query)}
+                className="bg-white font-Yekan w-[170] h-[38] text-right pr-[10] rounded-r-[20] "
+              />
             </View>
             <Pressable onPress={() => setModalVisible(true)}>
               <View

@@ -20,7 +20,7 @@ export const CommentItem: FC<commentItemProp> = ({
     >
       <View className="flex-row-reverse">
         <Image className="rounded-[20px] w-[30] h-[30]" source={user} />
-        <Text className="font-Yekan color-[#002D85] dark:color-white">
+        <Text className="font-Yekan text-[14px] color-[#002D85] dark:color-white">
           {userName}
         </Text>
       </View>

@@ -78,9 +78,10 @@ export const LoginForm: FC = (): JSX.Element => {
       >
         {({ submitForm }) => (
           <>
-            <>
+            <View className="flex items-center justify-center">
               <InputText
-                className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                className="bg-white text-right fontSize-[18px] rounded-l-full h-[45] w-full pr-[20]"
+                classView=" w-[88%]"
                 name="email"
                 placeholder="ایمیل"
                 type="email-address"
@@ -90,7 +91,8 @@ export const LoginForm: FC = (): JSX.Element => {
                 returnKeyType="next"
               />
               <InputText
-                className="bg-white text-right fontSize-[18px] h-[45] w-[245] pr-[20]"
+                className="bg-white text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-[20]"
+                classView=" w-[74%]"
                 secureTextEntry={isPasswordSecure}
                 name="password"
                 placeholder="رمزعبور"
@@ -107,7 +109,7 @@ export const LoginForm: FC = (): JSX.Element => {
                 leftIconStyle={{ padding: 10, marginLeft: 10 }}
                 returnKeyType="done"
               />
-            </>
+            </View>
             <>
               <Link
                 to={{ screen: ERouteList.ForgetPass }}
@@ -115,7 +117,7 @@ export const LoginForm: FC = (): JSX.Element => {
                   color: "white",
                   textAlign: "left",
                   fontFamily: "YekanBakh",
-                  fontSize: 16,
+                  fontSize: 14,
                   marginBottom: 80,
                 }}
               >

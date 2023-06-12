@@ -32,7 +32,7 @@ export const SettingPage: FC = (): JSX.Element => {
 
   const toggleSwitch = () => {
     toggleColorScheme();
-    setIsEnabled((previousState) => !previousState);
+    setIsEnabled((old) => !old);
     setItem(EStorageKeys.Mode, colorScheme === "light" ? "dark" : "light");
   };
 
@@ -316,7 +316,7 @@ export const SettingPage: FC = (): JSX.Element => {
       <CustomModal
         animationType="fade"
         visible={aboutModalVisible}
-        className="my-10 mx-7"
+        className="my-8 mx-7"
         className2="p-[30] rounded-[30px]"
         onRequestClose={() => {
           setAboutModalVisible(!aboutModalVisible);

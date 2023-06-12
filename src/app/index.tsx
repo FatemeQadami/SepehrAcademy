@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 import { Provider } from "react-redux";
+import { I18nManager} from 'react-native';
 
 import { Navigation } from "../navigation";
 import { store } from "../redux/store";
@@ -38,6 +39,12 @@ const toastConfig = {
 };
 
 const App: FC = (): JSX.Element => {
+  try { 
+    I18nManager.allowRTL(false);
+} 
+catch (e) {
+    console.log(e);
+}
   return (
     <Provider store={store}>
       <NavigationContainer>

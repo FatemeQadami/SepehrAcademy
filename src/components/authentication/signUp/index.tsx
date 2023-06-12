@@ -154,14 +154,15 @@ export const SignUpForm: FC = (): JSX.Element => {
           <>
             {step === 0 ? (
               <>
-                <View>
+                <View className="flex items-center justify-center">
                   <InputText
                     name="fullName"
                     placeholder="نام کاربر"
                     rightIconName="user"
                     rightIconSize={20}
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
-                    className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    className="bg-white text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-[20]"
+                    classView=" w-[88%]"
                     returnKeyType="next"
                   />
                   <InputText
@@ -171,7 +172,8 @@ export const SignUpForm: FC = (): JSX.Element => {
                     rightIconSize={20}
                     type="number-pad"
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
-                    className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    className="bg-white text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-[20]"
+                    classView=" w-[88%]"
                     returnKeyType="next"
                   />
                   <InputText
@@ -181,7 +183,8 @@ export const SignUpForm: FC = (): JSX.Element => {
                     rightIconSize={18}
                     type="number-pad"
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
-                    className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    className="bg-white text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-[20]"
+                    classView=" w-[88%]"
                     returnKeyType="done"
                   />
                 </View>
@@ -195,9 +198,10 @@ export const SignUpForm: FC = (): JSX.Element => {
               </>
             ) : (
               <>
-                <View>
+                <View className="flex items-center justify-center">
                   <DateInput
-                    inputWidth="w-[240]"
+                    inputWidth="w-[80%]"
+                    className=" w-full"
                     name="birthDate"
                     onPress={() => {
                       setModalVisible(true);
@@ -210,11 +214,13 @@ export const SignUpForm: FC = (): JSX.Element => {
                     rightIconName="envelope-o"
                     rightIconSize={20}
                     rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
-                    className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                    className="bg-white text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-[20]"
+                    classView=" w-[88%]"
                     returnKeyType="next"
                   />
                   <InputText
-                    className="bg-white text-right fontSize-[18px] h-[45] w-[245] pr-[20]"
+                    className="bg-white text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-[20]"
+                    classView=" w-[74%]"
                     secureTextEntry={isPasswordSecure}
                     name="password"
                     placeholder="رمزعبور"

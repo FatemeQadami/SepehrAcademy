@@ -97,7 +97,7 @@ export const CourseItem: FC<CourseItemProp> = ({
         >
           <View className="mr-10">
             <View className="flex flex-row-reverse justify-around">
-              <Text className="font-Yekan font-bold text-[18px] color-[#002D85] mb-2 dark:color-white ">
+              <Text className="font-Yekan font-bold text-[17px] color-[#002D85] mb-2 dark:color-white ">
                 {courseTitle}
               </Text>
             </View>
@@ -149,9 +149,9 @@ export const CourseItem: FC<CourseItemProp> = ({
             )}
           </View>
         </Pressable>
-        <View className="absolute top-4 right-10 rounded-[40px] w-[65] h-[65]">
+        <View className="absolute top-[20%] right-10 rounded-full w-[65] h-[65]">
           <Image
-            className="rounded-[40px] w-[65] h-[65]"
+            className="rounded-full w-[65] h-[65]"
             source={{ uri: courseImage }}
           />
         </View>

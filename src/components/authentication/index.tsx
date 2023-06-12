@@ -27,7 +27,7 @@ export const AuthLayout: FC<AuthLayoutProp> = ({
             width: "100%",
             height: "100%",
             position: "absolute",
-            top: -height / 1.78,
+            top: -height / 1.79,
             left: -width / 3,
           }}
           resizeMode="contain"
@@ -39,7 +39,7 @@ export const AuthLayout: FC<AuthLayoutProp> = ({
             height: "100%",
             position: "absolute",
             top: -height / 25,
-            right: -width / 2.5,
+            right: -width / 2.3,
           }}
           resizeMode="contain"
         />
@@ -50,8 +50,7 @@ export const AuthLayout: FC<AuthLayoutProp> = ({
           <Text className="font-Yekan text-[14px] mt-[8] mb-[48] dark:color-white">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
-            و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+            ستون و سطرآنچنان که لازم است،
           </Text>
         </View>
 
@@ -63,7 +62,7 @@ export const AuthLayout: FC<AuthLayoutProp> = ({
                   height: 390,
                   marginTop: 254,
                 }
-              : { height: 645 }
+              : { height: 644 }
           }
         >
           {formBox === "login" ? (

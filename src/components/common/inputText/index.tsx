@@ -77,7 +77,7 @@ export const InputText: FC<InputTextProp> = ({
     <KeyboardAvoidingView>
       <>
         <View
-          className={`flex flex-row-reverse rounded-3xl bg-white mt-3 ${classView}`}
+          className={`flex flex-row-reverse rounded-full bg-white mt-3 ${classView}`}
         >
           {rightIconName && (
             <Icon

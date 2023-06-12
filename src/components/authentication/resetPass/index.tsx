@@ -62,9 +62,9 @@ export const ResetPass: FC = (): JSX.Element => {
                     : setIsPasswordSecure(true);
                 }}
                 leftIconSize={22}
-                leftIconStyle={{ padding: 10, marginLeft: 8 }}
-                className="text-right fontSize-[18px] h-[42] w-[190] pr-[20]"
-                classView="border-2 border-[#E3E6E8]"
+                leftIconStyle={{ padding: 10, paddingRight: 0 }}
+                className="text-right fontSize-[18px] h-[42] rounded-l-full w-[75%] pr-[20]"
+                classView="border-2 border-[#E3E6E8] w-full"
                 returnKeyType="next"
               />
               <InputText
@@ -81,9 +81,9 @@ export const ResetPass: FC = (): JSX.Element => {
                     : setIsPasswordSecure2(true);
                 }}
                 leftIconSize={22}
-                leftIconStyle={{ padding: 10, marginLeft: 8 }}
-                className="text-right fontSize-[18px] h-[42] w-[190] pr-[20]"
-                classView="border-2 border-[#E3E6E8]"
+                leftIconStyle={{ padding: 10, paddingRight: 0 }}
+                className="text-right fontSize-[18px] h-[42] rounded-l-full w-[75%] pr-[20]"
+                classView="border-2 border-[#E3E6E8] w-full"
                 returnKeyType="next"
               />
             </>

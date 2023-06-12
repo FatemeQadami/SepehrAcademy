@@ -40,7 +40,6 @@ export const Comment: FC<commentPropsType> = ({
     const response: any = await addCommentsAPI(commentObj);
 
     ReFetch();
-    // setReFetch((old) => !old);
 
     Toast.show({
       type: "success",
@@ -53,7 +52,7 @@ export const Comment: FC<commentPropsType> = ({
   };
   return (
     <View>
-      <View className="items-center my-[70]">
+      <View className="items-center my-[40]">
         <Image
           source={
             studentModel && studentModel.profile
@@ -77,13 +76,13 @@ export const Comment: FC<commentPropsType> = ({
             <View>
               <InputText
                 name="comment"
-                className="border border-[#E3E6E8] bg-[#FCFCFC] rounded-[25px] text-right font-Yekan text-[15px] pb-[150] px-5 w-72"
+                className="border border-[#E3E6E8] bg-[#FCFCFC] rounded-[25px] text-right font-Yekan text-[15px] pb-[160] px-5 w-72"
                 placeholder="متن نظر"
                 multiline
                 numberOfLines={5}
               />
             </View>
-            <View className="flex-row items-center justify-center mt-14 mb-1">
+            <View className="flex-row items-center justify-center mt-8">
               <CustomButton
                 buttonTitle="بازگشت"
                 onPress={() => comeback()}

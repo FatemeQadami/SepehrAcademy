@@ -85,7 +85,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{ marginTop: 2 }}
         />
         <Text
-          className="text-[18px] font-Yekan px-5"
+          className="text-[17px] font-Yekan px-5"
           style={{
             color:
               route === ERouteList.EditProfile
@@ -123,7 +123,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{ marginTop: 2 }}
         />
         <Text
-          className="text-[18px] font-Yekan px-5"
+          className="text-[17px] font-Yekan px-5"
           style={{
             color:
               route === ERouteList.CourseTab
@@ -161,7 +161,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{ marginTop: 2 }}
         />
         <Text
-          className="color-[#686868] text-[18px] font-Yekan px-5"
+          className="color-[#686868] text-[17px] font-Yekan px-5"
           style={{
             color:
               route === ERouteList.Favorites
@@ -197,7 +197,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{ marginTop: 2 }}
         />
         <Text
-          className="color-[#686868] font-Yekan text-[18px] px-5"
+          className="color-[#686868] font-Yekan text-[17px] px-5"
           style={{
             color:
               route === ERouteList.Cart
@@ -235,7 +235,7 @@ export const DrowerItem: FC = (): JSX.Element => {
           style={{ marginTop: 2 }}
         />
         <Text
-          className="color-[#686868] font-Yekan text-[18px] px-5"
+          className="color-[#686868] font-Yekan text-[17px] px-5"
           style={{
             color:
               route === ERouteList.Settings
@@ -249,10 +249,10 @@ export const DrowerItem: FC = (): JSX.Element => {
         </Text>
       </Pressable>
       {studentModel && (
-        <View className="px-2">
+        <View className="">
           <Pressable
             onPress={() => logOut()}
-            className="bg-[#FFF4F4] flex-row px-2 py-2 mt-[170] rounded-[20px]"
+            className="bg-[#FFF4F4] flex-row px-2 py-2 mt-[140] rounded-[20px]"
           >
             <Text className="color-[#FF2B2B] font-Yekan text-[15px] px-2">
               خروج از حساب کاربری
@@ -260,8 +260,8 @@ export const DrowerItem: FC = (): JSX.Element => {
             <AntDesign
               name="logout"
               color="#FF2B2B"
-              size={12}
-              style={{ padding: 2 }}
+              size={13}
+              style={{ paddingVertical: 5 }}
             />
           </Pressable>
         </View>

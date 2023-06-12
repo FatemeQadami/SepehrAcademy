@@ -39,7 +39,7 @@ export const ForgetpassForm: FC = (): JSX.Element => {
       >
         {({ submitForm }) => (
           <>
-            <>
+            <View className="flex items-center justify-center">
               <InputText
                 name="email"
                 placeholder="ایمیل"
@@ -48,9 +48,10 @@ export const ForgetpassForm: FC = (): JSX.Element => {
                 rightIconSize={20}
                 rightIconStyle={{ marginRight: 20, paddingTop: 12 }}
                 returnKeyType="done"
-                className="bg-white text-right fontSize-[18px] h-[45] w-[270] pr-[20]"
+                classView=" w-[88%]"
+                className="bg-white text-right rounded-l-full fontSize-[18px] h-[45] w-full pr-[20]"
               />
-            </>
+            </View>
             <View className="mt-[50]">
               <CustomButton
                 buttonTitle="تایید ایمیل"

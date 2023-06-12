@@ -6,7 +6,7 @@ import { useFormikContext } from "formik";
 
 interface IDateInputProp {
   className?: string;
-  inputWidth: string;
+  inputWidth?: string;
   name: string;
   onPress: Function;
 }
@@ -20,16 +20,18 @@ export const DateInput: FC<IDateInputProp> = ({
   const { errors, touched, values }: any = useFormikContext<any>();
   return (
     <>
-      <View className={`flex-row bg-white rounded-3xl mt-3 ${className}`}>
-        <FontAwesome5
-          name="calendar-plus"
-          size={22}
-          color="grey"
-          style={{ padding: 10, marginLeft: 10 }}
-        />
-        <Pressable onPress={() => onPress()} className="flex-row">
+      <View
+        className={`flex-row bg-white rounded-3xl mt-3 ${className}`}
+      >
+        <Pressable onPress={() => onPress()} className="flex-row flex-1">
+          <FontAwesome5
+            name="calendar-plus"
+            size={22}
+            color="grey"
+            style={{ padding: 10, marginLeft: 10 }}
+          />
           <View
-            className={`bg-white text-right fontSize-[18px] h-[45] pr-[20] ${inputWidth}`}
+            className={`bg-white text-right fontSize-[18px] flex-1 h-[45]${inputWidth}`}
           >
             <Text
               style={
@@ -37,22 +39,22 @@ export const DateInput: FC<IDateInputProp> = ({
                   ? {
                       color: "black",
                       textAlign: "center",
-                      marginTop: 14,
+                      marginTop: 10,
                       fontSize: 15,
                     }
-                  : { color: "gray", textAlign: "right", marginTop: 14 }
+                  : { color: "gray", textAlign: "right", marginTop: 14 , marginRight:20 }
               }
             >
               {values[name] || "تاریخ تولد"}
             </Text>
           </View>
-          <Foundation
-            name="calendar"
-            size={27}
-            color="grey"
-            style={{ marginRight: 20, paddingTop: 8 }}
-          />
         </Pressable>
+        <Foundation
+          name="calendar"
+          size={27}
+          color="grey"
+          style={{ paddingTop: 8 , marginRight:20 }}
+        />
       </View>
       <View className="mt-[5] h-[20]">
         {errors.birthDate && touched.birthDate && (

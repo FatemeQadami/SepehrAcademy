@@ -10,7 +10,7 @@ import {
   Pressable,
   ScrollView,
   Text,
-  View,
+  View
 } from "react-native";
 import Toast from "react-native-toast-message";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -20,7 +20,11 @@ import { useColorTheme } from "../../core/config/color";
 import { EStorageKeys } from "../../core/enums/storage";
 import { idType } from "../../core/models";
 import { commentsAPI } from "../../core/services/api/comment.api";
-import { countLikeDislikeAPI, disLikeAPI, likeAPI } from "../../core/services/api/like.api";
+import {
+  countLikeDislikeAPI,
+  disLikeAPI,
+  likeAPI,
+} from "../../core/services/api/like.api";
 import { getItem, setItem } from "../../core/services/storage/storage";
 import { addToCart, removeItemFromCart } from "../../redux/features/cart";
 import { RootState } from "../../redux/store";
@@ -169,7 +173,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
 
   return (
     <>
-      <View className="dark:bg-[#00216C] relative ">
+      <View className="dark:bg-[#00216C] relative h-full ">
         <View
           className="w-[100%] h-[260] rounded-b-[40px] z-0 absolute top-0 "
           style={{ backgroundColor: color?.HeaderColor }}
@@ -271,7 +275,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
                 </View>
               </View>
             </View>
-            <ScrollView className="px-2 mt-[-70] pt-20 h-[49.5%] z-0">
+            <ScrollView className="px-2 mt-[-70] pt-20 h-[45%] z-0">
               <>
                 <Text className="text-right color-[#002D85] mt-2 text-[20px] font-Yekan dark:color-white">
                   توضیحات دوره:
@@ -281,9 +285,6 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
                   با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
                   مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
                   تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
-                  کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
-                  آینده، شناخت فراوان جامعه و متخصصان را می طلبد،تا با
-                  نرم‌افزارها شناخت
                 </Text>
               </>
               <View className="mt-6">
@@ -351,7 +352,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
             </ScrollView>
           </View>
         )}
-        <View className="pb-2">
+        <View className=" w-full absolute bottom-2">
           {handelClick() ? (
             <CustomButton
               iconName="trash-o"
@@ -374,7 +375,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
           visible={commentModal}
           animationType="slide"
           statusBarTranslucent
-          className2="p-[25] rounded-[30px] h-[94%]"
+          className2="p-[25] rounded-[30px] h-[93%]"
           className="py-10 bg-blue-rgba h-full"
           onRequestClose={() => {
             setCommentModal(!commentModal);

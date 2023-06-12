@@ -224,7 +224,7 @@ export const Filters: FC<filterPropsTypes> = ({
                 <Text style={{ left: props.oneMarkerLeftPosition }}>
                   {multiSliderPrice[0]}
                 </Text>
-                <Text style={{ left: props.twoMarkerLeftPosition - 25 }}>
+                <Text style={{ left: props.twoMarkerLeftPosition - 40 }}>
                   {multiSliderPrice[1]}
                 </Text>
               </View>
@@ -291,7 +291,7 @@ export const Filters: FC<filterPropsTypes> = ({
                 <Text style={{ left: props.oneMarkerLeftPosition }}>
                   {multiSliderCapacity[0]}
                 </Text>
-                <Text style={{ left: props.twoMarkerLeftPosition - 15 }}>
+                <Text style={{ left: props.twoMarkerLeftPosition - 20 }}>
                   {multiSliderCapacity[1]}
                 </Text>
               </View>

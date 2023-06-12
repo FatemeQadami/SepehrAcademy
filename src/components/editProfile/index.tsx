@@ -161,7 +161,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
               >
                 {({ submitForm, resetForm, setFieldValue }) => (
                   <>
-                    <View className="items-center my-[20]">
+                    <View className="items-center my-[18]">
                       <Image
                         source={profile ? { uri: profile } : user}
                         className="w-[125] h-[125] rounded-[80px] relative"
@@ -187,16 +187,16 @@ export const EditProfilePage: FC = (): JSX.Element => {
                         {studentModel?.fullName}
                       </Text>
                     </View>
-                    <View className="mt-5">
-                      <>
+                    <View className="mt-4">
+                      <View className="flex items-center justify-center">
                         <InputText
                           name="fullName"
                           placeholder="نام کاربر"
                           rightIconName="user"
                           rightIconSize={20}
                           rightIconStyle={{ marginTop: 12, marginRight: 20 }}
-                          className="text-right fontSize-[18px] h-[45] w-[230] pr-[20]"
-                          classView="border-2 border-[#E3E6E8]"
+                          className="text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-5"
+                          classView="border-2 border-[#E3E6E8] w-[88%]"
                           returnKeyType="next"
                         />
                         <InputText
@@ -206,8 +206,8 @@ export const EditProfilePage: FC = (): JSX.Element => {
                           rightIconSize={20}
                           type="number-pad"
                           rightIconStyle={{ marginTop: 12, marginRight: 20 }}
-                          className="text-right fontSize-[18px] h-[45] w-[230] pr-[20]"
-                          classView="border-2 border-[#E3E6E8]"
+                          className="text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-5"
+                          classView="border-2 border-[#E3E6E8] w-[88%]"
                           returnKeyType="next"
                         />
                         <InputText
@@ -218,18 +218,18 @@ export const EditProfilePage: FC = (): JSX.Element => {
                           type="number-pad"
                           editable={false}
                           rightIconStyle={{ marginTop: 12, marginRight: 20 }}
-                          className="text-right fontSize-[18px] h-[45] w-[230] pr-[20]"
-                          classView="border-2 border-[#E3E6E8] bg-[#d4d4d4]"
+                          className="text-right fontSize-[18px] h-[45] rounded-l-full w-full pr-5"
+                          classView="border-2 border-[#E3E6E8] bg-[#d4d4d4] w-[88%]"
                         />
                         <DateInput
-                          inputWidth="w-[180]"
+                          inputWidth="w-[80%]"
                           name="birthDate"
-                          className="border-2 border-[#E3E6E8]"
+                          className="border-2 border-[#E3E6E8] w-full"
                           onPress={() => {
                             setModalVisible2(true);
                           }}
                         />
-                        <View className="flex-row items-center justify-center my-4 pt-8">
+                        <View className="flex-row items-center justify-center my-3 pt-8">
                           <CustomButton
                             buttonTitle="انصراف"
                             onPress={() => resetForm()}
@@ -244,7 +244,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
                             className="bg-[#04A641] font-Yekan border-[1.5px] border-[#04A641] px-7 py-2 color-white text-[16px] text-center rounded-[27px] mx-5 "
                           />
                         </View>
-                      </>
+                      </View>
                     </View>
                     <CustomModal
                       animationType="fade"

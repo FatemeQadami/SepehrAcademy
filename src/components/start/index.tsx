@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Dimensions,
   Pressable,
+  ScrollView,
 } from "react-native";
 
 import logo from "../../assets/img/pre-start/logo.png";
@@ -15,6 +16,8 @@ import { CustomButton } from "../common/customButton";
 import { ERouteList } from "../../core/enums/route";
 
 const { width, height } = Dimensions.get("screen");
+
+console.log("width" , width)
 
 export const StartPage: FC = (): JSX.Element => {
   const navigation = useNavigation<any>();
@@ -27,8 +30,8 @@ export const StartPage: FC = (): JSX.Element => {
           width: "123%",
           height: "123%",
           position: "absolute",
-          top: -height / 1.56,
-          left: -width / 1.82,
+          top: -height / 1.47,
+          left: -width / 1.83,
         }}
         resizeMode="contain"
       />
@@ -38,24 +41,26 @@ export const StartPage: FC = (): JSX.Element => {
           position: "absolute",
           width: "123%",
           height: "123%",
-          top: -height / 7.3,
+          top: -height / 6.3,
           right: -width / 1.7,
         }}
         resizeMode="contain"
       />
-      <View className="mt-44">
-        <View className="flex justify-center">
+      <View className="flex-col justify-center items-center mt-44">
+        <View className="flex flex-col justify-center">
           <Image className="border mx-auto mb-1" source={logo} />
-          <Text className="text-3xl font-Yekan font-light text-center pt-5 color-[#00469A]  dark:color-white">
+          <Text className="text-[23px] font-Yekan font-light text-center pt-5 color-[#00469A]  dark:color-white">
             آکادمی کدنویسی بحر
           </Text>
         </View>
-        <View className="flex rounded-t-[40] p-9 mt-20 bg-[#3A84FF] h-[65%]">
-          <Text className="text-white text-5xl font-Yekan pt-3">خوش آمدید</Text>
-          <Text className="text-white text-base font-Yekan mt-4">
+        <View className="flex rounded-t-[40] p-9 mt-20 bg-[#3A84FF] pb-16">
+          <Text className="text-white text-[32px] font-Yekan text-right items-center pt-4">
+            خوش آمدید
+          </Text>
+          <Text className="text-white text-[15px] font-Yekan mt-4">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
+            ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
             و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
           </Text>
           <View className="flex-row justify-between mt-16">
@@ -64,14 +69,14 @@ export const StartPage: FC = (): JSX.Element => {
               onPress={() => {
                 navigation?.navigate(ERouteList?.SignUp);
               }}
-              className="font-Yekan color-white text-[16px] text-center border-2 border-white py-[10] w-[148] rounded-[27px] "
+              className="font-Yekan color-white text-[16px] text-center border-2 border-white py-2 px-12 rounded-[27px] "
             />
             <CustomButton
               buttonTitle="ورود"
               onPress={() => {
                 navigation.navigate(ERouteList.LogIn);
               }}
-              className="font-Yekan color-white text-[16px] text-center bg-[#0043F7] py-[12] w-[150] rounded-[27px] "
+              className="font-Yekan color-white text-[16px] text-center border-2 border-[#0043F7] bg-[#0043F7] py-2 px-14 rounded-[27px] "
             />
           </View>
           <Pressable
@@ -82,7 +87,7 @@ export const StartPage: FC = (): JSX.Element => {
               })
             }
           >
-            <Text className="font-Yekan color-white text-[20px] text-center mt-[55] mb[25] underline">
+            <Text className="font-Yekan color-white text-[18px] text-center mt-[55] mb-4 underline">
               ورود به صفحه اصلی
             </Text>
           </Pressable>
