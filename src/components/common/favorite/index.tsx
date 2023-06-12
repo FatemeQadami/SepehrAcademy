@@ -39,7 +39,7 @@ export const Favorite: FC<propType> = ({ color, size, item }): JSX.Element => {
     } else {
       Toast.show({
         type: "error",
-        text1: "برای افزودن به موارد دلخواه لطفا وارد حساب کاربری خود شوید !!",
+        text2: "برای افزودن به موارد دلخواه لطفا وارد حساب کاربری خود شوید !!",
       });
     }
   };

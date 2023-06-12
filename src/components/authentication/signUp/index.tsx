@@ -41,9 +41,8 @@ export const SignUpForm: FC = (): JSX.Element => {
 
   //---------- first Step---------
 
-  const onFirstStep = ({ setTouched }: any) => {
+  const onFirstStep = () => {
     setStep(1);
-    setTouched({});
   };
 
   //---------- second Step---------
@@ -67,40 +66,48 @@ export const SignUpForm: FC = (): JSX.Element => {
     if (user) {
       dispatch(
         handelLogin({
-          model: user.studentModel,
+          model: user?.studentModel,
         })
       );
 
-      Toast.show({ type: "success", text1: " ثبت نام با موفقیت انجام شد 🎉" });
+      Toast.show({ type: "success", text2: " ثبت نام با موفقیت انجام شد 🎉" });
       console.log("fffff", studentModel);
-    }
 
-    // ----------loginAPI----------
+      // ----------loginAPI----------
 
-    const userObj2: loginType = {
-      email: values?.email,
-      password: values?.password,
-    };
-    const response = await loginAPI(userObj2);
-    if (response) {
-      dispatch(
-        handelLogin({
-          token: response.jwtToken,
-          model: response.studentModel,
-        })
-      );
-      Toast.show({
-        type: "success",
-        text1: `کاربر ${response?.studentModel?.fullName} عزیز خوش آمدید :)`,
-      });
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [{ name: ERouteList.MyDrawer }],
-        })
-      );
+      const userObj2: loginType = {
+        email: values?.email,
+        password: values?.password,
+      };
+      const response = await loginAPI(userObj2);
+      if (response) {
+        dispatch(
+          handelLogin({
+            token: response?.jwtToken,
+            model: response?.studentModel,
+          })
+        );
+        Toast.show({
+          type: "success",
+          text2: `کاربر ${response?.studentModel?.fullName} عزیز خوش آمدید :)`,
+        });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [{ name: ERouteList.MyDrawer }],
+          })
+        );
+      } else {
+        Toast.show({
+          type: "error",
+          text2: " لطفا مجددا ایمیل و رمز عبور خود را وارد نمایید",
+        });
+        navigation.navigate(ERouteList.LogIn);
+      }
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   //-------- StepIndicator Style ---------
@@ -150,7 +157,7 @@ export const SignUpForm: FC = (): JSX.Element => {
         validationSchema={step === 0 ? signUp1Validation : signUp2Validation}
         onSubmit={step === 0 ? onFirstStep : onSecondStep}
       >
-        {({ submitForm, values, setFieldValue }) => (
+        {({ submitForm, setFieldValue }) => (
           <>
             {step === 0 ? (
               <>
@@ -242,7 +249,7 @@ export const SignUpForm: FC = (): JSX.Element => {
                   <CustomButton
                     buttonTitle="ثبت نام"
                     isLoading={isLoading}
-                    loadingClassName="bg-[#0043F7] py-3.5 rounded-[30px]"
+                    loadingClassName="bg-[#0043F7] pt-[16] pb-[17] rounded-[30px]"
                     onPress={submitForm}
                     color="white"
                     className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "

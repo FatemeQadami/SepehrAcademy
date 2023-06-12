@@ -47,7 +47,7 @@ export const BookMark: FC<bookMarkPropsType> = ({ item }): JSX.Element => {
     } else {
       Toast.show({
         type: "error",
-        text1: "برای رزرو کردن درس لطفا وارد حساب کاربری خود شوید !!",
+        text2: "برای رزرو کردن درس لطفا وارد حساب کاربری خود شوید !!",
       });
     }
   };

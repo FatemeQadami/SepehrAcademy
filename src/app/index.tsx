@@ -14,14 +14,16 @@ const toastConfig = {
       {...props}
       style={{ borderColor: "green", borderRightWidth: 6, borderLeftWidth: 0 }}
       text1Style={{
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: "400",
         fontFamily: "YekanBakh",
+        color:"black"
       }}
       text2Style={{
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: "400",
         fontFamily: "YekanBakh",
+        color:"black"
       }}
     />
   ),
@@ -31,8 +33,15 @@ const toastConfig = {
       style={{ borderColor: "red", borderRightWidth: 6, borderLeftWidth: 0 }}
       text1Style={{
         fontWeight: "400",
-        fontSize: 15,
+        fontSize: 13,
         fontFamily: "YekanBakh",
+        color:"black"
+      }}
+      text2Style={{
+        fontSize: 13,
+        fontWeight: "400",
+        fontFamily: "YekanBakh",
+        color:"black"
       }}
     />
   ),

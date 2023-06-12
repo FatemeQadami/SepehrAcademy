@@ -32,7 +32,7 @@ export const ResetPass: FC = (): JSX.Element => {
     const Reset = await resetPassAPI(userObj2);
 
     console.log("Reset", Reset, userObj2);
-    Toast.show({ type: "success", text1: "رمزعبور با موفقیت تغییر یافت" });
+    Toast.show({ type: "success", text2: "رمزعبور با موفقیت تغییر یافت" });
 
     console.log("first", values);
   };

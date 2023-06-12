@@ -24,7 +24,7 @@ export const ForgetpassForm: FC = (): JSX.Element => {
     if (user) {
       Toast.show({
         type: "success",
-        text1: "لینک تغییر رمزعبور به ایمیل شما ارسال شد :)",
+        text2: "لینک تغییر رمزعبور به ایمیل شما ارسال شد :)",
       });
     }
     setIsLoading(false);

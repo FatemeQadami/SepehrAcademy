@@ -35,7 +35,7 @@ export const FavoritesList: FC = (): JSX.Element => {
     if (!studentModel)
       Toast.show({
         type: "error",
-        text1: " لطفا وارد حساب کاربری خود شوید !!",
+        text2: " لطفا وارد حساب کاربری خود شوید !!",
       });
   }, [studentModel, isFocus]);
 

@@ -100,7 +100,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
     } else {
       Toast.show({
         type: "error",
-        text1: "برای رزرو کردن درس لطفا وارد حساب کاربری خود شوید !!",
+        text2: "برای رزرو کردن درس لطفا وارد حساب کاربری خود شوید !!",
       });
     }
   };
@@ -299,7 +299,7 @@ export const CourseDetailsPage: FC = (): JSX.Element => {
                         ? setCommentModal(true)
                         : Toast.show({
                             type: "error",
-                            text1:
+                            text2:
                               "برای ثبت نظر لطفا وارد حساب کاربری خود شوید !!",
                           });
                     }}

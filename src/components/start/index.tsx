@@ -53,7 +53,7 @@ export const StartPage: FC = (): JSX.Element => {
             آکادمی کدنویسی بحر
           </Text>
         </View>
-        <View className="flex rounded-t-[40] p-9 mt-20 bg-[#3A84FF] pb-16">
+        <View className="flex rounded-t-[40] p-9 mt-20 bg-[#3A84FF] pb-16 w-full">
           <Text className="text-white text-[32px] font-Yekan text-right items-center pt-4">
             خوش آمدید
           </Text>
@@ -69,14 +69,14 @@ export const StartPage: FC = (): JSX.Element => {
               onPress={() => {
                 navigation?.navigate(ERouteList?.SignUp);
               }}
-              className="font-Yekan color-white text-[16px] text-center border-2 border-white py-2 px-12 rounded-[27px] "
+              className="font-Yekan color-white text-[16px] text-center border-2 border-white pb-2 pt-3 px-12 rounded-[27px] "
             />
             <CustomButton
               buttonTitle="ورود"
               onPress={() => {
                 navigation.navigate(ERouteList.LogIn);
               }}
-              className="font-Yekan color-white text-[16px] text-center border-2 border-[#0043F7] bg-[#0043F7] py-2 px-14 rounded-[27px] "
+              className="font-Yekan color-white text-[16px] text-center border-2 border-[#0043F7] bg-[#0043F7] pb-2 pt-3 px-[56] rounded-[27px] "
             />
           </View>
           <Pressable

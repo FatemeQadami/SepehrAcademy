@@ -60,7 +60,7 @@ export const CourseItem: FC<CourseItemProp> = ({
     setItem(EStorageKeys.UserData, { ...get, ...userData });
     Toast.show({
       type: "success",
-      text1: " درس انتخاب شده با موفقیت حذف شد",
+      text2: " درس انتخاب شده با موفقیت حذف شد",
     });
     setModalVisible(!modalVisible);
   };

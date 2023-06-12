@@ -181,7 +181,7 @@ export const SettingPage: FC = (): JSX.Element => {
                       ? setClearModalVisible(true)
                       : Toast.show({
                           type: "error",
-                          text1: " شما حسابی ندارید!!!",
+                          text2: " شما حسابی ندارید!!!",
                         });
                   }}
                 >

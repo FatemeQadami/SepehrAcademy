@@ -56,7 +56,7 @@ export const LoginForm: FC = (): JSX.Element => {
 
       Toast.show({
         type: "success",
-        text1: `کاربر  ${user?.studentModel?.fullName}  عزیز خوش آمدید :)`,
+        text2: `کاربر  ${user?.studentModel?.fullName}  عزیز خوش آمدید :)`,
       });
       navigation.dispatch(
         CommonActions.reset({
@@ -128,7 +128,7 @@ export const LoginForm: FC = (): JSX.Element => {
               <CustomButton
                 buttonTitle="ورود"
                 isLoading={isLoading}
-                loadingClassName="bg-[#0043F7] py-3.5 rounded-[30px]"
+                loadingClassName="bg-[#0043F7] pt-[16] pb-[17] rounded-[30px]"
                 color="white"
                 onPress={submitForm}
                 className="text-center font-Yekan text-[20px] bg-[#0043F7] color-white rounded-[30px] py-3 "

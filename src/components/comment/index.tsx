@@ -43,7 +43,7 @@ export const Comment: FC<commentPropsType> = ({
 
     Toast.show({
       type: "success",
-      text1: "نظر شما با موفقیت ثبت شد :)",
+      text1: "نظر شما با موفقیت ثبت شد",
       text2: "ممنون از همکاری شما :)",
     });
 

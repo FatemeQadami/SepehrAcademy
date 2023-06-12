@@ -25,19 +25,19 @@ axios.interceptors.response.use(
           console.log("error", error.response.data.message[0].message);
           Toast.show({
             type: "error",
-            text1: error.response.data.message[0].message,
+            text2: error.response.data.message[0].message,
           });
         } catch (err) {
           Toast.show({
             type: "error",
-            text1: error.response.data.message.message[0].message,
+            text2: error.response.data.message.message[0].message,
           });
         }
       }
     } catch (error) {
       Toast.show({
         type: "error",
-        text1: "مشکلی پیش آمده است.لطفا مجددا امتحان نمایید.",
+        text2: "مشکلی پیش آمده است.لطفا مجددا امتحان نمایید.",
       });
     }
     return Promise.reject(error);

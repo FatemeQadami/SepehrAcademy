@@ -28,7 +28,7 @@ export const ClearPassword: FC<clearPassType> = ({ onPress }): JSX.Element => {
     );
     Toast.show({
       type: "error",
-      text1: "برای ورود به اپلیکیشن باید مجددا رمز عبور خود را وارد نمایید!!",
+      text2: "برای ورود به اپلیکیشن باید مجددا رمز عبور خود را وارد نمایید!!",
     });
   };
 

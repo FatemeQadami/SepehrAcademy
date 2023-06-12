@@ -77,7 +77,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
             );
             Toast.show({
               type: "success",
-              text1: "  ویرایش اطلاعات با موفقیت انجام شد 🎉",
+              text2: "  ویرایش اطلاعات با موفقیت انجام شد 🎉",
             });
           }
           setIsLoading(false);
@@ -105,7 +105,7 @@ export const EditProfilePage: FC = (): JSX.Element => {
       if (user) {
         Toast.show({
           type: "success",
-          text1: "  ویرایش اطلاعات با موفقیت انجام شد 🎉",
+          text2: "  ویرایش اطلاعات با موفقیت انجام شد 🎉",
         });
       }
       setIsLoading(false);
