@@ -199,7 +199,7 @@ export const SettingPage: FC = (): JSX.Element => {
                       }}
                     />
                     <Text className="font-Yekan text-[17px] text-[#474747] pt-2 pr-3 color-[#474747] dark:color-white ">
-                      پاک کردن رمز ذخیره شده
+                      امتیاز به آکادمی سپهر
                     </Text>
                   </View>
                   <Octicons

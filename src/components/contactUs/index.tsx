@@ -44,7 +44,7 @@ export const ContactUs: FC<ContactUsProps> = ({ onPress }): JSX.Element => {
             </Text>
           </View>
           <Text className="font-Gab text-[19px] color-[#474747] dark:color-white">
-            Sepehr_academy@gmail.com
+          sepehr.academy.app@gmail.com
           </Text>
         </View>
         <View className="flex-row-reverse justify-between my-3">
@@ -64,7 +64,7 @@ export const ContactUs: FC<ContactUsProps> = ({ onPress }): JSX.Element => {
               شماره تماس:
             </Text>
           </View>
-          <Text className="font-Yekan text-[14px] color-[#474747] mt-1 dark:color-white">
+          <Text className="font-Yekan text-[14px] color-[#474747] mt-0.5 dark:color-white">
             0911 123 1234
           </Text>
         </View>
@@ -85,7 +85,7 @@ export const ContactUs: FC<ContactUsProps> = ({ onPress }): JSX.Element => {
               آدرس:
             </Text>
           </View>
-          <Text className="font-Yekan mt-1 text-[14px] color-[#474747] mr-2 dark:color-white">
+          <Text className="font-Yekan mt-0.5 text-[14px] color-[#474747] mr-2 dark:color-white">
             ساری، جاده دریا، بعد از مجتمع دنیای آرزو
           </Text>
         </View>

@@ -49,7 +49,7 @@ export const signUp1Validation = Yup.object().shape({
   phoneNumber: Yup.string()
     .required("پر کردن فیلد الزامیست")
     .matches(
-      /09(1[0-9]|3[1-9])-?[0-9]{3}-?[0-9]{4}/,
+      /^(\+98|0098|98|0)?9\d{9}$/,
       "لطفا شماره خود را صحیح وارد کنید"
     ),
 });
@@ -101,7 +101,7 @@ export const profileValidation = Yup.object().shape({
   phoneNumber: Yup.string()
     .required("پر کردن فیلد الزامیست")
     .matches(
-      /09(1[0-9]|3[1-9])-?[0-9]{3}-?[0-9]{4}/,
+      /^(\+98|0098|98|0)?9\d{9}$/,
       "لطفا شماره خود را صحیح وارد کنید"
     ),
 
